@@ -15,21 +15,24 @@ class DependsRelationship
 {
     protected $parent;
     protected $child;
+    protected $order;
 
 
     /**
      * @param SimpleXMLElement $parent
      * @param string           $child
+     * @param int              $order
      */
-    public function __construct(SimpleXMLElement $parent, string $child)
+    public function __construct(SimpleXMLElement $parent, string $child, int $order)
     {
         $this->parent = $parent;
         $this->child = $child;
+        $this->order = $order;
     }
 
     public function __toString()
     {
-        return sprintf('(%s) --> (%s) : depends', $this->getParentName(), $this->getChildName());
+        return sprintf('(%s) --> (%s) : depend:%s', $this->getParentName(), $this->getChildName(), $this->order);
     }
 
     public function getParentName()

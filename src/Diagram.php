@@ -62,8 +62,8 @@ class Diagram
         foreach ($this->targets as $t) {
             $targetName = $t->getName();
             $calls = $this->xml->xpath("/project/target[@name='{$targetName}']//phingcall/@target");
-            foreach ($calls as $c) {
-                $this->calls[] = new CallRelationship($t, $c);
+            for ($i = 0, $total = count($calls); $i < $total; $i++) {
+                $this->calls[] = new CallRelationship($t, $calls[$i], $i + 1);
             }
         }
 
@@ -80,8 +80,8 @@ class Diagram
         foreach ($targets as $t) {
             $depends = (string)$t['depends'];
             $explode = explode(',', $depends);
-            foreach ($explode as $e) {
-                $this->depends[] = new DependsRelationship($t, trim($e));
+            for ($i = 0, $total = count($explode); $i < $total; $i++) {
+                $this->depends[] = new DependsRelationship($t, $explode[$i], $i + 1);
             }
         }
 
@@ -93,7 +93,8 @@ class Diagram
      */
     public function getCode()
     {
-        $code = '@startuml' . PHP_EOL . PHP_EOL;
+        $code = '@startuml' . PHP_EOL;
+        $code .= 'skinparam arrowFontColor Grey' . PHP_EOL . PHP_EOL;
 
         foreach ($this->targets as $t) {
             $code .= (string)$t . PHP_EOL;
