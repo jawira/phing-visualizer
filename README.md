@@ -4,6 +4,11 @@ Phing diagram
 **Phing diagram** generates a PlantUML diagram to have a 
 graphical representation for Phing's buildfile.
 
+Requirements
+------------
+
+* SimpleXML extension
+* XSL extension
 
 Use
 ---
