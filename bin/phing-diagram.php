@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 try {
     include __DIR__ . '/../vendor/autoload.php';
