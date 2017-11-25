@@ -13,8 +13,10 @@ Requirements
 Use
 ---
 
+You can use executable to generate 
+
 ```bash
-$ php public/phing-diagram.php -f ./path/to/build.xml
+$ php public/phing-diagram.php -i ./path/to/build.xml -o ./path/to/diagram.png -f png
 ```
 
 
