@@ -9,6 +9,7 @@ Requirements
 
 * SimpleXML extension
 * XSL extension
+* `allow_url_fopen = On;` (on `php.ini` file)
 
 Use
 ---
