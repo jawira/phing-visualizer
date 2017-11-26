@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f59c8dedbfe7ed76035770bba1ad4de",
+    "content-hash": "d33d9e0d103e704c346895ebc74e318e",
     "packages": [
         {
             "name": "jawira/plantuml-encoding",
@@ -57,7 +57,8 @@
     "prefer-lowest": false,
     "platform": {
         "ext-simplexml": "*",
-        "ext-xsl": "*"
+        "ext-xsl": "*",
+        "php": "^7.1"
     },
     "platform-dev": []
 }

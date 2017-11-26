@@ -1,20 +1,23 @@
 {
-    "name": "jawira/phing-diagram",
-    "description": "Graphical representation of Phing's buildfile",
-    "type": "project",
-    "require": {
-        "ext-simplexml": "*",
-        "ext-xsl": "*",
-        "jawira/plantuml-encoding": "^0.0.1"
-    },
-    "autoload": {
-        "psr-4": {"Jawira\\PhingDiagram\\": "src/"}
-    },
-    "license": "library",
-    "authors": [
-        {
-            "name": "Jawira Portugal",
-            "email": "dev@jawira.com"
-        }
-    ]
+  "name": "jawira/phing-diagram",
+  "description": "Graphical representation of Phing's buildfile",
+  "type": "project",
+  "require": {
+    "ext-simplexml": "*",
+    "ext-xsl": "*",
+    "jawira/plantuml-encoding": "^0.0.1",
+    "php": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jawira\\PhingDiagram\\": "src/"
+    }
+  },
+  "license": "library",
+  "authors": [
+    {
+      "name": "Jawira Portugal",
+      "email": "dev@jawira.com"
+    }
+  ]
 }
