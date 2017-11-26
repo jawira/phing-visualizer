@@ -1,126 +1,84 @@
 <?php
-declare(strict_types=1);
 
 namespace Jawira\PhingDiagram;
 
-
-use Jawira\PhingDiagram\Puml\CallRelationship;
-use Jawira\PhingDiagram\Puml\DependsRelationship;
-use Jawira\PhingDiagram\Puml\Target;
 use SimpleXMLElement;
-
+use XSLTProcessor;
 
 class Diagram
 {
-    /**
-     * Buildfile
-     *
-     * @var SimpleXMLElement
-     */
-    protected $xml;
+    const FORMAT_SVG = 'svg';
+    const FORMAT_PNG = 'png';
+    const FORMAT_PUML = 'puml';
 
-    protected $targets = [];
-    protected $depends = [];
-    protected $calls = [];
-    protected $buildfilePath;
+    const XSL_PATH = '../resources/xslt/plantuml.xsl';
 
+    protected $input;
+    protected $output;
+    protected $format;
 
-    public function __construct(string $buildfilePath)
+    public function __construct(string $input, string $output, string $format)
     {
-        $this->buildfilePath = $buildfilePath;
-        $this->loadXml($this->buildfilePath);
+        $this->loadFormat($format)->loadInput($input)->loadOutput($output);
     }
 
-    /**
-     * @param string $path
-     *
-     * @return self
-     */
-    protected function loadXml(string $path): self
+    protected function loadInput(string $input)
     {
-        $content = file_get_contents($path);
-        $this->xml = new SimpleXMLElement($content);
-
-        return $this->loadTargets()->loadCalls()->loadDepends();
-    }
-
-    protected function loadTargets()
-    {
-
-        $targets = $this->xml->xpath('/project/target[@name]');
-        $this->targets = [];
-        foreach ($targets as $t) {
-            $this->targets[] = new Target($t);
+        // Input must exist
+        if (!is_file($input)) {
+            throw new DiagramException('Invalid input.');
         }
+
+        $this->input = $input;
 
         return $this;
     }
 
-    protected function loadCalls()
+    protected function loadOutput(string $output)
     {
-        /** @var Target $t */
-        foreach ($this->targets as $t) {
-            $targetName = $t->getName();
-            $calls = $this->xml->xpath("/project/target[@name='{$targetName}']//phingcall/@target");
-            for ($i = 0, $total = count($calls); $i < $total; $i++) {
-                $this->calls[] = new CallRelationship($t, $calls[$i], $i + 1);
-            }
+        // Adding filename if necessary
+        if (is_dir($output)) {
+            $inputInfo = pathinfo($this->input);
+            $output .= DIRECTORY_SEPARATOR . $inputInfo['filename'] . '.' . $this->format;
         }
+
+        // Check if path is available
+        if (!is_dir(dirname($output))) {
+            throw new DiagramException('Invalid output.');
+        }
+
+        $this->output = $output;
 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    protected function loadDepends()
+    protected function loadFormat(string $format)
     {
-        $targets = $this->xml->xpath('/project/target[@depends]');
-        $this->depends = [];
-        foreach ($targets as $t) {
-            $depends = (string)$t['depends'];
-            $explode = explode(',', $depends);
-            for ($i = 0, $total = count($explode); $i < $total; $i++) {
-                $this->depends[] = new DependsRelationship($t, $explode[$i], $i + 1);
-            }
+        switch ($format) {
+            case self::FORMAT_PNG:
+            case self::FORMAT_SVG:
+            case self::FORMAT_PUML:
+                break;
+            default:
+                throw new DiagramException('Invalid format.');
+                break;
         }
+
+        $this->format = $format;
 
         return $this;
     }
 
-    /**
-     * Returns PlantUML code
-     */
-    public function getCode()
-    {
-        $code = '@startuml' . PHP_EOL;
-        $code .= 'skinparam arrowFontColor Grey' . PHP_EOL . PHP_EOL;
-
-        foreach ($this->targets as $t) {
-            $code .= (string)$t . PHP_EOL;
-        }
-
-        foreach ($this->calls as $c) {
-            $code .= (string)$c . PHP_EOL;
-        }
-
-        foreach ($this->depends as $d) {
-            $code .= (string)$d . PHP_EOL;
-        }
-
-        $code .= PHP_EOL . '@enduml' . PHP_EOL;
-
-        return $code;
-    }
-
-    /**
-     * Save puml to file
-     */
     public function save()
     {
-        $content = $this->getCode();
-        file_put_contents($this->buildfilePath . '.puml', $content);
-        return $this;
+        $xmlDoc = simplexml_load_file($this->input);
+        $xslDoc = simplexml_load_file(self::XSL_PATH);
+        
+        $proc = new XSLTProcessor();
+        $proc->importStylesheet($xslDoc);
+        $content = $proc->transformToXML($xmlDoc);
+
+        file_put_contents($this->output, $content);
     }
 
 }

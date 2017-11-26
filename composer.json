@@ -3,8 +3,9 @@
     "description": "Graphical representation of Phing's buildfile",
     "type": "project",
     "require": {
-        "pds/skeleton": "^1.0",
-        "ext-simplexml": "^7.1"
+        "ext-simplexml": "*",
+        "ext-xsl": "*",
+        "jawira/plantuml-encoding": "^0.0.1"
     },
     "autoload": {
         "psr-4": {"Jawira\\PhingDiagram\\": "src/"}
@@ -12,7 +13,7 @@
     "license": "library",
     "authors": [
         {
-            "name": "Jawira",
+            "name": "Jawira Portugal",
             "email": "dev@jawira.com"
         }
     ]

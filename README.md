@@ -4,12 +4,19 @@ Phing diagram
 **Phing diagram** generates a PlantUML diagram to have a 
 graphical representation for Phing's buildfile.
 
+Requirements
+------------
+
+* SimpleXML extension
+* XSL extension
 
 Use
 ---
 
+You can use executable to generate 
+
 ```bash
-$ php public/phing-diagram.php -f ./path/to/build.xml
+$ php public/phing-diagram.php -i ./path/to/build.xml -o ./path/to/diagram.png -f png
 ```
 
 

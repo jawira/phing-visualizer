@@ -4,38 +4,49 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf16d8cc982ed4c5fef27923c5c87f2a",
+    "content-hash": "9f59c8dedbfe7ed76035770bba1ad4de",
     "packages": [
         {
-            "name": "pds/skeleton",
-            "version": "1.0.0",
+            "name": "jawira/plantuml-encoding",
+            "version": "v0.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/php-pds/skeleton.git",
-                "reference": "95e476e5d629eadacbd721c5a9553e537514a231"
+                "url": "https://github.com/jawira/plantuml-encoding.git",
+                "reference": "ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-pds/skeleton/zipball/95e476e5d629eadacbd721c5a9553e537514a231",
-                "reference": "95e476e5d629eadacbd721c5a9553e537514a231",
+                "url": "https://api.github.com/repos/jawira/plantuml-encoding/zipball/ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5",
+                "reference": "ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5",
                 "shasum": ""
             },
-            "bin": [
-                "bin/pds-skeleton"
-            ],
-            "type": "standard",
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Pds\\Skeleton\\": "src/"
-                }
+                "files": [
+                    "src/plantuml_functions.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "CC-BY-SA-4.0"
+                "GPLv3"
             ],
-            "description": "Standard for PHP package skeletons.",
-            "homepage": "https://github.com/php-pds/skeleton",
-            "time": "2017-01-25T23:30:41+00:00"
+            "authors": [
+                {
+                    "name": "Jawira Portugal",
+                    "email": "dev@jawira.com"
+                }
+            ],
+            "description": "PlantUML encoding functions",
+            "keywords": [
+                "encodep",
+                "encoding",
+                "functions",
+                "plantuml"
+            ],
+            "time": "2017-11-23T21:54:33+00:00"
         }
     ],
     "packages-dev": [],
@@ -45,7 +56,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-simplexml": "^7.1"
+        "ext-simplexml": "*",
+        "ext-xsl": "*"
     },
     "platform-dev": []
 }
