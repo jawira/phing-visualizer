@@ -5,9 +5,9 @@ try {
 
     $options = getopt('i:o:f:', ['input:', 'output:', 'format:']);
 
-    $input = $options['i'] ?? $options['input'] ?? '';
-    $output = $options['o'] ?? $options['output'] ?? '';
-    $format = $options['f'] ?? $options['format'] ?? '';
+    $input = $options['i'] ?? $options['input'] ?? null;
+    $output = $options['o'] ?? $options['output'] ?? null;
+    $format = $options['f'] ?? $options['format'] ?? null;
 
     $diagram = new Jawira\PhingDiagram\Diagram($input, $output, $format);
     $diagram->save();

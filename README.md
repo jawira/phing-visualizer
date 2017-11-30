@@ -20,6 +20,10 @@ You can use executable to generate
 $ php public/phing-diagram.php -i ./path/to/build.xml -o ./path/to/diagram.png -f png
 ```
 
+```bash
+$ php public/phing-diagram.php -i ./path/to/build.xml
+```
+
 
 This project adheres
 --------------------
@@ -28,9 +32,10 @@ This project adheres
 * [pds/skeleton]
 * [Semantic Versioning]
 * [Contributor Covenant]
-
+* [Git flow]
 
 [Keep a Changelog]: http://keepachangelog.com/en/1.0.0/
 [pds/skeleton]: https://github.com/php-pds/skeleton
 [Semantic Versioning]: http://semver.org/
 [Contributor Covenant]: https://www.contributor-covenant.org/
+[Git flow]: https://danielkummer.github.io/git-flow-cheatsheet/

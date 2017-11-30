@@ -15,13 +15,22 @@ class Diagram
 
     protected $input;
     protected $output;
-    protected $format;
+    protected $format = self::FORMAT_PNG;
 
-    public function __construct(string $input, string $output, string $format)
+    public function __construct(string $input, ?string $output, ?string $format)
     {
+        // Order is important here
         $this->loadFormat($format)->loadInput($input)->loadOutput($output);
     }
 
+    /**
+     * Load buildfile location
+     *
+     * @param string $input
+     *
+     * @return $this
+     * @throws DiagramException
+     */
     protected function loadInput(string $input)
     {
         // Input must exist
@@ -34,11 +43,25 @@ class Diagram
         return $this;
     }
 
-    protected function loadOutput(string $output)
+    /**
+     * Load PlantUML diagram output location
+     *
+     * @param null|string $output
+     *
+     * @return $this
+     * @throws DiagramException
+     */
+    protected function loadOutput(?string $output)
     {
+        $inputInfo = pathinfo($this->input);
+
+        // Fallback
+        if (empty($output)) {
+            $output = $inputInfo['dirname'];
+        }
+
         // Adding filename if necessary
         if (is_dir($output)) {
-            $inputInfo = pathinfo($this->input);
             $output .= DIRECTORY_SEPARATOR . $inputInfo['filename'] . '.' . $this->format;
         }
 
@@ -52,8 +75,12 @@ class Diagram
         return $this;
     }
 
-    protected function loadFormat(string $format)
+    protected function loadFormat(?string $format)
     {
+        if (is_null($format)) {
+            $format = $this->format;
+        }
+
         switch ($format) {
             case self::FORMAT_PNG:
             case self::FORMAT_SVG:
