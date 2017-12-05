@@ -17,10 +17,16 @@ class Diagram
     protected $output;
     protected $format = self::FORMAT_PNG;
 
-    public function __construct(string $input, ?string $output, ?string $format)
+    /**
+     * Diagram constructor.
+     *
+     * @param string $input Path where buildfile is located
+     *
+     * @throws DiagramException
+     */
+    public function __construct(string $input)
     {
-        // Order is important here
-        $this->loadFormat($format)->loadInput($input)->loadOutput($output);
+        $this->loadInput($input);
     }
 
     /**
@@ -75,6 +81,12 @@ class Diagram
         return $this;
     }
 
+    /**
+     * @param null|string $format
+     *
+     * @return $this
+     * @throws DiagramException
+     */
     protected function loadFormat(?string $format)
     {
         if (is_null($format)) {
@@ -95,8 +107,17 @@ class Diagram
         return $this;
     }
 
-    public function save()
+    /**
+     * @param null|string $format
+     * @param null|string $output
+     *
+     * @throws DiagramException
+     */
+    public function save(?string $format, ?string $output)
     {
+        $this->loadFormat($format);
+        $this->loadOutput($output);
+
         $puml = $this->generatePuml();
 
         switch ($this->format) {
@@ -131,6 +152,13 @@ class Diagram
         return $proc->transformToXML($xmlDoc);
     }
 
+    /**
+     * Retrieves image from Internet
+     *
+     * @param string $puml PlantUML source code
+     *
+     * @return bool|string
+     */
     protected function generateImage(string $puml)
     {
         $encoded = encodep($puml);
