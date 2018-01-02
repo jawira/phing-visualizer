@@ -1,7 +1,7 @@
-Phing diagram
-=============
+Phing visualizer
+================
 
-**Phing diagram** generates a PlantUML diagram to have a 
+**Phing visualizer** generates a PlantUML diagram to have a 
 graphical representation for Phing's buildfile.
 
 Requirements
@@ -17,11 +17,11 @@ Use
 You can use executable to generate 
 
 ```bash
-$ php public/phing-diagram.php -i ./path/to/build.xml -o ./path/to/diagram.png -f png
+$ php bin/phing-visualizer.php -i ./path/to/build.xml -o ./path/to/diagram.png -f png
 ```
 
 ```bash
-$ php public/phing-diagram.php -i ./path/to/build.xml
+$ php bin/phing-visualizer.php -i ./path/to/build.xml
 ```
 
 

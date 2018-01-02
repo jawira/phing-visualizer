@@ -1,6 +1,6 @@
 <?php
 
-namespace Jawira\PhingDiagram;
+namespace Jawira\PhingVisualiser;
 
 use XSLTProcessor;
 use function Jawira\PlantUml\encodep;
@@ -159,7 +159,7 @@ class Diagram
      *
      * @return bool|string
      */
-    protected function generateImage(string $puml)
+    protected function generateImage(string $puml): string
     {
         $encoded = encodep($puml);
         $url = sprintf(self::URL, $this->format, $encoded);

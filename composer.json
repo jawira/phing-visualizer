@@ -1,5 +1,5 @@
 {
-  "name": "jawira/phing-diagram",
+  "name": "jawira/phing-visualiser",
   "description": "Graphical representation of Phing's buildfile",
   "type": "library",
   "require": {
@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Jawira\\PhingDiagram\\": "src/"
+      "Jawira\\PhingVisualiser\\": "src/"
     }
   },
   "license": "library",

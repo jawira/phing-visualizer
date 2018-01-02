@@ -6,7 +6,7 @@
  * Time: 23:13
  */
 
-namespace Jawira\PhingDiagram;
+namespace Jawira\PhingVisualiser;
 
 
 use Exception;

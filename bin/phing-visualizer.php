@@ -9,7 +9,7 @@ try {
     $output = $options['o'] ?? $options['output'] ?? null;
     $format = $options['f'] ?? $options['format'] ?? null;
 
-    $diagram = new Jawira\PhingDiagram\Diagram($input);
+    $diagram = new Jawira\PhingVisualiser\Diagram($input);
     $diagram->save($format, $output);
 } catch (Exception $ex) {
     $msg = $ex->getMessage();
