@@ -9,17 +9,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Unreleased
 ----------
 
+
+v1.0.0 - 2017-01-02
+-------------------
+
 ### Changed
 * Renaming project name from `PhingDiagram` to `PhingVisualiser`.
 * Updated library usage in Readme file
+* Changed signature \Jawira\PhingVisualiser\Diagram::save
 
 
-v0.0.0
-------------
+v0.0.0 - 2017-11-17
+-------------------
 
 ### Added
 * First functional version
-* executable in `bin` dir
+* Executable in `bin` dir
 * XSLT file
 
 
