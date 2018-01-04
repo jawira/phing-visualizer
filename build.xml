@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PhingVisualizer" default="properties">
+
+    <property file="build.properties.ini"/>
+
+    <!--Available properties-->
+    <target name="properties" description="List all properties">
+        <echoproperties/>
+    </target>
+
+    <!--composer install-->
+    <target name="composer:install" description="Install dependencies">
+        <composer composer="${composer}" command="install"/>
+    </target>
+
+    <!--phpunit.phar-->
+    <target name="phar:phpunit" description="Download PhpUnit">
+        <if>
+            <not>
+                <available file="phpunit.phar"/>
+            </not>
+            <then>
+                <httpget dir="." url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true" filename="phpunit.phar"/>
+            </then>
+        </if>
+        <chmod file="phpunit.phar" mode="555" verbose="true"/>
+        <exec executable="${php.interpreter}" passthru="true">
+            <arg value="phpunit.phar"/>
+            <arg value="--version"/>
+        </exec>
+    </target>
+
+</project>
