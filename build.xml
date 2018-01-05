@@ -14,6 +14,14 @@
         <composer composer="${composer}" command="install"/>
     </target>
 
+    <!--composer install for prod-->
+    <target name="composer:optimize" description="Install dependencies optimized for production environment">
+        <composer composer="${composer}">
+            <arg value="install"/>
+            <arg value="--optimize-autoloader"/>
+        </composer>
+    </target>
+
     <!--phpunit.phar-->
     <target name="phar:phpunit" description="Download PhpUnit">
         <if>
@@ -21,7 +29,7 @@
                 <available file="phpunit.phar"/>
             </not>
             <then>
-                <httpget dir="." url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true" filename="phpunit.phar"/>
+                <httpget dir="${project.basedir}" url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true" filename="phpunit.phar"/>
             </then>
         </if>
         <chmod file="phpunit.phar" mode="555" verbose="true"/>
