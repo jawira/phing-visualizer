@@ -10,6 +10,17 @@ Unreleased
 ----------
 
 
+v1.1.0 - 2017-01-08
+-------------------
+
+### Added
+* Unit tests for Diagram class
+* Phing support
+
+### Changed
+* Refactored Diagram class
+
+
 v1.0.0 - 2017-01-02
 -------------------
 

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "503644cdc40faef87b1c74f4278e8f8f",
+    "content-hash": "012709d73b0f4c41175ed218b7b06eeb",
     "packages": [
         {
             "name": "jawira/plantuml-encoding",
-            "version": "v0.0.1",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/plantuml-encoding.git",
-                "reference": "ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5"
+                "reference": "c8c2744f425a604ac4e17bb9ee8e13f6f02608c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/plantuml-encoding/zipball/ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5",
-                "reference": "ca7c2edb16f6c7f8c26365a7a1b59b6452f905c5",
+                "url": "https://api.github.com/repos/jawira/plantuml-encoding/zipball/c8c2744f425a604ac4e17bb9ee8e13f6f02608c6",
+                "reference": "c8c2744f425a604ac4e17bb9ee8e13f6f02608c6",
                 "shasum": ""
             },
             "require": {
@@ -46,7 +46,7 @@
                 "functions",
                 "plantuml"
             ],
-            "time": "2017-11-23T21:54:33+00:00"
+            "time": "2018-01-07T10:02:40+00:00"
         }
     ],
     "packages-dev": [],

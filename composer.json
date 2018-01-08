@@ -1,16 +1,16 @@
 {
-  "name": "jawira/phing-visualiser",
+  "name": "jawira/phing-visualizer",
   "description": "Graphical representation of Phing's buildfile",
   "type": "library",
   "require": {
     "ext-simplexml": "*",
     "ext-xsl": "*",
-    "jawira/plantuml-encoding": "^0.0.1",
+    "jawira/plantuml-encoding": "^1.0.0",
     "php": "^7.1"
   },
   "autoload": {
     "psr-4": {
-      "Jawira\\PhingVisualiser\\": "src/"
+      "Jawira\\PhingVisualizer\\": "src/"
     }
   },
   "license": "library",

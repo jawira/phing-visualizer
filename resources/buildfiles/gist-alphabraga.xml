@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="ProjectName" basedir="." default="build">
+
+    <property name="project-name" value="ProjectName"/>
+    <property name="tag-name" value="."/>
+    <property name="dir-build" value="./build"/>
+    <property name="dir-tests" value="tests"/>
+    <property name="dir-tests-logs" value="tests/_reports"/>
+    <property name="dir-logs" value="./build/logs"/>
+    <property name="dir-app" value="./core"/>
+
+    <php function="basename" returnProperty="phing.buildfile.dirname">
+        <param value="${phing.dir}"/>
+    </php>
+
+    <tstamp>
+        <format property="build.time" pattern="%Y%m%d%H%I%S"/>
+    </tstamp>
+
+
+    <!-- ======================== -->
+    <!-- = (Default) Build Task = -->
+    <!-- ======================== -->
+    <target name="build">
+        <phingcall target="start"></phingcall>
+        <phingcall target="clean"></phingcall>
+        <phingcall target="structure"></phingcall>
+        <phingcall target="composer"></phingcall>
+        <phingcall target="phpunit"></phingcall>
+        <phingcall target="metrics"></phingcall>
+        <phingcall target="phpdoc"></phingcall>
+        <phingcall target="copylogs"></phingcall>
+        <phingcall target="makedist"></phingcall>
+        <phingcall target="deploy"></phingcall>
+    </target>
+
+
+    <!-- ============== -->
+    <!-- = Start Task = -->
+    <!-- ============== -->
+    <target name="start">
+        <echo message=" "/>
+        <echo message="----------------------------------------------------------------"/>
+        <echo message="   _____             _                                          "/>
+        <echo message="  |  __ \           | |                                         "/>
+        <echo message="  | |  | | ___ _ __ | | ___  _   _                              "/>
+        <echo message="  | |  | |/ _ | '_ \| |/ _ \| | | |                             "/>
+        <echo message="  | |__| |  __| |_) | | (_) | |_| |                             "/>
+        <echo message="  |_____/ \___| .__/|_|\___/ \__, |                             "/>
+        <echo message="              | |             __/ |                             "/>
+        <echo message="              |_|            |___/                              "/>
+        <echo message=""/>
+        <echo message="Inciando processo de deploy... de ${phing.buildfile.dirname}"/>
+        <echo message=""/>
+        <echo message="----------------------------------------------------------------"/>
+        <echo message=""/>
+    </target>
+
+    <!-- ============== -->
+    <!-- = Clean Task = -->
+    <!-- ============== -->
+    <target name="clean">
+        <echo msg="Cleaning build directories ..."/>
+        <delete dir="${dir-build}"/>
+        <echo msg="Cleaning unit tests results ..."/>
+        <delete>
+            <fileset dir="${dir-tests}/_reports/">
+                <include name="**/*.php"/>
+            </fileset>
+        </delete>
+    </target>
+
+
+    <!-- ========== -->
+    <!-- = Composer = -->
+    <!-- ========== -->
+    <target name="composer">
+        <echo msg="Running composer install ..."/>
+        <exec command="composer install" logoutput="true" escape="false"/>
+    </target>
+
+    <!-- ========== -->
+    <!-- = PHPDoc = -->
+    <!-- ========== -->
+    <target name="phpdoc">
+        <echo msg="Generating API docs ..."/>
+        <exec command="vendor/bin/phpdoc.php --progressbar --sourcecode -d ${dir-app}" logoutput="true" escape="false"/>
+        <exec command="rm -rf docs/api" logoutput="true" escape="false"/>
+        <exec command="cp -rf output docs/api" logoutput="true" escape="false"/>
+    </target>
+
+    <!-- ========================== -->
+    <!-- = Make distribution Task = -->
+    <!-- ========================== -->
+    <target name="makedist">
+        <echo msg="Moving files to distribution directory ..."/>
+        <copy todir="${dir-build}/dist/${project-name}.${phing.buildfile.dirname}.${build.time}">
+            <fileset dir=".">
+                <exclude name="build/**"/>
+                <exclude name="build**"/>
+                <exclude name="output/**"/>
+                <exclude name="vendor/**"/>
+                <exclude name="tests/**"/>
+                <exclude name="composer.**"/>
+                <exclude name="phpunit.xml"/>
+                <!-- <exclude name="docs/**" /> -->
+                <!--  <exclude name="tests/**" /> -->
+                <!-- <exclude name="composer**" /> -->
+                <!-- <exclude name="phpunit**" /> -->
+                <exclude name="phpdoc**"/>
+                <include name="**"/>
+            </fileset>
+        </copy>
+        <tar destfile="${dir-build}/${project-name}.${phing.buildfile.dirname}.${build.time}.tar.gz" compression="gzip">
+            <fileset dir="${dir-build}/dist">
+                <include name="**"/>
+            </fileset>
+        </tar>
+    </target>
+
+    <!-- ================== -->
+    <!-- = Structure Task = -->
+    <!-- ================== -->
+    <target name="structure">
+        <echo msg="Creating structure ..."/>
+        <mkdir dir="${dir-build}"/>
+        <mkdir dir="${dir-build}/docs"/>
+        <mkdir dir="${dir-logs}"/>
+        <mkdir dir="${dir-build}/dist"/>
+        <mkdir dir="${dir-tests-logs}"/>
+    </target>
+
+    <!-- ================ -->
+    <!-- = PHPUnit Task = -->
+    <!-- ================ -->
+    <target name="phpunit">
+        <echo msg="Running unit tests in ${dir-tests} ..."/>
+        <exec command="vendor/bin/phpunit" logoutput="true" escape="true"/>
+    </target>
+
+    <!-- ================ -->
+    <!-- = Metrics Task = -->
+    <!-- ================ -->
+    <target name="metrics">
+        <echo msg="Running metrics tools ..."/>
+
+        <echo msg="# PHPCPD ..."/>
+        <exec command="vendor/bin/phpcpd --log-pmd ${dir-tests-logs}/cpd.xml ${dir-app}" logoutput="true"
+              escape="false"/>
+
+        <echo msg="# PDepend ..."/>
+        <exec command="vendor/bin/pdepend -d memory_limit=1G --jdepend-xml=${dir-tests-logs}/jdepend.xml --summary-xml=${dir-tests-logs}/jdepend-summary.xml --jdepend-chart=${dir-tests-logs}/jdepend.svg --overview-pyramid=${dir-tests-logs}/jdepend-pyramid.svg ${dir-app}"
+              logoutput="true" escape="false"/>
+
+        <echo msg="# PHP Mess Detector ..."/>
+        <exec command="vendor/bin/phpmd ${dir-app} text cleancode,codesize,controversial,design,naming,unusedcode --reportfile ${dir-tests-logs}/phpmd.txt"
+              logoutput="true" escape="false"/>
+
+        <echo msg="# PHP Loc ..."/>
+        <exec command="vendor/bin/phploc --progress --log-xml=${dir-tests-logs}/phploc.xml ${dir-app} ${dir-tests} index.php"
+              logoutput="true" escape="false"/>
+
+    </target>
+
+    <!-- ================== -->
+    <!-- = Log files copy = -->
+    <!-- ================== -->
+    <target name="copylogs">
+        <echo msg="Copying logs to build dir ..."/>
+        <copy todir="${dir-logs}">
+            <fileset dir="${dir-tests-logs}">
+                <include name="**"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="deploy">
+        <!-- copy to live -->
+        <echo msg="Put code to live server ..."/>
+        <exec command="scp ${dir-build}/${project-name}.${phing.buildfile.dirname}.${build.time}.tar.gz username@www.server.com:/var/projects/${project-name}/${project-name}.${phing.buildfile.dirname}.${build.time}.tar.gz"
+              passthru="true"/>
+
+        <!-- make live -->
+        <exec command="ssh username@www.server.com tar -zxf /var/projects/${project-name}/${project-name}.${phing.buildfile.dirname}.${build.time}.tar.gz -C /var/projects/${project-name}/"
+              logoutput="yes"/>
+
+        <echo msg="Creating symlink..."/>
+
+        <exec command="ssh username@www.server.com rm /var/www/html/${project-name}" logoutput="yes"/>
+        <exec command="ssh username@www.server.com ln -sf /var/projects/${project-name}/${project-name}.${phing.buildfile.dirname}.${build.time} /var/www/html/${project-name}"
+              logoutput="yes"/>
+    </target>
+</project>

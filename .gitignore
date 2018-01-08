@@ -1,2 +1,4 @@
-.idea/
-vendor/
+/.idea/
+/vendor/
+/phpunit.phar
+/build.properties.ini
