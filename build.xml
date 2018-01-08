@@ -19,6 +19,7 @@
         <composer composer="${composer}">
             <arg value="install"/>
             <arg value="--optimize-autoloader"/>
+            <arg value="--no-dev"/>
         </composer>
     </target>
 
@@ -26,17 +27,40 @@
     <target name="phar:phpunit" description="Download PhpUnit">
         <if>
             <not>
-                <available file="phpunit.phar"/>
+                <available file="${phpunit}"/>
             </not>
             <then>
-                <httpget dir="${project.basedir}" url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true" filename="phpunit.phar"/>
+                <httpget dir="${phpunit.dir}" url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true"
+                         filename="${phpunit.filename}"/>
             </then>
         </if>
-        <chmod file="phpunit.phar" mode="555" verbose="true"/>
+        <chmod file="${phpunit}" mode="555" verbose="true"/>
         <exec executable="${php.interpreter}" passthru="true">
-            <arg value="phpunit.phar"/>
+            <arg value="${phpunit}"/>
             <arg value="--version"/>
         </exec>
+    </target>
+
+    <!--Run PHPUnit-->
+    <target name="test:phpunit" description="Run PHPUnit's tests">
+        <exec executable="${phpunit}" passthru="true"/>
+    </target>
+
+    <!--php -l -->
+    <target name="test:php-check-syntax" description="Check syntax on PHP files" depends="filesets">
+        <!--All project's PHP files, excluding vendor dir-->
+        <apply executable="${php.interpreter}" passthru="true">
+            <arg value="-l"/>
+            <fileset refid="php_files"/>
+        </apply>
+    </target>
+
+    <!--Register your filesets here-->
+    <target name="filesets">
+        <fileset dir="${project.basedir}" id="php_files">
+            <include name="**/*.php"/>
+            <exclude name="vendor/"/>
+        </fileset>
     </target>
 
 </project>
