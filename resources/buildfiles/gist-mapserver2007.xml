@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="stream" basedir="." default="main">
+
+    <target name="main" depends="init,phpmd,phpcpd,test"></target>
+
+    <!-- init -->
+    <target name="init">
+        <delete dir="./reports" includeemptydirs="true"/>
+        <mkdir dir="./reports"/>
+    </target>
+
+    <!-- PHPUnit -->
+    <target name="test">
+        <phpunit haltonfailure="false" printsummary="true">
+            <formatter type="xml" outfile="reports/phpunit.xml"/>
+            <batchtest>
+                <fileset dir="./core/test">
+                    <include name="**/*Test.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+    <!-- PHPMD -->
+    <target name="phpmd">
+        <phpmd rulesets="codesize,unusedcode,design,naming">
+            <fileset dir="./">
+                <include name="**/*.php"/>
+                <exclude name="**/*Test.php"/>
+            </fileset>
+            <formatter type="xml" outfile="reports/pmd.xml"/>
+        </phpmd>
+    </target>
+    <!-- PHPCPD -->
+    <target name="phpcpd">
+        <phpcpd>
+            <fileset dir="./">
+                <include name="**/*.php"/>
+                <exclude name="**/*Test.php"/>
+            </fileset>
+            <formatter type="pmd" outfile="reports/cpd.xml"/>
+        </phpcpd>
+    </target>
+</project>
