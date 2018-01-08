@@ -1,0 +1,5 @@
+@startuml
+title Hablando en español
+Ñoño -> Chapulín : ¿Quién podrá ayudarme?
+Chapulín --> Ñoño : ¡Yo!
+@enduml
