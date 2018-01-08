@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HelloWorld" default="welcome" basedir="." description="a demo project">
+    <property name="message" value="Hello World!"/>
+    <property name="buildDir" value="build"/>
+    <property name="srcDir" value="src"/>
+    <property name="ftp.host" value="ftp.example.com"/>
+    <property name="ftp.port" value="21"/>
+    <property name="ftp.username" value="user"/>
+    <property name="ftp.password" value="password"/>
+    <property name="ftp.dir" value="/public_html/"/>
+    <property name="ftp.mode" value="ascii"/>
+
+    <target name="welcome">
+        <echo msg="${message}"/>
+    </target>
+
+    <target name="test">
+        <phpunit printsummary="true" haltonfailure="true">
+            <batchtest>
+                <fileset dir="./tests">
+                    <include name="*Test.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit>
+    </target>
+
+    <fileset id="srcfiles">
+        <include name="*"/>
+        <exclude name="*.tmp"/>
+    </fileset>
+
+    <target name="build" depends="test">
+        <echo msg="Copying to build directory..."/>
+        <copy todir="${buildDir}">
+            <fileset refid="srcfiles"/>
+        </copy>
+    </target>
+
+    <ftpdeploy
+            host="${ftp.host}"
+            port="${ftp.port}"
+            username="${ftp.username}"
+            password="${ftp.password}"
+            dir="${ftp.dir}"
+            mode="${ftp.mode}">
+        <fileset refid="srcfiles"/>
+    </ftpdeploy>
+</project>

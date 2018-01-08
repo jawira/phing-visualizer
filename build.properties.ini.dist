@@ -1,0 +1,7 @@
+[bin]
+composer = /usr/bin/composer
+
+[phpunit]
+phpunit.dir = ${project.basedir}
+phpunit.filename = phpunit.phar
+phpunit = ${phpunit.dir}/${phpunit.filename}

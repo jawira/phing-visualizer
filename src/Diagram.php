@@ -1,50 +1,66 @@
 <?php
 
-namespace Jawira\PhingVisualiser;
+namespace Jawira\PhingVisualizer;
 
 use XSLTProcessor;
 use function Jawira\PlantUml\encodep;
+use function dirname;
 
 class Diagram
 {
-    const FORMAT_SVG = 'svg';
-    const FORMAT_PNG = 'png';
-    const FORMAT_PUML = 'puml';
-    const XSL_PATH = __DIR__ . DIRECTORY_SEPARATOR . '../resources/xslt/plantuml.xsl';
-    const URL = 'http://www.plantuml.com/plantuml/%s/%s';
+    public const FORMAT_SVG = 'svg';
+    public const FORMAT_PNG = 'png';
+    public const FORMAT_PUML = 'puml';
 
-    protected $input;
-    protected $output;
-    protected $format = self::FORMAT_PNG;
+    protected const XSL_PATH = __DIR__ . DIRECTORY_SEPARATOR . '../resources/xslt/plantuml.xsl';
+    protected const URL = 'http://www.plantuml.com/plantuml/%s/%s';
+
+    /**
+     * @var string
+     */
+    protected $buildfile;
+
 
     /**
      * Diagram constructor.
      *
-     * @param string $input Path where buildfile is located
+     * @param string $buildfile Path where buildfile is located
      *
-     * @throws DiagramException
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
-    public function __construct(string $input)
+    public function __construct(string $buildfile)
     {
-        $this->loadInput($input);
+        $this->setBuildfile($buildfile);
     }
+
+
+    /**
+     * @return string
+     */
+    protected function getBuildfile(): string
+    {
+        return $this->buildfile;
+    }
+
 
     /**
      * Load buildfile location
      *
-     * @param string $input
+     * @param string $buildfile
      *
      * @return $this
-     * @throws DiagramException
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
-    protected function loadInput(string $input)
+    protected function setBuildfile(string $buildfile): self
     {
-        // Input must exist
-        if (!is_file($input)) {
-            throw new DiagramException('Invalid input.');
+        // Buildfile must exist
+        if (!is_file($buildfile)) {
+            throw new DiagramException(
+                sprintf('File "%s" is invalid.', $buildfile)
+            );
         }
 
-        $this->input = $input;
+        $this->buildfile = $buildfile;
 
         return $this;
     }
@@ -52,23 +68,24 @@ class Diagram
     /**
      * Load PlantUML diagram output location
      *
+     * @param string      $format
      * @param null|string $output
      *
-     * @return $this
-     * @throws DiagramException
+     * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
-    protected function loadOutput(?string $output)
+    protected function validateOutputLocation(string $format, ?string $output): string
     {
-        $inputInfo = pathinfo($this->input);
+        $buildfileInfo = pathinfo($this->getBuildfile());
 
         // Fallback
         if (empty($output)) {
-            $output = $inputInfo['dirname'];
+            $output = $buildfileInfo['dirname'];
         }
 
         // Adding filename if necessary
         if (is_dir($output)) {
-            $output .= DIRECTORY_SEPARATOR . $inputInfo['filename'] . '.' . $this->format;
+            $output .= DIRECTORY_SEPARATOR . $buildfileInfo['filename'] . '.' . $format;
         }
 
         // Check if path is available
@@ -76,64 +93,74 @@ class Diagram
             throw new DiagramException('Invalid output.');
         }
 
-        $this->output = $output;
-
-        return $this;
+        return $output;
     }
 
     /**
-     * @param null|string $format
+     * Saves image on disk
      *
-     * @return $this
-     * @throws DiagramException
-     */
-    protected function loadFormat(?string $format)
-    {
-        if (is_null($format)) {
-            $format = $this->format;
-        }
-
-        switch ($format) {
-            case self::FORMAT_PNG:
-            case self::FORMAT_SVG:
-            case self::FORMAT_PUML:
-                $this->format = $format;
-                break;
-            default:
-                throw new DiagramException('Invalid format.');
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param null|string $format
+     * @param string      $format
      * @param null|string $output
      *
-     * @throws DiagramException
+     * @throws \Jawira\PhingVisualizer\DiagramException
+     *
+     * @return int|bool The function returns the number of bytes that were written to the file, or false on failure.
      */
-    public function save(?string $format, ?string $output)
+    public function save(string $format, ?string $output)
     {
-        $this->loadFormat($format);
-        $this->loadOutput($output);
-
-        $puml = $this->generatePuml();
-
-        switch ($this->format) {
+        switch ($format) {
             case self::FORMAT_PUML:
-                $content = $puml;
+                $content = $this->generatePuml();
                 break;
             case self::FORMAT_SVG:
             case self::FORMAT_PNG:
-                $content = $this->generateImage($puml);
+                $content = $this->generateImage($format);
                 break;
             default:
-                throw new DiagramException('Invalid format to save.');
+                throw new DiagramException(sprintf('Format "%s" not handled.', $format));
+                break;
+        }
+        $output = $this->validateOutputLocation($format, $output);
+
+        return file_put_contents($output, $content);
+    }
+
+    /**
+     * Retrieves image from Internet
+     *
+     * @param string $format
+     *
+     * @return bool|string
+     * @throws \Jawira\PhingVisualizer\DiagramException
+     */
+    protected function generateImage(string $format): string
+    {
+        $url = $this->generateUrl($format);
+
+        return file_get_contents($url);
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
+     */
+    public function generateUrl(string $format): string
+    {
+        switch ($format) {
+            case self::FORMAT_SVG:
+            case self::FORMAT_PNG:
+                break;
+            default:
+                throw new DiagramException(sprintf('Format "%s" not handled.', $format));
                 break;
         }
 
-        file_put_contents($this->output, $content);
+        $puml    = $this->generatePuml();
+        $encoded = encodep($puml);
+
+        return sprintf(self::URL, $format, $encoded);
     }
 
     /**
@@ -141,30 +168,14 @@ class Diagram
      *
      * @return string
      */
-    protected function generatePuml()
+    protected function generatePuml(): string
     {
-        $xmlDoc = simplexml_load_file($this->input);
-        $xslDoc = simplexml_load_file(self::XSL_PATH);
+        $xmlDoc = simplexml_load_string(file_get_contents($this->getBuildfile()));
+        $xslDoc = simplexml_load_string(file_get_contents(self::XSL_PATH));
 
         $proc = new XSLTProcessor();
         $proc->importStylesheet($xslDoc);
 
-        return $proc->transformToXML($xmlDoc);
+        return $proc->transformToXml($xmlDoc);
     }
-
-    /**
-     * Retrieves image from Internet
-     *
-     * @param string $puml PlantUML source code
-     *
-     * @return bool|string
-     */
-    protected function generateImage(string $puml): string
-    {
-        $encoded = encodep($puml);
-        $url = sprintf(self::URL, $this->format, $encoded);
-
-        return file_get_contents($url);
-    }
-
 }

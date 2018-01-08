@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+
+<project name="test" basedir="." default="work">
+    <!-- rattachement de la tache a une balise -->
+    <taskdef name="vmwareUserCreate"
+             classname="phing.tasks.custom.vmware.user.CreateTask"/>
+    <target name="work">
+        <vmwareUserCreate username="nfa"
+                          password="pwd"
+                          description="my delegated admin auto-agent software"/>
+    </target>
+</project>
