@@ -2,12 +2,30 @@
 
 namespace Jawira\PhingVisualizer;
 
+use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionObject;
 
 class DiagramTest extends TestCase
 {
+
+    /**
+     * @var \org\bovigo\vfs\vfsStreamDirectory
+     */
+    protected $root;
+
+    public function setUp()
+    {
+        $this->root = vfsStream::setup();
+        vfsStream::copyFromFileSystem(__DIR__ . '/../resources/', $this->root);
+    }
+
+    public function tearDown()
+    {
+        unset($this->root);
+    }
+
     /**
      * Tests that "__construct" calls "setBuildfile" method once
      *
@@ -18,17 +36,19 @@ class DiagramTest extends TestCase
      */
     public function testConstructor(string $buildfile)
     {
+        $buildfilePath = $this->root->getChild($buildfile)->url();
+
         $diagramMock = $this->getMockBuilder(Diagram::class)
             ->disableOriginalConstructor()
             ->setMethods(['setBuildfile'])
             ->getMock();
         $diagramMock->expects($this->once())
             ->method('setBuildfile')
-            ->with($this->equalTo($buildfile));
+            ->with($this->equalTo($buildfilePath));
 
         $reflectedClass = new ReflectionClass(Diagram::class);
         $constructor    = $reflectedClass->getConstructor();
-        $constructor->invoke($diagramMock, $buildfile);
+        $constructor->invoke($diagramMock, $buildfilePath);
     }
 
     /**
@@ -39,12 +59,52 @@ class DiagramTest extends TestCase
      *
      * @param string $buildfile Path to buildfile
      */
-    public function testInputIsLoadedWithConstructor(string $buildfile)
+    public function testSetBuildFile(string $buildfile)
     {
-        $diagram = new Diagram($buildfile);
+        $buildfilePath = $this->root->getChild($buildfile)->url();
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods([])
+            ->getMock();
+
+        $reflection = new ReflectionObject($diagramStub);
+        $method     = $reflection->getMethod('setBuildfile');
+        $method->setAccessible(true);
+
+        $method->invokeArgs($diagramStub, [$buildfilePath]);
+
         $this->assertThat(
-            $diagram,
-            $this->attributeEqualTo('buildfile', $buildfile)
+            $diagramStub,
+            $this->attributeEqualTo('buildfile', $buildfilePath)
+        );
+    }
+
+    /**
+     * @dataProvider buildfilesProvider
+     * @covers       \Jawira\PhingVisualizer\Diagram::getBuildfile()
+     *
+     * @param $buildfile
+     */
+    public function testGetBuildfile($buildfile)
+    {
+        $buildfilePath = $this->root->getChild($buildfile)->url();
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods([])
+            ->getMock();
+
+        $reflection = new ReflectionObject($diagramStub);
+        $property   = $reflection->getProperty('buildfile');
+        $property->setAccessible(true);
+        $property->setValue($diagramStub, $buildfilePath);
+        $method = $reflection->getMethod('getBuildfile');
+        $method->setAccessible(true);
+
+        $this->assertSame(
+            $buildfilePath,
+            $method->invoke($diagramStub)
         );
     }
 
@@ -54,13 +114,13 @@ class DiagramTest extends TestCase
      * @dataProvider notExistentFilesProvider
      * @covers       \Jawira\PhingVisualizer\Diagram::setBuildfile()
      *
-     * @param string $input Invalid path
+     * @param string $invalidFile Invalid file path
      */
-    public function testConstructorFailsOnInvalidInput(string $input)
+    public function testConstructorFailsOnInvalidInput(string $invalidFile)
     {
         $this->expectException(DiagramException::class);
-        $this->expectExceptionMessage(sprintf('File "%s" is invalid.', $input));
-        new Diagram($input);
+        $this->expectExceptionMessage(sprintf('File "%s" is invalid.', $invalidFile));
+        new Diagram($invalidFile);
     }
 
     /**
@@ -165,11 +225,11 @@ class DiagramTest extends TestCase
     public function buildfilesProvider()
     {
         return [
-            'Gist alphabraga'    => [__DIR__ . '/../resources/buildfiles/gist-alphabraga.xml'],
-            'Gist kbariotis'     => [__DIR__ . '/../resources/buildfiles/gist-kbariotis.xml'],
-            'Gist mapserver2007' => [__DIR__ . '/../resources/buildfiles/gist-mapserver2007.xml'],
-            'Gist nfabre'        => [__DIR__ . '/../resources/buildfiles/gist-nfabre.xml'],
-            'Phing doc'          => [__DIR__ . '/../resources/buildfiles/phing-doc.xml'],
+            'Gist alphabraga'    => ['buildfiles/gist-alphabraga.xml'],
+            'Gist kbariotis'     => ['buildfiles/gist-kbariotis.xml'],
+            'Gist mapserver2007' => ['buildfiles/gist-mapserver2007.xml'],
+            'Gist nfabre'        => ['buildfiles/gist-nfabre.xml'],
+            'Phing doc'          => ['buildfiles/phing-doc.xml'],
         ];
     }
 
@@ -180,6 +240,7 @@ class DiagramTest extends TestCase
             'Not existent 2' => ['/hello/world'],
             'Not existent 3' => [uniqid('file-', true)],
             'Temp dir'       => [sys_get_temp_dir()],
+            'Temp file'      => [sys_get_temp_dir() . '/file.xml'],
             'root dir'       => ['/'],
         ];
     }
