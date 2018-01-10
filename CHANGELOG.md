@@ -10,6 +10,13 @@ Unreleased
 ----------
 
 
+v1.2.0 - 2017-01-11
+-------------------
+
+### Changed
+* Improved Unit tests for Diagram class
+
+
 v1.1.0 - 2017-01-08
 -------------------
 
