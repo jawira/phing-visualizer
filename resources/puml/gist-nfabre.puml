@@ -1,0 +1,10 @@
+
+        @startuml
+        
+            title test
+        skinparam arrowFontColor Grey
+        
+            (work)
+            
+        @enduml
+    

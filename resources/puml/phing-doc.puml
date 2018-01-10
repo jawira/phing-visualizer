@@ -1,0 +1,16 @@
+
+        @startuml
+        
+            title FooBar
+        skinparam arrowFontColor Grey
+        
+            (prepare)
+            
+            (build)
+            
+            (build) --> (prepare) : depend:1
+            (dist)
+            
+            (dist) --> (build) : depend:1
+        @enduml
+    
