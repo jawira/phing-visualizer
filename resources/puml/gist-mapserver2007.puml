@@ -1,0 +1,22 @@
+
+        @startuml
+        
+            title stream
+        skinparam arrowFontColor Grey
+        
+            (main)
+            
+            (main) --> (init) : depend:1
+            (main) --> (phpmd) : depend:2
+            (main) --> (phpcpd) : depend:3
+            (main) --> (test) : depend:4
+            (init)
+            
+            (test)
+            
+            (phpmd)
+            
+            (phpcpd)
+            
+        @enduml
+    

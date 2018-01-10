@@ -112,6 +112,7 @@ class DiagramTest extends TestCase
      * Test exception when buildfile location is invalid
      *
      * @dataProvider notExistentFilesProvider
+     * @covers       \Jawira\PhingVisualizer\Diagram::__construct()
      * @covers       \Jawira\PhingVisualizer\Diagram::setBuildfile()
      *
      * @param string $invalidFile Invalid file path
@@ -145,6 +146,25 @@ class DiagramTest extends TestCase
     }
 
     /**
+     * @covers \Jawira\PhingVisualizer\Diagram::generateUrl()
+     */
+    public function testGenerateUrlException()
+    {
+        $format = 'abc';
+
+        $this->expectException(DiagramException::class);
+        $this->expectExceptionMessage(sprintf('Format "%s" not handled.', $format));
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['generatePuml'])
+            ->getMock();
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $diagramStub->generateUrl($format, null);
+    }
+
+    /**
      * @dataProvider validateOutputLocationProvider
      * @covers       \Jawira\PhingVisualizer\Diagram::validateOutputLocation()
      *
@@ -169,6 +189,139 @@ class DiagramTest extends TestCase
             $expected,
             $method->invokeArgs($diagramStub, [$format, $output])
         );
+    }
+
+    /**
+     * @dataProvider notExistentDirsProvider
+     * @covers       \Jawira\PhingVisualizer\Diagram::validateOutputLocation()
+     *
+     * @param string $dir Invalid output directory
+     */
+    public function testInvalidOutputDirWhenValidatingOutputLocation(string $dir)
+    {
+        $this->expectException(DiagramException::class);
+        $this->expectExceptionMessage(
+            sprintf('Dir "%s" is invalid.', $dir)
+        );
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBuildfile'])
+            ->getMock();
+        $diagramStub->method('getBuildfile')->willReturn('/demo.xml');
+
+        $reflection = new ReflectionObject($diagramStub);
+        $method     = $reflection->getMethod('validateOutputLocation');
+        $method->setAccessible(true);
+
+        $method->invokeArgs($diagramStub, [Diagram::FORMAT_PNG, $dir]);
+    }
+
+    /**
+     * @dataProvider saveProvider
+     * @covers       \Jawira\PhingVisualizer\Diagram::save()
+     *
+     * @param string $format
+     * @param string $outputPath
+     * @param string $contentPath
+     */
+    public function testSave(string $format, string $outputPath, string $contentPath)
+    {
+        $outputVfs  = $this->root->url() . DIRECTORY_SEPARATOR . $outputPath; // output.png
+        $contentVfs = $this->root->getChild($contentPath)->url(); // image.png
+        $content    = file_get_contents($contentVfs);
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
+            ->getMock();
+        $diagramStub->method('generatePuml')->willReturn($content);
+        $diagramStub->method('generateImage')->willReturn($content);
+        $diagramStub->method('validateOutputLocation')->willReturn($outputVfs);
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $currentSize = $diagramStub->save($format, $outputVfs);
+
+        $this->assertFileEquals($outputVfs, $contentVfs);
+        $this->assertNotEmpty($currentSize);
+    }
+
+    /**
+     * @covers \Jawira\PhingVisualizer\Diagram::save()
+     */
+    public function testSaveNotHandledFormat()
+    {
+        $format = 'abc';
+
+        $this->expectException(DiagramException::class);
+        $this->expectExceptionMessage(sprintf('Format "%s" not handled.', $format));
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
+            ->getMock();
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $diagramStub->save($format, null);
+    }
+
+    /**
+     * @covers       \Jawira\PhingVisualizer\Diagram::generateImage()
+     * @dataProvider generateImageProvider
+     *
+     * @param string $format
+     * @param string $url
+     * @param string $image
+     */
+    public function testGenerateImage(string $format, string $url, string $image)
+    {
+        $expectedImage = file_get_contents($this->root->getChild($image)->url());
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['generateUrl'])
+            ->getMock();
+        $diagramStub->method('generateUrl')->willReturn($url);
+
+        $reflection = new ReflectionObject($diagramStub);
+        $method     = $reflection->getMethod('generateImage');
+        $method->setAccessible(true);
+
+        $image = $method->invokeArgs($diagramStub, [$format]);
+
+        if ($format === Diagram::FORMAT_SVG) {
+            $this->assertXmlStringEqualsXmlString($expectedImage, $image);
+        } else {
+            $this->assertSame($expectedImage, $image);
+        }
+    }
+
+    /**
+     * @dataProvider generatePumlProvider
+     * @covers       \Jawira\PhingVisualizer\Diagram::generatePuml()
+     *
+     * @param string $buildfile
+     * @param string $puml
+     */
+    public function testGeneratePuml(string $buildfile, string $puml)
+    {
+        $buildfileVfs = $this->root->getChild($buildfile)->url();
+        $expectedPuml = file_get_contents($this->root->getChild($puml)->url());
+
+        $diagramStub = $this->getMockBuilder(Diagram::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getBuildfile'])
+            ->getMock();
+        $diagramStub->method('getBuildfile')->willReturn($buildfileVfs);
+
+        $reflection = new ReflectionObject($diagramStub);
+        $method     = $reflection->getMethod('generatePuml');
+        $method->setAccessible(true);
+
+        $puml = $method->invoke($diagramStub);
+
+        $this->assertSame($expectedPuml, $puml);
+
     }
 
     public function validateOutputLocationProvider()
@@ -206,7 +359,7 @@ class DiagramTest extends TestCase
         return [
             'Basic'         => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../resources/puml/hello-world.puml'),
+                file_get_contents(__DIR__ . '/../resources/puml/bob-alice.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
             ],
             'Phing'         => [
@@ -245,4 +398,76 @@ class DiagramTest extends TestCase
         ];
     }
 
+    public function notExistentDirsProvider()
+    {
+        return [
+            'Not existent 1' => ['/this/dir/do/not/exists.xml'],
+            'Not existent 2' => ['/hello/world/'],
+            'Not existent 3' => ['/directory/file.tmp'],
+            'Temp dir'       => [sys_get_temp_dir() . '/invalid/dir/here/'],
+        ];
+    }
+
+    public function saveProvider()
+    {
+        return [
+            'Save png'  => [
+                Diagram::FORMAT_PNG,
+                'buildfiles/output.png',
+                'png/bob-alice.png',
+            ],
+            'Save svg'  => [
+                Diagram::FORMAT_SVG,
+                'buildfiles/output.svg',
+                'svg/bob-alice.svg',
+            ],
+            'Save puml' => [
+                Diagram::FORMAT_PUML,
+                'buildfiles/output.puml',
+                'puml/bob-alice.puml',
+            ],
+        ];
+    }
+
+    public function generateImageProvider()
+    {
+        return [
+            'Generate svg' => [
+                Diagram::FORMAT_SVG,
+                'http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
+                'svg/bob-alice.svg',
+            ],
+            'Generate png' => [
+                Diagram::FORMAT_PNG,
+                'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
+                'png/bob-alice.png',
+            ],
+        ];
+    }
+
+    public function generatePumlProvider()
+    {
+        return [
+            'Gist alphabraga'    => [
+                'buildfiles/gist-alphabraga.xml',
+                'puml/gist-alphabraga.puml',
+            ],
+            'Gist kbariotis'     => [
+                'buildfiles/gist-kbariotis.xml',
+                'puml/gist-kbariotis.puml',
+            ],
+            'Gist mapserver2007' => [
+                'buildfiles/gist-mapserver2007.xml',
+                'puml/gist-mapserver2007.puml',
+            ],
+            'Gist nfabre'        => [
+                'buildfiles/gist-nfabre.xml',
+                'puml/gist-nfabre.puml',
+            ],
+            'Phing doc'          => [
+                'buildfiles/phing-doc.xml',
+                'puml/phing-doc.puml',
+            ],
+        ];
+    }
 }
