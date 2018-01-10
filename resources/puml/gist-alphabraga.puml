@@ -1,0 +1,40 @@
+
+        @startuml
+        
+            title ProjectName
+        skinparam arrowFontColor Grey
+        
+            (build)
+            
+                (build) --> (start) : call:1
+                (build) --> (clean) : call:2
+                (build) --> (structure) : call:3
+                (build) --> (composer) : call:4
+                (build) --> (phpunit) : call:5
+                (build) --> (metrics) : call:6
+                (build) --> (phpdoc) : call:7
+                (build) --> (copylogs) : call:8
+                (build) --> (makedist) : call:9
+                (build) --> (deploy) : call:10
+            (start)
+            
+            (clean)
+            
+            (composer)
+            
+            (phpdoc)
+            
+            (makedist)
+            
+            (structure)
+            
+            (phpunit)
+            
+            (metrics)
+            
+            (copylogs)
+            
+            (deploy)
+            
+        @enduml
+    

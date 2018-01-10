@@ -1,0 +1,15 @@
+
+        @startuml
+        
+            title HelloWorld
+        skinparam arrowFontColor Grey
+        
+            (welcome)
+            
+            (test)
+            
+            (build)
+            
+            (build) --> (test) : depend:1
+        @enduml
+    

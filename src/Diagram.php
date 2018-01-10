@@ -90,7 +90,9 @@ class Diagram
 
         // Check if path is available
         if (!is_dir(dirname($output))) {
-            throw new DiagramException('Invalid output.');
+            throw new DiagramException(
+                sprintf('Dir "%s" is invalid.', $output)
+            );
         }
 
         return $output;
