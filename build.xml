@@ -4,9 +4,17 @@
 
     <property file="build.properties.ini"/>
 
+    <target name="setup" description="Prepare library for dev"
+            depends="init, composer:install, phar:phpunit"/>
+
     <!--Available properties-->
     <target name="properties" description="List all properties">
         <echoproperties/>
+    </target>
+
+    <!--Config files-->
+    <target name="init" description="Crate config files">
+        <copy file="build.properties.ini.dist" tofile="build.properties.ini"/>
     </target>
 
     <!--composer install-->
@@ -34,7 +42,7 @@
                          filename="${phpunit.filename}"/>
             </then>
         </if>
-        <chmod file="${phpunit}" mode="555" verbose="true"/>
+        <chmod file="${phpunit}" mode="777" verbose="true"/>
         <exec executable="${php.interpreter}" passthru="true">
             <arg value="${phpunit}"/>
             <arg value="--version"/>
@@ -63,4 +71,6 @@
         </fileset>
     </target>
 
+    <target name="test" description="Test library"
+            depends="test:php-check-syntax, test:phpunit"/>
 </project>

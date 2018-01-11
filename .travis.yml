@@ -3,9 +3,9 @@ php:
   - '7.0'
   - '7.1'
 
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y phing
-
 before_script:
-  - sudo apt-get update
+  - wget -O phing.phar http://www.phing.info/get/phing-2.16.0.phar
+  - php phing.phar setup
+
+script:
+ - php phing.phar test
