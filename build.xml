@@ -23,13 +23,17 @@
     </target>
 
     <!--composer install-->
-    <target name="composer:install" description="Install dependencies">
-        <composer composer="${composer}" command="install"/>
+    <target name="composer:install" description="Install dependencies" depends="phar:composer">
+        <composer composer="${composer}">
+            <arg value="-n"/>
+            <arg value="install"/>
+        </composer>
     </target>
 
     <!--composer install for prod-->
-    <target name="composer:optimize" description="Install dependencies optimized for production environment">
-        <composer composer="${composer}">
+    <target name="composer:optimize" description="Install dependencies optimized for production environment"
+            depends="phar:composer">
+        <composer composer="./${composer}">
             <arg value="install"/>
             <arg value="--optimize-autoloader"/>
             <arg value="--no-dev"/>
@@ -52,6 +56,21 @@
             <arg value="${phpunit}"/>
             <arg value="--version"/>
         </exec>
+    </target>
+
+    <!--composer.phar-->
+    <target name="phar:composer" description="Download Composer">
+        <if>
+            <not>
+                <available file="${composer}"/>
+            </not>
+            <then>
+                <exec command="wget -O - https://getcomposer.org/installer | php"/>
+            </then>
+        </if>
+        <composer composer="${project.basedir}/composer.phar">
+            <arg value="--version"/>
+        </composer>
     </target>
 
     <!--Run PHPUnit-->
