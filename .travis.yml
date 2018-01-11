@@ -1,0 +1,11 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y phing
+
+before_script:
+  - sudo apt-get update
