@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Unreleased
 ----------
 
+### Added
+* Tests with travis-ci.org
+
 
 v1.2.0 - 2017-01-11
 -------------------
