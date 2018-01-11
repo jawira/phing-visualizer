@@ -4,8 +4,12 @@
 
     <property file="build.properties.ini"/>
 
-    <target name="setup" description="Prepare library for dev"
-            depends="init, composer:install, phar:phpunit"/>
+    <!--Setup-->
+    <target name="setup" description="Prepare library for dev">
+        <phingcall target="init"/>
+        <phingcall target="composer:install"/>
+        <phingcall target="phar:phpunit"/>
+    </target>
 
     <!--Available properties-->
     <target name="properties" description="List all properties">
@@ -14,7 +18,8 @@
 
     <!--Config files-->
     <target name="init" description="Crate config files">
-        <copy file="build.properties.ini.dist" tofile="build.properties.ini"/>
+        <copy file="${project.basedir}/build.properties.ini.dist"
+              tofile="${project.basedir}/build.properties.ini"/>
     </target>
 
     <!--composer install-->
