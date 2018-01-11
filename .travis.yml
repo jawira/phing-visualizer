@@ -1,0 +1,14 @@
+language: php
+php:
+  - '7.1'
+
+git:
+  depth: 3
+
+install:
+  - pear install HTTP_Request2-2.3.0
+  - wget -O phing.phar http://www.phing.info/get/phing-2.16.0.phar
+  - php phing.phar setup
+
+script:
+ - php phing.phar test

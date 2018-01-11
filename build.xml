@@ -4,19 +4,36 @@
 
     <property file="build.properties.ini"/>
 
+    <!--Setup-->
+    <target name="setup" description="Prepare library for dev">
+        <phingcall target="init"/>
+        <phingcall target="composer:install"/>
+        <phingcall target="phar:phpunit"/>
+    </target>
+
     <!--Available properties-->
     <target name="properties" description="List all properties">
         <echoproperties/>
     </target>
 
+    <!--Config files-->
+    <target name="init" description="Crate config files">
+        <copy file="${project.basedir}/build.properties.ini.dist"
+              tofile="${project.basedir}/build.properties.ini"/>
+    </target>
+
     <!--composer install-->
-    <target name="composer:install" description="Install dependencies">
-        <composer composer="${composer}" command="install"/>
+    <target name="composer:install" description="Install dependencies" depends="phar:composer">
+        <composer composer="${composer}">
+            <arg value="-n"/>
+            <arg value="install"/>
+        </composer>
     </target>
 
     <!--composer install for prod-->
-    <target name="composer:optimize" description="Install dependencies optimized for production environment">
-        <composer composer="${composer}">
+    <target name="composer:optimize" description="Install dependencies optimized for production environment"
+            depends="phar:composer">
+        <composer composer="./${composer}">
             <arg value="install"/>
             <arg value="--optimize-autoloader"/>
             <arg value="--no-dev"/>
@@ -34,11 +51,26 @@
                          filename="${phpunit.filename}"/>
             </then>
         </if>
-        <chmod file="${phpunit}" mode="555" verbose="true"/>
+        <chmod file="${phpunit}" mode="777" verbose="true"/>
         <exec executable="${php.interpreter}" passthru="true">
             <arg value="${phpunit}"/>
             <arg value="--version"/>
         </exec>
+    </target>
+
+    <!--composer.phar-->
+    <target name="phar:composer" description="Download Composer">
+        <if>
+            <not>
+                <available file="${composer}"/>
+            </not>
+            <then>
+                <exec command="wget -O - https://getcomposer.org/installer | php"/>
+            </then>
+        </if>
+        <composer composer="${project.basedir}/composer.phar">
+            <arg value="--version"/>
+        </composer>
     </target>
 
     <!--Run PHPUnit-->
@@ -63,4 +95,6 @@
         </fileset>
     </target>
 
+    <target name="test" description="Test library"
+            depends="test:php-check-syntax, test:phpunit"/>
 </project>

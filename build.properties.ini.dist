@@ -1,5 +1,5 @@
 [bin]
-composer = /usr/bin/composer
+composer = composer.phar
 
 [phpunit]
 phpunit.dir = ${project.basedir}

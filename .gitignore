@@ -3,3 +3,4 @@
 /vendor/
 /build.properties.ini
 /phpunit.phar
+/composer.phar
