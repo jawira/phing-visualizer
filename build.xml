@@ -33,7 +33,7 @@
     </target>
 
     <!--Run PHPUnit-->
-    <target name="test:phpunit" description="Run PHPUnit's tests">
+    <target name="test:phpunit" description="Run PHPUnit's tests" depends="make:phpunit.phar">
         <exec executable="${phpunit}" passthru="true"/>
     </target>
 
@@ -73,8 +73,12 @@
 
     <target name="qa:code-climate:after" description="CodeClimate after build" depends="make:cc-test-reporter">
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
-            <arg value="after-build"/>
+            <arg value="format-coverage"/>
             <arg value="-tclover"/>
+            <arg value="${project.basedir}/resources/coverage/clover.xml"/>
+        </exec>
+        <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
+            <arg value="upload-coverage"/>
         </exec>
     </target>
 </project>
