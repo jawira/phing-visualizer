@@ -8,7 +8,7 @@
     <target name="setup" description="Prepare library for dev">
         <phingcall target="init"/>
         <phingcall target="composer:install"/>
-        <phingcall target="phar:phpunit"/>
+        <phingcall target="make:phpunit.phar"/>
     </target>
 
     <!--Available properties-->
@@ -23,54 +23,13 @@
     </target>
 
     <!--composer install-->
-    <target name="composer:install" description="Install dependencies" depends="phar:composer">
-        <composer composer="${composer}">
-            <arg value="-n"/>
-            <arg value="install"/>
-        </composer>
+    <target name="composer:install" description="Install dependencies">
+        <exec command="composer -n install" passthru="true"/>
     </target>
 
     <!--composer install for prod-->
-    <target name="composer:optimize" description="Install dependencies optimized for production environment"
-            depends="phar:composer">
-        <composer composer="./${composer}">
-            <arg value="install"/>
-            <arg value="--optimize-autoloader"/>
-            <arg value="--no-dev"/>
-        </composer>
-    </target>
-
-    <!--phpunit.phar-->
-    <target name="phar:phpunit" description="Download PhpUnit">
-        <if>
-            <not>
-                <available file="${phpunit}"/>
-            </not>
-            <then>
-                <httpget dir="${phpunit.dir}" url="https://phar.phpunit.de/phpunit-6.phar" followRedirects="true"
-                         filename="${phpunit.filename}"/>
-            </then>
-        </if>
-        <chmod file="${phpunit}" mode="777" verbose="true"/>
-        <exec executable="${php.interpreter}" passthru="true">
-            <arg value="${phpunit}"/>
-            <arg value="--version"/>
-        </exec>
-    </target>
-
-    <!--composer.phar-->
-    <target name="phar:composer" description="Download Composer">
-        <if>
-            <not>
-                <available file="${composer}"/>
-            </not>
-            <then>
-                <exec command="wget -O - https://getcomposer.org/installer | php"/>
-            </then>
-        </if>
-        <composer composer="${project.basedir}/composer.phar">
-            <arg value="--version"/>
-        </composer>
+    <target name="composer:optimize" description="Install dependencies optimized for production environment">
+        <exec command="composer install --no-dev --optimize-autoloader" passthru="true"/>
     </target>
 
     <!--Run PHPUnit-->
@@ -97,4 +56,24 @@
 
     <target name="test" description="Test library"
             depends="test:php-check-syntax, test:phpunit"/>
+
+    <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
+        <exec command="make cc-test-reporter" passthru="true"/>
+    </target>
+    
+    <target name="make:phpunit.phar" description="Download PHPUnit">
+        <exec command="make phpunit.phar" passthru="true"/>
+    </target>
+
+    <target name="qa:code-climate:before" description="CodeClimate before build" depends="make:cc-test-reporter">
+        <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
+            <arg value="before-build"/>
+        </exec>
+    </target>
+
+    <target name="qa:code-climate:after" description="CodeClimate after build" depends="make:cc-test-reporter">
+        <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
+            <arg value="after-build"/>
+        </exec>
+    </target>
 </project>
