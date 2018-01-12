@@ -6,6 +6,7 @@ git:
   depth: 3
 
 install:
+  - make cc-test-reporter
   - make phing.phar
   - ./phing.phar setup
 

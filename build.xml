@@ -74,6 +74,7 @@
     <target name="qa:code-climate:after" description="CodeClimate after build" depends="make:cc-test-reporter">
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
             <arg value="after-build"/>
+            <arg value="-tclover"/>
         </exec>
     </target>
 </project>
