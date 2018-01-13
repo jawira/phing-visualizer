@@ -1,6 +1,9 @@
 /.idea/
 /resources/coverage/
+/resources/logs/
 /vendor/
 /build.properties.ini
-/phpunit.phar
+/cc-test-reporter
 /composer.phar
+/phing.phar
+/phpunit.phar
