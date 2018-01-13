@@ -1,0 +1,20 @@
+language: php
+php:
+  - '7.1'
+
+git:
+  depth: 3
+
+install:
+  - make cc-test-reporter
+  - make phing.phar
+  - ./phing.phar setup
+
+before_script:
+  - ./phing.phar qa:code-climate:before
+
+script:
+  - ./phing.phar test
+
+after_script:
+  - ./phing.phar qa:code-climate:after

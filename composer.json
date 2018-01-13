@@ -21,5 +21,8 @@
       "homepage": "http://jawira.com",
       "role": "Developer"
     }
-  ]
+  ],
+  "require-dev": {
+    "mikey179/vfsStream": "^1.6"
+  }
 }
