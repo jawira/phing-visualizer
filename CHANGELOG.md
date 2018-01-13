@@ -9,8 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Unreleased
 ----------
 
+v1.3.0 - 2017-01-13
+----------
+
 ### Added
-* Tests with travis-ci.org
+* Tests with travis-ci.org & code climate
 
 
 v1.2.0 - 2017-01-11
