@@ -1,0 +1,12 @@
+/resources/buildfiles       export-ignore
+/resources/png              export-ignore
+/resources/puml             export-ignore
+/resources/svg              export-ignore
+/tests                      export-ignore
+build.properties.ini.dist   export-ignore
+build.xml                   export-ignore
+CHANGELOG.md                export-ignore
+LICENSE                     export-ignore
+Makefile                    export-ignore
+phpunit.xml                 export-ignore
+README.md                   export-ignore
