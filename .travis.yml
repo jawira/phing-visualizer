@@ -11,10 +11,10 @@ install:
   - ./phing.phar setup
 
 before_script:
-  - ./phing.phar qa:code-climate:before
+  - ./phing.phar code-climate:before
 
 script:
   - ./phing.phar test
 
 after_script:
-  - ./phing.phar qa:code-climate:after
+  - ./phing.phar code-climate:after

@@ -13,13 +13,10 @@
       "Jawira\\PhingVisualizer\\": "src/"
     }
   },
-  "license": "library",
+  "license": "MIT",
   "authors": [
     {
-      "name": "Jawira Portugal",
-      "email": "dev@jawira.com",
-      "homepage": "http://jawira.com",
-      "role": "Developer"
+      "name": "Jawira Portugal"
     }
   ],
   "require-dev": {

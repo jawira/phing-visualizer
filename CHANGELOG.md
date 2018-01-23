@@ -9,44 +9,57 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Unreleased
 ----------
 
-v1.3.0 - 2017-01-13
-----------
+v1.3.1 (2017-01-23)
+-------------------
+
+### Fixed
+
+* Valid license in `composer.json`  
+
+v1.3.0 (2017-01-13)
+-------------------
 
 ### Added
+
 * Tests with travis-ci.org & code climate
 
 
-v1.2.0 - 2017-01-11
+v1.2.0 (2017-01-11)
 -------------------
 
 ### Changed
+
 * Improved Unit tests for Diagram class
 
 
-v1.1.0 - 2017-01-08
+v1.1.0 (2017-01-08)
 -------------------
 
 ### Added
+
 * Unit tests for Diagram class
 * Phing support
 
 ### Changed
+
 * Refactored Diagram class
 
 
-v1.0.0 - 2017-01-02
+v1.0.0 (2017-01-02)
 -------------------
 
 ### Changed
+
 * Renaming project name from `PhingDiagram` to `PhingVisualiser`.
 * Updated library usage in Readme file
 * Changed signature \Jawira\PhingVisualiser\Diagram::save
 
 
-v0.0.0 - 2017-11-17
+v0.0.0 (2017-11-17)
 -------------------
 
 ### Added
+
 * First functional version
 * Executable in `bin` dir
 * XSLT file
@@ -65,10 +78,10 @@ Guiding Principles
 
 Types of changes
 
-    Added for new features.
-    Changed for changes in existing functionality.
-    Deprecated for soon-to-be removed features.
-    Removed for now removed features.
-    Fixed for any bug fixes.
-    Security in case of vulnerabilities.
+    Added       for new features.
+    Changed     for changes in existing functionality.
+    Deprecated  for soon-to-be removed features.
+    Removed     for now removed features.
+    Fixed       for any bug fixes.
+    Security    in case of vulnerabilities.
 -->
