@@ -21,5 +21,8 @@
   ],
   "require-dev": {
     "mikey179/vfsStream": "^1.6"
-  }
+  },
+  "bin": [
+    "bin/phing-visualizer"
+  ]
 }

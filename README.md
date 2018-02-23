@@ -31,11 +31,11 @@ $diagram->save($format, $output);
 ### Executable
 
 ```bash
-$ php bin/phing-visualizer.php -i ./path/to/build.xml
+$ php bin/phing-visualizer -i ./path/to/build.xml
 ```
 
 ```bash
-$ php bin/phing-visualizer.php -i /my/location/build.xml -o /my/location/ -f png
+$ php bin/phing-visualizer -i /my/location/build.xml -o /my/location/ -f png
 ```
 
 Executable options
