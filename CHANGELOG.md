@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 Unreleased
 ----------
 
+### Added
+
+* Phing visualiser now supports ForeachTask
+
+### Fixed
+
+* Updating files for test \Jawira\PhingVisualizer\DiagramTest::testGenerateImage
+
 v1.3.1 (2017-01-23)
 -------------------
 

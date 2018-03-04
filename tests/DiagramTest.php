@@ -269,9 +269,9 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::generateImage()
      * @dataProvider generateImageProvider
      *
-     * @param string $format
-     * @param string $url
-     * @param string $image
+     * @param string $format Format to generate, png, svg,...
+     * @param string $url    PlantUml url
+     * @param string $image  Relative path to existing file
      */
     public function testGenerateImage(string $format, string $url, string $image)
     {
@@ -287,12 +287,12 @@ class DiagramTest extends TestCase
         $method     = $reflection->getMethod('generateImage');
         $method->setAccessible(true);
 
-        $image = $method->invokeArgs($diagramStub, [$format]);
+        $generatedImage = $method->invokeArgs($diagramStub, [$format]);
 
         if ($format === Diagram::FORMAT_SVG) {
-            $this->assertXmlStringEqualsXmlString($expectedImage, $image);
+            $this->assertXmlStringEqualsXmlString($expectedImage, $generatedImage);
         } else {
-            $this->assertSame($expectedImage, $image);
+            $this->assertSame($expectedImage, $generatedImage);
         }
     }
 
