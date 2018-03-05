@@ -44,7 +44,7 @@ You can go from this:
 
 To this:
 
-<img src="https://raw.githubusercontent.com/jawira/phing-visualizer/master/resources/readme/demo.png" alt="call graph">
+![Phing visualizer demo](resources/readme/demo.png)
 
 **Phing visualizer** is able to represent:
 
