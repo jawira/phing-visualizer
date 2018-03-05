@@ -44,7 +44,7 @@ You can go from this:
 
 To this:
 
-![Phing visualizer demo](resources/readme/demo.png)
+![Phing visualizer demo](http://jawira.com/img/phing-visualizer/demo.png)
 
 **Phing visualizer** is able to represent:
 
