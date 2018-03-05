@@ -4,6 +4,7 @@
 /vendor/
 /build.properties.ini
 /cc-test-reporter
+/composer.lock
 /composer.phar
 /phing.phar
 /phpunit.phar

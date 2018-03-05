@@ -15,7 +15,7 @@
         <xsl:for-each select="./target">
             (<xsl:value-of select="@name"/>)
             <xsl:variable name="current-target" select="@name"/>
-            <xsl:for-each select=".//phingcall">
+            <xsl:for-each select=".//phingcall | .//foreach">
                 (<xsl:value-of select="$current-target"/>) --> (<xsl:value-of select="@target"/>) : call:<xsl:value-of select="position()"/>
             </xsl:for-each>
             <xsl:if test="@depends">

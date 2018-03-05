@@ -1,8 +1,56 @@
 Phing visualizer
 ================
 
-**Phing visualizer** generates a PlantUML diagram to have a 
-graphical representation for Phing's buildfile.
+**Phing visualizer** generates a graphical representation of your Phing's 
+buildfile.
+
+[![Latest Stable Version](https://poser.pugx.org/jawira/phing-visualizer/v/stable)](https://packagist.org/packages/jawira/phing-visualizer)
+[![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
+[![composer.lock](https://poser.pugx.org/jawira/phing-visualizer/composerlock)](https://packagist.org/packages/jawira/phing-visualizer)
+
+You can go from this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="My Phing's buildfile" default="test">
+
+    <target name="test" depends="test:phpunit, test:composer">
+        <phingcall target="test:notify"/>
+    </target>
+
+    <target name="test:composer">
+        <exec command="composer validate --strict --no-check-lock" passthru="true"/>
+    </target>
+
+    <target name="test:phpunit">
+        <exec executable="${phpunit}"/>
+        <phingcall target="test:clean"/>
+    </target>
+
+    <target name="test:notify">
+        <notifysend msg="Everything is OK!"/>
+    </target>
+
+    <target name="test:clean">
+        <delete dir="${dir.output}" verbose="true"/>
+    </target>
+
+    <target name="diagnostics">
+        <diagnostics/>
+    </target>
+
+</project>
+```
+
+To this:
+
+![demo visualization](https://raw.githubusercontent.com/jawira/phing-visualizer/master/resources/readme/demo.png)
+
+**Phing visualizer** is able to represent:
+
+* Target's depends
+* PhingCallTask
+* ForeachTask
 
 Requirements
 ------------
@@ -10,6 +58,15 @@ Requirements
 * SimpleXML extension
 * XSL extension
 * `allow_url_fopen = On;` (on `php.ini` file)
+
+Installing
+----------
+
+The easiest way to install is with Composer:
+
+```bash
+$ composer require jawira/phing-visualizer
+```
 
 Usage
 -----
@@ -31,11 +88,11 @@ $diagram->save($format, $output);
 ### Executable
 
 ```bash
-$ php bin/phing-visualizer.php -i ./path/to/build.xml
+$ vendor/bin/phing-visualizer -i /my/location/build.xml -f svg
 ```
 
 ```bash
-$ php bin/phing-visualizer.php -i /my/location/build.xml -o /my/location/ -f png
+$ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/location/ 
 ```
 
 Executable options
@@ -44,19 +101,17 @@ Executable options
 | --------------------- | ----------------------------------------- | ----------------- |
 | `--input` or `-i`     | Phing's buildfile location                |                   |
 | `--output` or `-o`    | Dir or file location                      | Same as `--input` |
-| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   | `png`             |
+| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   |                   |
 
-This project adheres
---------------------
 
-* [Keep a Changelog]
-* [pds/skeleton]
-* [Semantic Versioning]
-* [Contributor Covenant]
-* [Git flow]
+Contributing
+------------
 
-[Keep a Changelog]: http://keepachangelog.com/en/1.0.0/
-[pds/skeleton]: https://github.com/php-pds/skeleton
-[Semantic Versioning]: http://semver.org/
-[Contributor Covenant]: https://www.contributor-covenant.org/
-[Git flow]: https://danielkummer.github.io/git-flow-cheatsheet/
+To contribute to this project please read [CONTRIBUTING.md](./CONTRIBUTING.md) 
+first.
+
+
+License
+-------
+
+This project is under the [GNU GPLv3 license](./LICENSE).
