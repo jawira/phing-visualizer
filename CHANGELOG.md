@@ -12,6 +12,7 @@ Unreleased
 ### Added
 
 * Phing visualiser now supports ForeachTask
+* Created CONTRIBUTING.md 
 
 ### Fixed
 

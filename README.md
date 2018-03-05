@@ -46,17 +46,15 @@ Executable options
 | `--output` or `-o`    | Dir or file location                      | Same as `--input` |
 | `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   | `png`             |
 
-This project adheres
---------------------
 
-* [Keep a Changelog]
-* [pds/skeleton]
-* [Semantic Versioning]
-* [Contributor Covenant]
-* [Git flow]
+Contributing
+------------
 
-[Keep a Changelog]: http://keepachangelog.com/en/1.0.0/
-[pds/skeleton]: https://github.com/php-pds/skeleton
-[Semantic Versioning]: http://semver.org/
-[Contributor Covenant]: https://www.contributor-covenant.org/
-[Git flow]: https://danielkummer.github.io/git-flow-cheatsheet/
+To contribute to this project please read [CONTRIBUTING.md](./CONTRIBUTING.md) 
+first.
+
+
+License
+-------
+
+This project is under the [GNU GPLv3 license](./LICENSE).
