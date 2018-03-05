@@ -11,7 +11,6 @@ try {
 
     $diagram = new Jawira\PhingVisualizer\Diagram($input);
     $diagram->save($format, $output);
-} catch (Exception $ex) {
-    $msg = $ex->getMessage();
-    die(get_class($ex) . ": $msg");
+} catch (Throwable $th) {
+    exit(sprintf('%s: %s%s', get_class($th), $th->getMessage(), PHP_EOL));
 }
