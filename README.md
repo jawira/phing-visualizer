@@ -51,9 +51,9 @@ To this:
 
 **Phing visualizer** is able to represent:
 
-* Target's depends
-* PhingCallTask
-* ForeachTask
+- Target's depends
+- PhingCallTask
+- ForeachTask
 
 Usage
 -----
@@ -72,13 +72,13 @@ $ vendor/bin/phing-visualizer --input /my/location/build.xml --format svg
 $ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/location/ 
 ```
 
-Executable options
+Executable options:
 
-| Option                | Description                               | Default           |
-| --------------------- | ----------------------------------------- | ----------------- |
-| `--input` or `-i`     | Phing's buildfile location                |                   |
-| `--output` or `-o`    | Dir or file location                      | Same as `--input` |
-| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   |                   |
+| Option                | Description                               | Required          | Default           |
+| --------------------- | ----------------------------------------- | ----------------- | ----------------- | 
+| `--input` or `-i`     | Phing's buildfile location                | Yes               |                   |
+| `--output` or `-o`    | Dir or file location                      | No                | Same as `--input` |
+| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   | Yes               |                   |
 
 ### Instantiating `Diagram` class
 
@@ -108,9 +108,9 @@ $ composer require jawira/phing-visualizer
 Requirements
 ------------
 
-* SimpleXML extension
-* XSL extension
-* `allow_url_fopen = On;` (on `php.ini` file)
+- SimpleXML extension
+- XSL extension
+- `allow_url_fopen = On;` (on `php.ini` file)
 
 Contributing
 ------------
