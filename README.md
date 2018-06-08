@@ -1,12 +1,13 @@
 Phing visualizer
 ================
 
-**Phing visualizer** generates a graphical representation of your Phing's 
-buildfile.
+**Phing visualizer** generates a graphical representation of your 
+[Phing](https://www.phing.info/)'s buildfile.
 
 [![Latest Stable Version](https://poser.pugx.org/jawira/phing-visualizer/v/stable)](https://packagist.org/packages/jawira/phing-visualizer)
 [![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
 [![composer.lock](https://poser.pugx.org/jawira/phing-visualizer/composerlock)](https://packagist.org/packages/jawira/phing-visualizer)
+[![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 
 You can go from this:
 
@@ -19,7 +20,9 @@ You can go from this:
     </target>
 
     <target name="test:composer">
-        <exec command="composer validate --strict --no-check-lock" passthru="true"/>
+        <composer>
+            <arg line="validate --strict --no-check-lock"/>
+        </composer>
     </target>
 
     <target name="test:phpunit">
@@ -48,30 +51,38 @@ To this:
 
 **Phing visualizer** is able to represent:
 
-* Target's depends
-* PhingCallTask
-* ForeachTask
-
-Requirements
-------------
-
-* SimpleXML extension
-* XSL extension
-* `allow_url_fopen = On;` (on `php.ini` file)
-
-Installing
-----------
-
-The easiest way to install is with Composer:
-
-```bash
-$ composer require jawira/phing-visualizer
-```
+- Target's depends
+- PhingCallTask
+- ForeachTask
 
 Usage
 -----
 
-### `Diagram` class
+You can use `phing-visualizer` in two possible ways:
+
+### Using command line
+
+Create your diagram using the command line:
+
+```bash
+$ vendor/bin/phing-visualizer --input /my/location/build.xml --format svg
+```
+
+```bash
+$ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/location/ 
+```
+
+Executable options:
+
+| Option                | Description                               | Required          | Default           |
+| --------------------- | ----------------------------------------- | ----------------- | ----------------- | 
+| `--input` or `-i`     | Phing's buildfile location                | Yes               |                   |
+| `--output` or `-o`    | Dir or file location                      | No                | Same as `--input` |
+| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   | Yes               |                   |
+
+### Instantiating `Diagram` class
+
+You can instantiate `Diagram` class to generate diagram in your source code:
 
 ```php
 <?php
@@ -85,24 +96,21 @@ $diagram = new Jawira\PhingVisualiser\Diagram($input);
 $diagram->save($format, $output);
 ```
 
-### Executable
+Installing
+----------
+
+The easiest way to install is with Composer:
 
 ```bash
-$ vendor/bin/phing-visualizer -i /my/location/build.xml -f svg
+$ composer require jawira/phing-visualizer
 ```
 
-```bash
-$ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/location/ 
-```
+Requirements
+------------
 
-Executable options
-
-| Option                | Description                               | Default           |
-| --------------------- | ----------------------------------------- | ----------------- |
-| `--input` or `-i`     | Phing's buildfile location                |                   |
-| `--output` or `-o`    | Dir or file location                      | Same as `--input` |
-| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   |                   |
-
+- SimpleXML extension
+- XSL extension
+- `allow_url_fopen = On;` (on `php.ini` file)
 
 Contributing
 ------------

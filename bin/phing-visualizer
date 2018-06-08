@@ -1,16 +1,68 @@
 #!/usr/bin/env php
 <?php
-try {
-    include __DIR__ . '/../vendor/autoload.php';
 
+use Jawira\PhingVisualizer\DiagramException;
+
+/**
+ * Return autoload's location
+ *
+ * @return mixed
+ * @throws \Jawira\PhingVisualizer\DiagramException
+ */
+function autoloadPath(): string
+{
+    $autoloadFiles = [
+        __DIR__ . '/../vendor/autoload.php',
+        __DIR__ . '/../../../autoload.php',
+    ];
+
+    foreach ($autoloadFiles as $file) {
+        if (file_exists($file)) {
+            return $file;
+        }
+    }
+
+    throw new DiagramException("Autoload file not found; try 'composer dump-autoload' first.");
+}
+
+/**
+ * Generate diagram
+ *
+ * @throws \Jawira\PhingVisualizer\DiagramException
+ * @throws \Exception
+ */
+function saveDiagram(): void
+{
     $options = getopt('i:o:f:', ['input:', 'output:', 'format:']);
 
     $input  = $options['i'] ?? $options['input'] ?? null;
     $output = $options['o'] ?? $options['output'] ?? null;
     $format = $options['f'] ?? $options['format'] ?? null;
 
+    if (is_null($input)) {
+        throw new DiagramException('Input file is required.');
+    }
+
+    if (is_null($format)) {
+        throw new DiagramException('Format is required.');
+    }
+
     $diagram = new Jawira\PhingVisualizer\Diagram($input);
     $diagram->save($format, $output);
-} catch (Throwable $th) {
-    exit(sprintf('%s: %s%s', get_class($th), $th->getMessage(), PHP_EOL));
 }
+
+/**
+ * Main function
+ */
+function main(): void
+{
+    try {
+        /** @noinspection PhpIncludeInspection */
+        require autoloadPath();
+        saveDiagram();
+    } catch (Throwable $th) {
+        exit('⚠ ' . $th->getMessage() . PHP_EOL);
+    }
+}
+
+main();

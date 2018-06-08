@@ -1,26 +1,26 @@
 {
   "name": "jawira/phing-visualizer",
-  "description": "Graphical representation of Phing's buildfile",
   "type": "library",
-  "require": {
-    "ext-simplexml": "*",
-    "ext-xsl": "*",
-    "jawira/plantuml-encoding": "^1.0.0",
-    "php": "^7.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "Jawira\\PhingVisualizer\\": "src/"
-    }
-  },
-  "license": "MIT",
+  "description": "Graphical representation of Phing's buildfile",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Jawira Portugal"
     }
   ],
+  "require": {
+    "php": "^7.1",
+    "ext-simplexml": "*",
+    "ext-xsl": "*",
+    "jawira/plantuml-encoding": "^1.0.0"
+  },
   "require-dev": {
     "mikey179/vfsStream": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Jawira\\PhingVisualizer\\": "src/"
+    }
   },
   "bin": [
     "bin/phing-visualizer"
