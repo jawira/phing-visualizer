@@ -23,6 +23,9 @@ Types of changes
 Unreleased
 ----------
 
+v1.4.4 (2018-06-08)
+-------------------
+
 ### Fixed
 
 * Error loading autoload file was fixed. Executable will work when executing 
