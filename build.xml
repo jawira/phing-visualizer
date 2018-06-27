@@ -24,17 +24,30 @@
 
     <!--composer install-->
     <target name="composer:install" description="Install dependencies">
-        <exec command="composer -n install" passthru="true"/>
+        <composer>
+            <arg value="install"/>
+            <arg value="--no-interaction"/>
+            <arg value="--prefer-dist"/>
+        </composer>
     </target>
 
     <!--composer install for prod-->
     <target name="composer:optimize" description="Install dependencies optimized for production environment">
-        <exec command="composer install --no-dev --optimize-autoloader" passthru="true"/>
+        <composer>
+            <arg value="install"/>
+            <arg value="--no-dev"/>
+            <arg value="--optimize-autoloader"/>
+            <arg value="--prefer-dist"/>
+        </composer>
     </target>
 
     <!--composer validate-->
     <target name="composer:validate" description="Checks if composer.json is valid">
-        <exec command="composer validate --strict --no-check-lock" passthru="true"/>
+        <composer>
+            <arg value="validate"/>
+            <arg value="--strict"/>
+            <arg value="--no-check-lock"/>
+        </composer>
     </target>
 
     <!--Run PHPUnit-->
