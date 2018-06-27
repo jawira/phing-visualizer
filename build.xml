@@ -58,10 +58,9 @@
     <!--php -l -->
     <target name="php:check-syntax" description="Check syntax on PHP files" depends="filesets">
         <!--All project's PHP files, excluding vendor dir-->
-        <apply executable="${php.interpreter}" passthru="true">
-            <arg value="-l"/>
+        <phplint>
             <fileset refid="php_files"/>
-        </apply>
+        </phplint>
     </target>
 
     <!--Register your filesets here-->
@@ -69,6 +68,7 @@
         <fileset dir="${project.basedir}" id="php_files">
             <include name="**/*.php"/>
             <exclude name="vendor/"/>
+            <exclude name=".idea/"/>
         </fileset>
     </target>
 
