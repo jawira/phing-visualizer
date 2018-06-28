@@ -26,6 +26,7 @@ Unreleased
 ### Added
 
 - An help option (-h, --help) was added to executable #12
+- Code Climate badges in README.md
 
 
 v1.4.4 (2018-06-08)
