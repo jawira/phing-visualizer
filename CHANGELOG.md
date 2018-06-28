@@ -23,6 +23,11 @@ Types of changes
 Unreleased
 ----------
 
+### Added
+
+- An help option (-h, --help) was added to executable #12
+
+
 v1.4.4 (2018-06-08)
 -------------------
 

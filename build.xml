@@ -73,7 +73,7 @@
     </target>
 
     <target name="test" description="Test library"
-            depends="php:check-syntax, phpunit:run, composer:validate"/>
+            depends="composer:install, php:check-syntax, phpunit:run, composer:validate"/>
 
     <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
         <exec command="make cc-test-reporter" passthru="true"/>
