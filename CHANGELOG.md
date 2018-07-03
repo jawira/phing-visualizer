@@ -25,6 +25,11 @@ Unreleased
 
 ### Added
 
+v1.4.5 - (2018-07-03)
+---------------------
+
+### Added
+
 - An help option (-h, --help) was added to executable #12
 - Code Climate badges in README.md
 - Travis-ci badges in README.md
