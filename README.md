@@ -8,6 +8,9 @@ Phing visualizer
 [![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
 [![composer.lock](https://poser.pugx.org/jawira/phing-visualizer/composerlock)](https://packagist.org/packages/jawira/phing-visualizer)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/maintainability)](https://codeclimate.com/github/jawira/phing-visualizer/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/test_coverage)](https://codeclimate.com/github/jawira/phing-visualizer/test_coverage)
+[![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
 
 You can go from this:
 
@@ -65,6 +68,10 @@ You can use `phing-visualizer` in two possible ways:
 Create your diagram using the command line:
 
 ```bash
+$ vendor/bin/phing-visualizer -i build.xml -f svg
+```
+
+```bash
 $ vendor/bin/phing-visualizer --input /my/location/build.xml --format svg
 ```
 
@@ -76,9 +83,10 @@ Executable options:
 
 | Option                | Description                               | Required          | Default           |
 | --------------------- | ----------------------------------------- | ----------------- | ----------------- | 
-| `--input` or `-i`     | Phing's buildfile location                | Yes               |                   |
-| `--output` or `-o`    | Dir or file location                      | No                | Same as `--input` |
-| `--format` or `-f`    | Diagram format (`png`, `svg` or `puml`)   | Yes               |                   |
+| `-i` or `--input`     | Phing's buildfile location                | Yes               |                   |
+| `-f` or `--format`    | Diagram format (`png`, `svg` or `puml`)   | Yes               |                   |
+| `-o` or `--output`    | Dir or file location                      | No                | Same as `--input` |
+| `-h` or `--help`      | Help                                      | No                |                   |
 
 ### Instantiating `Diagram` class
 

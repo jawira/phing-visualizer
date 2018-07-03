@@ -24,17 +24,30 @@
 
     <!--composer install-->
     <target name="composer:install" description="Install dependencies">
-        <exec command="composer -n install" passthru="true"/>
+        <composer>
+            <arg value="install"/>
+            <arg value="--no-interaction"/>
+            <arg value="--prefer-dist"/>
+        </composer>
     </target>
 
     <!--composer install for prod-->
     <target name="composer:optimize" description="Install dependencies optimized for production environment">
-        <exec command="composer install --no-dev --optimize-autoloader" passthru="true"/>
+        <composer>
+            <arg value="install"/>
+            <arg value="--no-dev"/>
+            <arg value="--optimize-autoloader"/>
+            <arg value="--prefer-dist"/>
+        </composer>
     </target>
 
     <!--composer validate-->
     <target name="composer:validate" description="Checks if composer.json is valid">
-        <exec command="composer validate --strict --no-check-lock" passthru="true"/>
+        <composer>
+            <arg value="validate"/>
+            <arg value="--strict"/>
+            <arg value="--no-check-lock"/>
+        </composer>
     </target>
 
     <!--Run PHPUnit-->
@@ -45,10 +58,9 @@
     <!--php -l -->
     <target name="php:check-syntax" description="Check syntax on PHP files" depends="filesets">
         <!--All project's PHP files, excluding vendor dir-->
-        <apply executable="${php.interpreter}" passthru="true">
-            <arg value="-l"/>
+        <phplint>
             <fileset refid="php_files"/>
-        </apply>
+        </phplint>
     </target>
 
     <!--Register your filesets here-->
@@ -56,11 +68,12 @@
         <fileset dir="${project.basedir}" id="php_files">
             <include name="**/*.php"/>
             <exclude name="vendor/"/>
+            <exclude name=".idea/"/>
         </fileset>
     </target>
 
     <target name="test" description="Test library"
-            depends="php:check-syntax, phpunit:run, composer:validate"/>
+            depends="composer:install, php:check-syntax, phpunit:run, composer:validate"/>
 
     <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
         <exec command="make cc-test-reporter" passthru="true"/>

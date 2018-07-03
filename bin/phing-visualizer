@@ -1,12 +1,15 @@
 #!/usr/bin/env php
 <?php
 
-use Jawira\PhingVisualizer\DiagramException;
+namespace Jawira\PhingVisualizer;
+
+use Throwable;
+
 
 /**
  * Return autoload's location
  *
- * @return mixed
+ * @return string
  * @throws \Jawira\PhingVisualizer\DiagramException
  */
 function autoloadPath(): string
@@ -33,22 +36,70 @@ function autoloadPath(): string
  */
 function saveDiagram(): void
 {
-    $options = getopt('i:o:f:', ['input:', 'output:', 'format:']);
+    $options = getopt('i:o:f:h', ['input:', 'output:', 'format:', 'help']);
 
+    $help   = $options['h'] ?? $options['help'] ?? null;
     $input  = $options['i'] ?? $options['input'] ?? null;
     $output = $options['o'] ?? $options['output'] ?? null;
     $format = $options['f'] ?? $options['format'] ?? null;
 
-    if (is_null($input)) {
+    if (false === $help) {
+        help();
+        exit(0);
+    }
+
+    if (null === $input) {
         throw new DiagramException('Input file is required.');
     }
 
-    if (is_null($format)) {
+    if (null === $format) {
         throw new DiagramException('Format is required.');
     }
 
-    $diagram = new Jawira\PhingVisualizer\Diagram($input);
+    $diagram = new Diagram($input);
     $diagram->save($format, $output);
+}
+
+/**
+ * Show binary help
+ */
+function help()
+{
+    echo <<<'HELP'
+NAME
+    phing-visualizer - visualize Phing's buildfile
+
+SYNOPSIS
+    foo -i <buildfile> -f <png|svg|puml> [-o <diagram-path>] 
+
+DESCRIPTION
+    With phing-visualizer you can generate a diagram that 
+    represents Phing's targets calls and dependencies.
+
+OPTIONS
+    -i, --input <buildfile>
+        The buildfile location. It could be an absolute or 
+        relative path.
+    
+    -f, --format <png|svg|puml>
+        The format of the diagram to generate. 
+    
+    -o, --output <diagram-path>
+        The location for the diagram to be generated, it could 
+        be a filepath or dirpath. It defaults to same location 
+        as --input.
+    -h, --help
+        Shows this message.
+
+EXAMPLE
+    $ phing-visualizer -i build.xml -f png -o images/
+    $ phing-visualizer --input /projects/build.xml --format svg
+    
+AUTHOR
+    Jawira Portugal
+
+
+HELP;
 }
 
 /**

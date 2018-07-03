@@ -8,7 +8,7 @@ cc-test-reporter:	## CodeClimate reporter
 	@./cc-test-reporter -v
 
 phing.phar:			## Download Phing
-	@wget -O ./phing.phar http://www.phing.info/get/phing-2.16.0.phar
+	@wget -O ./phing.phar https://www.phing.info/get/phing-3.0.0-alpha1.phar
 	@chmod +x ./phing.phar
 	@./phing.phar -v
 
