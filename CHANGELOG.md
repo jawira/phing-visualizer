@@ -25,6 +25,8 @@ Unreleased
 
 ### Added
 
+- Supporting visualization of RunTargetTask
+
 v1.4.5 - (2018-07-03)
 ---------------------
 
