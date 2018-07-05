@@ -55,6 +55,7 @@ To this:
 **Phing visualizer** is able to represent:
 
 - Target's depends
+- RunTargetTask
 - PhingCallTask
 - ForeachTask
 
