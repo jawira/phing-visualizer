@@ -128,7 +128,9 @@ More examples
 
 [![App.EduResourceCenter](resources/readme/edu-resource-center.png)](https://gist.github.com/melin/fa4818acc9fd55666b77)
 
-[![Enum Pro!](resources/readme/enum-pro.png)](https://gist.github.com/bobbravo2/0fb3eef82c9c5be60415df61c01e8fd4)
+[![Enom Pro!](resources/readme/enom-pro.png)](https://gist.github.com/bobbravo2/0fb3eef82c9c5be60415df61c01e8fd4)
+
+[![Bitpay Magento2 plugin](resources/readme/bitpay-magento.png)](https://github.com/bitpay/magento2-plugin/blob/master/build.xml)
 
 Contributing
 ------------
