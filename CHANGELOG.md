@@ -25,6 +25,8 @@ Unreleased
 
 ### Added
 
+- Adding more examples in readme file, all buildfiles are freely available in Gist
+
 
 v1.5.0 - (2018-07-05) 
 ---------------------

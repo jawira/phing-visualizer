@@ -121,6 +121,15 @@ Requirements
 - XSL extension
 - `allow_url_fopen = On;` (on `php.ini` file)
 
+More examples
+-------------
+
+[![ucenter](resources/readme/ucenter.png)](https://gist.github.com/leric/1216551)
+
+[![App.EduResourceCenter](resources/readme/edu-resource-center.png)](https://gist.github.com/melin/fa4818acc9fd55666b77)
+
+[![Enum Pro!](resources/readme/enum-pro.png)](https://gist.github.com/bobbravo2/0fb3eef82c9c5be60415df61c01e8fd4)
+
 Contributing
 ------------
 
