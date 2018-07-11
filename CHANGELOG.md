@@ -25,8 +25,12 @@ Unreleased
 
 ### Added
 
-- Adding more examples in readme file, all buildfiles are freely available in Gist
+v1.5.1 - (2018-07-11)
+---------------------
 
+### Added
+
+- Adding more examples in readme file, all buildfiles are freely available in Gist and Github
 
 v1.5.0 - (2018-07-05) 
 ---------------------
