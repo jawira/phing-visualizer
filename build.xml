@@ -22,8 +22,8 @@
               tofile="${project.basedir}/build.properties.ini"/>
     </target>
 
-    <target name="check-version" description="Require at least Phing v3">
-        <fail>
+    <target name="check-phing-version" description="Require at least Phing v3">
+        <fail message="Install Phing v3 or newer">
             <condition>
                 <not>
                     <phingversion atleast="3.0"/>
@@ -34,7 +34,7 @@
 
     <!--composer install-->
     <target name="composer:install" description="Install dependencies"
-            depends="check-version">
+            depends="check-phing-version">
         <composer>
             <arg value="install"/>
             <arg value="--no-interaction"/>
@@ -44,7 +44,7 @@
 
     <!--composer install for prod-->
     <target name="composer:optimize" description="Install dependencies optimized for production environment"
-            depends="check-version">
+            depends="check-phing-version">
 
         <composer>
             <arg value="install"/>
@@ -56,7 +56,7 @@
 
     <!--composer validate-->
     <target name="composer:validate" description="Checks if composer.json is valid"
-            depends="check-version">
+            depends="check-phing-version">
         <composer>
             <arg value="validate"/>
             <arg value="--strict"/>
