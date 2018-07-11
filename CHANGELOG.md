@@ -23,7 +23,9 @@ Types of changes
 Unreleased
 ----------
 
-### Added
+### Changed
+
+- Improving ./CONTRIBUTING.md
 
 v1.5.1 - (2018-07-11)
 ---------------------
