@@ -69,6 +69,10 @@ You can use `phing-visualizer` in two possible ways:
 Create your diagram using the command line:
 
 ```bash
+$ vendor/bin/phing-visualizer
+```
+
+```bash
 $ vendor/bin/phing-visualizer -i build.xml -f svg
 ```
 
@@ -84,8 +88,8 @@ Executable options:
 
 | Option                | Description                               | Required          | Default           |
 | --------------------- | ----------------------------------------- | ----------------- | ----------------- | 
-| `-i` or `--input`     | Phing's buildfile location                | Yes               |                   |
-| `-f` or `--format`    | Diagram format (`png`, `svg` or `puml`)   | Yes               |                   |
+| `-i` or `--input`     | Phing's buildfile location                | No                | build.xml         |
+| `-f` or `--format`    | Diagram format (`png`, `svg` or `puml`)   | No                | png               |
 | `-o` or `--output`    | Dir or file location                      | No                | Same as `--input` |
 | `-h` or `--help`      | Help                                      | No                |                   |
 

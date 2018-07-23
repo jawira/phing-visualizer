@@ -6,14 +6,20 @@ use XSLTProcessor;
 use function Jawira\PlantUml\encodep;
 use function dirname;
 
+/**
+ * Class Diagram
+ *
+ * @package Jawira\PhingVisualizer
+ */
 class Diagram
 {
-    public const FORMAT_SVG = 'svg';
-    public const FORMAT_PNG = 'png';
-    public const FORMAT_PUML = 'puml';
+    public const BUILDFILE_DEFAULT = 'build.xml';
+    public const FORMAT_SVG        = 'svg';
+    public const FORMAT_PNG        = 'png';
+    public const FORMAT_PUML       = 'puml';
 
-    protected const XSL_PATH = __DIR__ . DIRECTORY_SEPARATOR . '../resources/xslt/plantuml.xsl';
-    protected const URL = 'http://www.plantuml.com/plantuml/%s/%s';
+    protected const XSL_PATH = __DIR__ . '/../resources/xslt/plantuml.xsl';
+    protected const URL      = 'http://www.plantuml.com/plantuml/%s/%s';
 
     /**
      * @var string
