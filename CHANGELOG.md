@@ -23,7 +23,16 @@ Types of changes
 Unreleased
 ----------
 
-### Added
+### Changed
+
+v1.6.0 - (2018-07-23)
+---------------------
+
+### Changed
+
+- Executable can be executed directly without options. Default _format_ and 
+default _buildfile name_ has been added.
+- Improving ./CONTRIBUTING.md
 
 v1.5.1 - (2018-07-11)
 ---------------------

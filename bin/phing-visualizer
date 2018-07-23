@@ -12,7 +12,7 @@ use Throwable;
  * @return string
  * @throws \Jawira\PhingVisualizer\DiagramException
  */
-function autoloadPath(): string
+function autoloadLocation(): string
 {
     $autoloadFiles = [
         __DIR__ . '/../vendor/autoload.php',
@@ -39,21 +39,13 @@ function saveDiagram(): void
     $options = getopt('i:o:f:h', ['input:', 'output:', 'format:', 'help']);
 
     $help   = $options['h'] ?? $options['help'] ?? null;
-    $input  = $options['i'] ?? $options['input'] ?? null;
+    $input  = $options['i'] ?? $options['input'] ?? Diagram::BUILDFILE_DEFAULT;
     $output = $options['o'] ?? $options['output'] ?? null;
-    $format = $options['f'] ?? $options['format'] ?? null;
+    $format = $options['f'] ?? $options['format'] ?? Diagram::FORMAT_PNG;
 
     if (false === $help) {
         help();
         exit(0);
-    }
-
-    if (null === $input) {
-        throw new DiagramException('Input file is required.');
-    }
-
-    if (null === $format) {
-        throw new DiagramException('Format is required.');
     }
 
     $diagram = new Diagram($input);
@@ -63,18 +55,18 @@ function saveDiagram(): void
 /**
  * Show binary help
  */
-function help()
+function help(): void
 {
     echo <<<'HELP'
 NAME
     phing-visualizer - visualize Phing's buildfile
 
 SYNOPSIS
-    foo -i <buildfile> -f <png|svg|puml> [-o <diagram-path>] 
+    phing-visualizer [-i <buildfile>] [-f <png|svg|puml>] [-o <diagram-path>] 
 
 DESCRIPTION
     With phing-visualizer you can generate a diagram that 
-    represents Phing's targets calls and dependencies.
+    represents Phing's targets, calls, and dependencies.
 
 OPTIONS
     -i, --input <buildfile>
@@ -88,10 +80,12 @@ OPTIONS
         The location for the diagram to be generated, it could 
         be a filepath or dirpath. It defaults to same location 
         as --input.
+        
     -h, --help
         Shows this message.
 
-EXAMPLE
+EXAMPLES
+    $ phing-visualizer
     $ phing-visualizer -i build.xml -f png -o images/
     $ phing-visualizer --input /projects/build.xml --format svg
     
@@ -109,7 +103,7 @@ function main(): void
 {
     try {
         /** @noinspection PhpIncludeInspection */
-        require autoloadPath();
+        require autoloadLocation();
         saveDiagram();
     } catch (Throwable $th) {
         exit('⚠ ' . $th->getMessage() . PHP_EOL);
