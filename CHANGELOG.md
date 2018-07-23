@@ -25,6 +25,8 @@ Unreleased
 
 ### Changed
 
+- Executable can be executed directly without options. Default _format_ and 
+default _buildfile name_ has been added.
 - Improving ./CONTRIBUTING.md
 
 v1.5.1 - (2018-07-11)
