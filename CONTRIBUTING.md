@@ -1,7 +1,21 @@
-How to contribute
-=================
+Contributing
+============
 
-Contributions in the form of **✍Issues** and **🛠Pull requests** are welcomed and encouraged.
+Contributions in the form of **✍Issues** and **🛠Pull requests** are welcomed 
+and encouraged.
+
+How to contribute
+-----------------
+
+In order to contribute to this project:
+
+1. **Fork** this repository
+1. Create a **new branch** and commit your feature or bugfix
+1. Once you have finished, create a **Pull Request** to merge your changes into 
+remote's develop branch 
+
+Recommendations
+---------------
 
 This project adheres to:
 
@@ -13,8 +27,10 @@ This project adheres to:
 
 It's encouraged to use:
 
-* [The seven rules of a great Git commit message]: How to Write a Git Commit Message
-* [git-flow]: Git extensions to provide high-level repository operations for Vincent Driessen's branching model  
+* [The seven rules of a great Git commit message]: How to Write a good Git 
+Commit Message
+* [git-flow]: Git extensions to provide high-level repository operations for 
+Vincent Driessen's branching model  
 
 
 [Contributor Covenant]: https://www.contributor-covenant.org/
