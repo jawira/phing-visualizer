@@ -2,7 +2,11 @@
 /resources/coverage/
 /resources/logs/
 /vendor/
+/build.eps
+/build.png
 /build.properties.ini
+/build.puml
+/build.svg
 /cc-test-reporter
 /composer.lock
 /composer.phar

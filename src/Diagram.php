@@ -3,8 +3,8 @@
 namespace Jawira\PhingVisualizer;
 
 use XSLTProcessor;
-use function Jawira\PlantUml\encodep;
 use function dirname;
+use function Jawira\PlantUml\encodep;
 
 /**
  * Class Diagram
@@ -14,9 +14,10 @@ use function dirname;
 class Diagram
 {
     public const BUILDFILE_DEFAULT = 'build.xml';
-    public const FORMAT_SVG        = 'svg';
+    public const FORMAT_EPS        = 'eps';
     public const FORMAT_PNG        = 'png';
     public const FORMAT_PUML       = 'puml';
+    public const FORMAT_SVG        = 'svg';
 
     protected const XSL_PATH = __DIR__ . '/../resources/xslt/plantuml.xsl';
     protected const URL      = 'http://www.plantuml.com/plantuml/%s/%s';
@@ -61,9 +62,7 @@ class Diagram
     {
         // Buildfile must exist
         if (!is_file($buildfile)) {
-            throw new DiagramException(
-                sprintf('File "%s" is invalid.', $buildfile)
-            );
+            throw new DiagramException(sprintf('File "%s" is invalid.', $buildfile));
         }
 
         $this->buildfile = $buildfile;
@@ -96,9 +95,7 @@ class Diagram
 
         // Check if path is available
         if (!is_dir(dirname($output))) {
-            throw new DiagramException(
-                sprintf('Dir "%s" is invalid.', $output)
-            );
+            throw new DiagramException(sprintf('Dir "%s" is invalid.', $output));
         }
 
         return $output;
@@ -111,7 +108,6 @@ class Diagram
      * @param null|string $output
      *
      * @throws \Jawira\PhingVisualizer\DiagramException
-     *
      * @return int|bool The function returns the number of bytes that were written to the file, or false on failure.
      */
     public function save(string $format, ?string $output)
@@ -120,8 +116,9 @@ class Diagram
             case self::FORMAT_PUML:
                 $content = $this->generatePuml();
                 break;
-            case self::FORMAT_SVG:
+            case self::FORMAT_EPS:
             case self::FORMAT_PNG:
+            case self::FORMAT_SVG:
                 $content = $this->generateImage($format);
                 break;
             default:
@@ -157,8 +154,9 @@ class Diagram
     public function generateUrl(string $format): string
     {
         switch ($format) {
-            case self::FORMAT_SVG:
+            case self::FORMAT_EPS:
             case self::FORMAT_PNG:
+            case self::FORMAT_SVG:
                 break;
             default:
                 throw new DiagramException(sprintf('Format "%s" not handled.', $format));

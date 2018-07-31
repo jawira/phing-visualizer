@@ -23,7 +23,9 @@ Types of changes
 Unreleased
 ----------
 
-### Changed
+### Added
+
+- `phing-visualizer` now supports `eps` format.
 
 v1.6.0 - (2018-07-23)
 ---------------------

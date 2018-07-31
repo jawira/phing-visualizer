@@ -25,7 +25,7 @@ function autoloadLocation(): string
         }
     }
 
-    throw new DiagramException("Autoload file not found; try 'composer dump-autoload' first.");
+    throw new DiagramException('Did you run composer install?');
 }
 
 /**
@@ -62,7 +62,7 @@ NAME
     phing-visualizer - visualize Phing's buildfile
 
 SYNOPSIS
-    phing-visualizer [-i <buildfile>] [-f <png|svg|puml>] [-o <diagram-path>] 
+    phing-visualizer [-i <buildfile>] [-f <png|svg|puml|eps>] [-o <path>] 
 
 DESCRIPTION
     With phing-visualizer you can generate a diagram that 
@@ -73,10 +73,10 @@ OPTIONS
         The buildfile location. It could be an absolute or 
         relative path.
     
-    -f, --format <png|svg|puml>
+    -f, --format <png|svg|puml|eps>
         The format of the diagram to generate. 
     
-    -o, --output <diagram-path>
+    -o, --output <path>
         The location for the diagram to be generated, it could 
         be a filepath or dirpath. It defaults to same location 
         as --input.
