@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 namespace Jawira\PhingVisualizer;
 
@@ -8,34 +8,41 @@ use Throwable;
 
 
 /**
- * Return autoload's location
+ * Finds and loads autoload file
  *
- * @return string Autoload's absolute path
+ * @see https://www.tomasvotruba.cz/blog/2018/08/02/5-gotchas-of-the-bin-file-in-php-cli-applications/
+ * @return void
  * @throws \Exception
  */
-function autoloadLocation(): string
+function loadAutoload(): void
 {
-    $autoloadFiles = [
-        __DIR__ . '/../vendor/autoload.php',
-        __DIR__ . '/../../../autoload.php',
+    $candidates = [
+        __DIR__ . '/../vendor/autoload.php',    // development
+        __DIR__ . '/../../../autoload.php',     // as dependency
     ];
 
-    foreach ($autoloadFiles as $file) {
-        if (file_exists($file)) {
-            return $file;
+    $eureka = false;
+    foreach ($candidates as $c) {
+        if (file_exists($c)) {
+            /** @noinspection PhpIncludeInspection */
+            require_once $c;
+            $eureka = true;
+            break;
         }
     }
 
-    throw new Exception("autoload.php not found; try 'composer dump-autoload' first.");
+    if (!$eureka) {
+        throw new Exception("autoload.php not found; try 'composer dump-autoload' first.");
+    }
 }
 
 /**
- * Generate diagram
+ * Run cli command to generate Phing diagrams
  *
  * @throws \Jawira\PhingVisualizer\DiagramException
  * @throws \Exception
  */
-function saveDiagram(): void
+function runPhingVisualizer(): void
 {
     $options = getopt('i:o:f:h', ['input:', 'output:', 'format:', 'help']);
 
@@ -103,9 +110,8 @@ HELP;
 function main(): void
 {
     try {
-        /** @noinspection PhpIncludeInspection */
-        require autoloadLocation();
-        saveDiagram();
+        loadAutoload();
+        runPhingVisualizer();
     } catch (Throwable $th) {
         exit('⚠ ' . $th->getMessage() . PHP_EOL);
     }
