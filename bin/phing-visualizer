@@ -4,6 +4,7 @@
 namespace Jawira\PhingVisualizer;
 
 use Exception;
+use Jawira\MiniGetopt\MiniGetopt;
 use Throwable;
 
 
@@ -44,12 +45,16 @@ function loadAutoload(): void
  */
 function runPhingVisualizer(): void
 {
-    $options = getopt('i:o:f:h', ['input:', 'output:', 'format:', 'help']);
+    $mg = new MiniGetopt();
+    $mg->addRequired('i', 'input');
+    $mg->addRequired('o', 'output');
+    $mg->addRequired('f', 'format');
+    $mg->addNoValue('h', 'help');
 
-    $help   = $options['h'] ?? $options['help'] ?? null;
-    $input  = $options['i'] ?? $options['input'] ?? Diagram::BUILDFILE_DEFAULT;
-    $output = $options['o'] ?? $options['output'] ?? null;
-    $format = $options['f'] ?? $options['format'] ?? Diagram::FORMAT_PNG;
+    $input  = $mg->getOption('i', 'input', Diagram::BUILDFILE_DEFAULT);
+    $output = $mg->getOption('o', 'output');
+    $format = $mg->getOption('f', 'format', Diagram::FORMAT_PNG);
+    $help   = $mg->getOption('h', 'help');
 
     if (false === $help) {
         help();
