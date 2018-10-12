@@ -9,7 +9,14 @@
 <xsl:if test="@name">
 title <xsl:value-of select="@name"/>
 </xsl:if>
-skinparam arrowFontColor Grey
+skinparam Arrow {
+    Color #0C3A49
+    FontColor #3787A6
+}
+skinparam Usecase {
+    BackgroundColor #E6F9FE
+    BorderColor #0C3A49
+}
 
 <!--Printing all targets first-->
 <xsl:for-each select="./target">(<xsl:value-of select="@name"/>)
