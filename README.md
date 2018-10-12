@@ -86,12 +86,12 @@ $ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/loca
 
 Executable options:
 
-| Option                | Description                               | Required          | Default           |
-| --------------------- | ----------------------------------------- | ----------------- | ----------------- | 
-| `-i` or `--input`     | Phing's buildfile location                | No                | build.xml         |
-| `-f` or `--format`    | Diagram format (`png`, `svg` or `puml`)   | No                | png               |
-| `-o` or `--output`    | Dir or file location                      | No                | Same as `--input` |
-| `-h` or `--help`      | Help                                      | No                |                   |
+| Option                | Description                                   | Default value     |
+| --------------------- | --------------------------------------------- | ----------------- | 
+| `-i` or `--input`     | Phing's buildfile location                    | build.xml         |
+| `-f` or `--format`    | Diagram format (`png`, `svg`, `eps` or `puml`)| png               |
+| `-o` or `--output`    | Dir or file location                          | Same as `--input` |
+| `-h` or `--help`      | Help                                          |                   |
 
 ### Instantiating `Diagram` class
 

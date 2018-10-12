@@ -4,26 +4,24 @@ Changelog
 All notable changes to this project will be documented in this file.
 
 <!---
-Types of changes
-
 ### Added
-    for new features.
 ### Changed
-    for changes in existing functionality.
 ### Deprecated
-    for soon-to-be removed features.
 ### Removed
-    for now removed features.
 ### Fixed
-    for any bug fixes.
 ### Security
-    in case of vulnerabilities.
 -->
 
 Unreleased
 ----------
 
-### Changed
+v1.7.0 - (2018-10-13)
+---------------------
+
+### Added
+
+- `phing-visualizer` now supports `eps` format.
+- New color scheme for visualization
 
 v1.6.0 - (2018-07-23)
 ---------------------

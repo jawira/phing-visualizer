@@ -1,47 +1,60 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 
 namespace Jawira\PhingVisualizer;
 
+use Exception;
+use Jawira\MiniGetopt\MiniGetopt;
 use Throwable;
 
 
 /**
- * Return autoload's location
+ * Finds and loads autoload file
  *
- * @return string
- * @throws \Jawira\PhingVisualizer\DiagramException
+ * @see https://www.tomasvotruba.cz/blog/2018/08/02/5-gotchas-of-the-bin-file-in-php-cli-applications/
+ * @return void
+ * @throws \Exception
  */
-function autoloadLocation(): string
+function loadAutoload(): void
 {
-    $autoloadFiles = [
-        __DIR__ . '/../vendor/autoload.php',
-        __DIR__ . '/../../../autoload.php',
+    $candidates = [
+        __DIR__ . '/../vendor/autoload.php',    // development
+        __DIR__ . '/../../../autoload.php',     // as dependency
     ];
 
-    foreach ($autoloadFiles as $file) {
-        if (file_exists($file)) {
-            return $file;
+    $eureka = false;
+    foreach ($candidates as $c) {
+        if (file_exists($c)) {
+            /** @noinspection PhpIncludeInspection */
+            require_once $c;
+            $eureka = true;
+            break;
         }
     }
 
-    throw new DiagramException("Autoload file not found; try 'composer dump-autoload' first.");
+    if (!$eureka) {
+        throw new Exception("autoload.php not found; try 'composer dump-autoload' first.");
+    }
 }
 
 /**
- * Generate diagram
+ * Run cli command to generate Phing diagrams
  *
  * @throws \Jawira\PhingVisualizer\DiagramException
  * @throws \Exception
  */
-function saveDiagram(): void
+function runPhingVisualizer(): void
 {
-    $options = getopt('i:o:f:h', ['input:', 'output:', 'format:', 'help']);
+    $mg = new MiniGetopt();
+    $mg->addRequired('i', 'input');
+    $mg->addRequired('o', 'output');
+    $mg->addRequired('f', 'format');
+    $mg->addNoValue('h', 'help');
 
-    $help   = $options['h'] ?? $options['help'] ?? null;
-    $input  = $options['i'] ?? $options['input'] ?? Diagram::BUILDFILE_DEFAULT;
-    $output = $options['o'] ?? $options['output'] ?? null;
-    $format = $options['f'] ?? $options['format'] ?? Diagram::FORMAT_PNG;
+    $input  = $mg->getOption('i', 'input', Diagram::BUILDFILE_DEFAULT);
+    $output = $mg->getOption('o', 'output');
+    $format = $mg->getOption('f', 'format', Diagram::FORMAT_PNG);
+    $help   = $mg->getOption('h', 'help');
 
     if (false === $help) {
         help();
@@ -62,7 +75,7 @@ NAME
     phing-visualizer - visualize Phing's buildfile
 
 SYNOPSIS
-    phing-visualizer [-i <buildfile>] [-f <png|svg|puml>] [-o <diagram-path>] 
+    phing-visualizer [-i <buildfile>] [-f <png|svg|puml|eps>] [-o <path>] 
 
 DESCRIPTION
     With phing-visualizer you can generate a diagram that 
@@ -73,10 +86,10 @@ OPTIONS
         The buildfile location. It could be an absolute or 
         relative path.
     
-    -f, --format <png|svg|puml>
+    -f, --format <png|svg|puml|eps>
         The format of the diagram to generate. 
     
-    -o, --output <diagram-path>
+    -o, --output <path>
         The location for the diagram to be generated, it could 
         be a filepath or dirpath. It defaults to same location 
         as --input.
@@ -102,9 +115,8 @@ HELP;
 function main(): void
 {
     try {
-        /** @noinspection PhpIncludeInspection */
-        require autoloadLocation();
-        saveDiagram();
+        loadAutoload();
+        runPhingVisualizer();
     } catch (Throwable $th) {
         exit('⚠ ' . $th->getMessage() . PHP_EOL);
     }
