@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file.
 Unreleased
 ----------
 
+v1.7.0 - (2018-10-13)
+---------------------
+
 ### Added
 
 - `phing-visualizer` now supports `eps` format.
