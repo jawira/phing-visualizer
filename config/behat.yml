@@ -1,0 +1,10 @@
+default:
+  suites:
+    default:
+      paths:
+      - '%paths.base%/../tests/behat/'
+      contexts:
+      - \Jawira\PhingVisualizer\Behat\FeatureContext
+      - \Jawira\PhingVisualizer\Behat\ClassContext
+  formatters:
+    pretty: true

@@ -10,7 +10,7 @@
          colors="true">
 
     <testsuite name="default">
-        <directory>./tests</directory>
+        <directory>tests/phpunit</directory>
     </testsuite>
 
     <filter>
