@@ -1,4 +1,5 @@
 <?php
+
 namespace Jawira\PhingVisualizer\Behat;
 
 use Behat\Behat\Context\Context;
@@ -36,10 +37,10 @@ class ClassContext implements Context
     }
 
     /**
-     * @Given /^save Diagram using "([^"]*)" as format and "([^"]*)" as location$/
+     * @Given /^save Diagram using "([^"]*)" as format and "([^"]*)" as output$/
      * @throws \Jawira\PhingVisualizer\DiagramException
      */
-    public function saveDiagramUsingAsFormatAndAsLocation($arg1, $arg2)
+    public function saveDiagramUsingAsFormatAndAsOutput($arg1, $arg2)
     {
         $this->diagram->save($arg1, $arg2);
     }
@@ -56,4 +57,5 @@ class ClassContext implements Context
             throw new Exception("File '$fileLocation' does not exists.'");
         }
     }
+
 }
