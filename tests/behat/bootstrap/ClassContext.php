@@ -17,6 +17,9 @@ class ClassContext implements Context
      * @var string
      */
     protected $input;
+    protected $format;
+    protected $output;
+    protected $fileLocation;
 
     /**
      * @Given /^I use "([^"]*)" as input file$/
@@ -38,11 +41,16 @@ class ClassContext implements Context
 
     /**
      * @Given /^save Diagram using "([^"]*)" as format and "([^"]*)" as output$/
+     * @param string $format Generated file format
+     * @param string $output Generated file location
+     *
      * @throws \Jawira\PhingVisualizer\DiagramException
      */
-    public function saveDiagramUsingAsFormatAndAsOutput($arg1, $arg2)
+    public function saveDiagramUsingAsFormatAndAsOutput($format, $output)
     {
-        $this->diagram->save($arg1, $arg2);
+        $this->format = $format;
+        $this->output = $output;
+        $this->diagram->save($format, $output);
     }
 
     /**
@@ -53,9 +61,30 @@ class ClassContext implements Context
      */
     public function iShouldHaveAFileCalled($fileLocation)
     {
+        $this->fileLocation = $fileLocation;
         if (!is_file($fileLocation)) {
             throw new Exception("File '$fileLocation' does not exists.'");
         }
     }
 
+    /**
+     * @Given /^File should have at least "([^"]*)" bytes$/
+     * @param int $bytes Expected file size in bytes
+     *
+     * @throws \Exception
+     */
+    public function fileShouldHaveAtLeastBytes($bytes)
+    {
+        $fileSize = filesize($this->fileLocation);
+        if ($fileSize < $bytes) {
+            throw new Exception("File too small $fileSize bytes, expecting $bytes bytes");
+        }
+    }
+
+    public function __destruct()
+    {
+        if (file_exists($this->fileLocation)) {
+            unlink($this->fileLocation);
+        }
+    }
 }

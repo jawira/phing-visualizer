@@ -8,18 +8,19 @@ Feature: Create Phing diagram
     When I instantiate Diagram class
     And save Diagram using "<format>" as format and "<output>" as output
     Then I should have a file called "<path>"
+    And File should have at least "<size>" bytes
 
     Examples:
-      | input     | format | output           | path             |
-      | build.xml | eps    | /tmp/            | /tmp/build.eps   |
-      | build.xml | puml   | /tmp/            | /tmp/build.puml  |
-      | build.xml | png    | /tmp/            | /tmp/build.png   |
-      | build.xml | svg    | /tmp/            | /tmp/build.svg   |
-      | build.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  |
-      | build.xml | puml   | /tmp/custom.puml | /tmp/custom.puml |
-      | build.xml | png    | /tmp/custom.png  | /tmp/custom.png  |
-      | build.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  |
-      | build.xml | eps    | .                | build.eps        |
-      | build.xml | puml   | .                | build.puml       |
-      | build.xml | png    | .                | build.png        |
-      | build.xml | svg    | .                | build.svg        |
+      | input     | format | output           | path             | size  |
+      | build.xml | eps    | /tmp/            | /tmp/build.eps   | 87193 |
+      | build.xml | puml   | /tmp/            | /tmp/build.puml  | 1078  |
+      | build.xml | png    | /tmp/            | /tmp/build.png   | 55441 |
+      | build.xml | svg    | /tmp/            | /tmp/build.svg   | 14371 |
+      | build.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 87193 |
+      | build.xml | puml   | /tmp/custom.puml | /tmp/custom.puml | 1078  |
+      | build.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 55441 |
+      | build.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  | 14371 |
+      | build.xml | eps    | .                | build.eps        | 87193 |
+      | build.xml | puml   | .                | build.puml       | 1078  |
+      | build.xml | png    | .                | build.png        | 55441 |
+      | build.xml | svg    | .                | build.svg        | 14371 |
