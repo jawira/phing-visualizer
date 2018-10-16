@@ -18,7 +18,7 @@ class DiagramTest extends TestCase
     public function setUp()
     {
         $this->root = vfsStream::setup();
-        vfsStream::copyFromFileSystem(__DIR__ . '/../resources/', $this->root);
+        vfsStream::copyFromFileSystem(__DIR__ . '/../../resources/', $this->root);
     }
 
     public function tearDown()
@@ -33,18 +33,20 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::__construct()
      *
      * @param string $buildfile
+     *
+     * @throws \ReflectionException
      */
     public function testConstructor(string $buildfile)
     {
         $buildfilePath = $this->root->getChild($buildfile)->url();
 
         $diagramMock = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['setBuildfile'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['setBuildfile'])
+                            ->getMock();
         $diagramMock->expects($this->once())
-            ->method('setBuildfile')
-            ->with($this->equalTo($buildfilePath));
+                    ->method('setBuildfile')
+                    ->with($this->equalTo($buildfilePath));
 
         $reflectedClass = new ReflectionClass(Diagram::class);
         $constructor    = $reflectedClass->getConstructor();
@@ -64,9 +66,9 @@ class DiagramTest extends TestCase
         $buildfilePath = $this->root->getChild($buildfile)->url();
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods([])
+                            ->getMock();
 
         $reflection = new ReflectionObject($diagramStub);
         $method     = $reflection->getMethod('setBuildfile');
@@ -91,9 +93,9 @@ class DiagramTest extends TestCase
         $buildfilePath = $this->root->getChild($buildfile)->url();
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods([])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods([])
+                            ->getMock();
 
         $reflection = new ReflectionObject($diagramStub);
         $property   = $reflection->getProperty('buildfile');
@@ -116,6 +118,8 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::setBuildfile()
      *
      * @param string $invalidFile Invalid file path
+     *
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
     public function testConstructorFailsOnInvalidInput(string $invalidFile)
     {
@@ -135,9 +139,9 @@ class DiagramTest extends TestCase
     public function testGenerateUrl(string $format, string $plantUml, string $url)
     {
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generatePuml', 'getFormat'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['generatePuml', 'getFormat'])
+                            ->getMock();
         $diagramStub->method('generatePuml')->willReturn($plantUml);
         $diagramStub->method('getFormat')->willReturn($format);
 
@@ -156,9 +160,9 @@ class DiagramTest extends TestCase
         $this->expectExceptionMessage(sprintf('Format "%s" not handled.', $format));
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generatePuml'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['generatePuml'])
+                            ->getMock();
 
         /** @noinspection PhpUndefinedMethodInspection */
         $diagramStub->generateUrl($format, null);
@@ -176,9 +180,9 @@ class DiagramTest extends TestCase
     public function testValidateOutputLocation($buildfile, $format, $output, $expected)
     {
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBuildfile'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['getBuildfile'])
+                            ->getMock();
         $diagramStub->method('getBuildfile')->willReturn($buildfile);
 
         $reflection = new ReflectionObject($diagramStub);
@@ -205,9 +209,9 @@ class DiagramTest extends TestCase
         );
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBuildfile'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['getBuildfile'])
+                            ->getMock();
         $diagramStub->method('getBuildfile')->willReturn('/demo.xml');
 
         $reflection = new ReflectionObject($diagramStub);
@@ -232,9 +236,9 @@ class DiagramTest extends TestCase
         $content    = file_get_contents($contentVfs);
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
+                            ->getMock();
         $diagramStub->method('generatePuml')->willReturn($content);
         $diagramStub->method('generateImage')->willReturn($content);
         $diagramStub->method('validateOutputLocation')->willReturn($outputVfs);
@@ -257,9 +261,9 @@ class DiagramTest extends TestCase
         $this->expectExceptionMessage(sprintf('Format "%s" not handled.', $format));
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['generatePuml', 'generateImage', 'validateOutputLocation'])
+                            ->getMock();
 
         /** @noinspection PhpUndefinedMethodInspection */
         $diagramStub->save($format, null);
@@ -278,9 +282,9 @@ class DiagramTest extends TestCase
         $expectedImage = file_get_contents($this->root->getChild($image)->url());
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['generateUrl'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['generateUrl'])
+                            ->getMock();
         $diagramStub->method('generateUrl')->willReturn($url);
 
         $reflection = new ReflectionObject($diagramStub);
@@ -309,9 +313,9 @@ class DiagramTest extends TestCase
         $expectedPuml = file_get_contents($this->root->getChild($puml)->url());
 
         $diagramStub = $this->getMockBuilder(Diagram::class)
-            ->disableOriginalConstructor()
-            ->setMethods(['getBuildfile'])
-            ->getMock();
+                            ->disableOriginalConstructor()
+                            ->setMethods(['getBuildfile'])
+                            ->getMock();
         $diagramStub->method('getBuildfile')->willReturn($buildfileVfs);
 
         $reflection = new ReflectionObject($diagramStub);
@@ -359,17 +363,17 @@ class DiagramTest extends TestCase
         return [
             'Basic'         => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../resources/puml/bob-alice.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/bob-alice.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
             ],
             'Phing'         => [
                 Diagram::FORMAT_SVG,
-                file_get_contents(__DIR__ . '/../resources/puml/buildfile.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/buildfile.puml'),
                 'http://www.plantuml.com/plantuml/svg/FSqX3e0m341HtrDKWa1W9yW22PoZP1KBOrrA2U7s33FrnHFVNqPgzvd0eYN6LMGcXUk8kP3IYQGgpohP5acYk2c_q1Nbgjn3jzynXLOSXWcReiF0XNDm8_YQ__81',
             ],
             'Spanish chars' => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../resources/puml/spanish-characters.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/spanish-characters.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIh9BCb9LV18JCf9p4l9LqZDKqWjBaWyl34_X-lmn7mWhQ1hf-2SaLXGcdDuRPw2bSAX_O6bcOTNvYaKvASK7Lwea5XPcf9Ob9jgpuLGfGlK0zKDrB0mCb-Hoo4rBmLa7m00',
             ],
         ];

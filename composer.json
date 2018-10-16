@@ -12,15 +12,22 @@
     "php": "^7.1",
     "ext-simplexml": "*",
     "ext-xsl": "*",
-    "jawira/plantuml-encoding": "^1.0.0",
-    "jawira/mini-getopt": "^0.0.1"
+    "jawira/mini-getopt": "^0.0.1",
+    "jawira/plantuml-encoding": "^1.0.0"
   },
   "require-dev": {
+    "behat/behat": "^3.5",
+    "kamermans/command": "^1.2",
     "mikey179/vfsStream": "^1.6"
   },
   "autoload": {
     "psr-4": {
       "Jawira\\PhingVisualizer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jawira\\PhingVisualizer\\Behat\\": "tests/behat/bootstrap"
     }
   },
   "bin": [

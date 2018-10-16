@@ -1,15 +1,18 @@
+@startuml
 
-        @startuml
-        
-            title HelloWorld
-        skinparam arrowFontColor Grey
-        
-            (welcome)
-            
-            (test)
-            
-            (build)
-            
-            (build) --> (test) : depend:1
-        @enduml
-    
+title HelloWorld
+skinparam Arrow {
+    Color #0C3A49
+    FontColor #3787A6
+}
+skinparam Usecase {
+    BackgroundColor #E6F9FE
+    BorderColor #0C3A49
+}
+
+(welcome)
+(test)
+(build)
+
+(build) --> (test) : depend:1
+@enduml

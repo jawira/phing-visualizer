@@ -12,3 +12,4 @@
 /composer.phar
 /phing.phar
 /phpunit.phar
+/bin/phpunit

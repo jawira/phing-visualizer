@@ -1,10 +1,15 @@
+@startuml
 
-        @startuml
-        
-            title test
-        skinparam arrowFontColor Grey
-        
-            (work)
-            
-        @enduml
-    
+title test
+skinparam Arrow {
+    Color #0C3A49
+    FontColor #3787A6
+}
+skinparam Usecase {
+    BackgroundColor #E6F9FE
+    BorderColor #0C3A49
+}
+
+(work)
+
+@enduml

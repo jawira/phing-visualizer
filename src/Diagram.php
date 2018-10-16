@@ -179,9 +179,9 @@ class Diagram
         $xmlDoc = simplexml_load_string(file_get_contents($this->getBuildfile()));
         $xslDoc = simplexml_load_string(file_get_contents(self::XSL_PATH));
 
-        $proc = new XSLTProcessor();
-        $proc->importStylesheet($xslDoc);
+        $processor = new XSLTProcessor();
+        $processor->importStylesheet($xslDoc);
 
-        return $proc->transformToXml($xmlDoc);
+        return $processor->transformToXml($xmlDoc);
     }
 }
