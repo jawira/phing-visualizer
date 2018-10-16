@@ -2,6 +2,7 @@
   <dictionary name="jawira">
     <words>
       <w>/tmp/</w>
+      <w>build.png</w>
       <w>build.xml</w>
       <w>buildfile</w>
       <w>buildfiles</w>
