@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 Unreleased
 ----------
 
+### Updated
+
+- Images in README.md have new color scheme
+
 v1.7.0 - (2018-10-13)
 ---------------------
 
@@ -37,7 +41,8 @@ v1.5.1 - (2018-07-11)
 
 ### Added
 
-- Adding more examples in readme file, all buildfiles are freely available in Gist and Github
+- Adding more examples in readme file, all buildfiles are freely available in 
+Gist and Github
 
 v1.5.0 - (2018-07-05) 
 ---------------------
@@ -57,7 +62,8 @@ v1.4.5 - (2018-07-03)
 
 ### Fixed
 
-- Updating Makefile to download latest Phing's version, older version wasn't compatible with current buildfile
+- Updating Makefile to download latest Phing's version, older version was not 
+compatible with current buildfile
 
 v1.4.4 (2018-06-08)
 -------------------
