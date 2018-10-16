@@ -1,22 +1,23 @@
+@startuml
 
-        @startuml
-        
-            title stream
-        skinparam arrowFontColor Grey
-        
-            (main)
-            
-            (main) --> (init) : depend:1
-            (main) --> (phpmd) : depend:2
-            (main) --> (phpcpd) : depend:3
-            (main) --> (test) : depend:4
-            (init)
-            
-            (test)
-            
-            (phpmd)
-            
-            (phpcpd)
-            
-        @enduml
-    
+title stream
+skinparam Arrow {
+    Color #0C3A49
+    FontColor #3787A6
+}
+skinparam Usecase {
+    BackgroundColor #E6F9FE
+    BorderColor #0C3A49
+}
+
+(main)
+(init)
+(test)
+(phpmd)
+(phpcpd)
+
+(main) --> (init) : depend:1
+(main) --> (phpmd) : depend:2
+(main) --> (phpcpd) : depend:3
+(main) --> (test) : depend:4
+@enduml

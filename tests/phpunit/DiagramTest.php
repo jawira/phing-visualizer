@@ -18,7 +18,7 @@ class DiagramTest extends TestCase
     public function setUp()
     {
         $this->root = vfsStream::setup();
-        vfsStream::copyFromFileSystem(__DIR__ . '/../resources/', $this->root);
+        vfsStream::copyFromFileSystem(__DIR__ . '/../../resources/', $this->root);
     }
 
     public function tearDown()
@@ -363,17 +363,17 @@ class DiagramTest extends TestCase
         return [
             'Basic'         => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../resources/puml/bob-alice.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/bob-alice.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
             ],
             'Phing'         => [
                 Diagram::FORMAT_SVG,
-                file_get_contents(__DIR__ . '/../resources/puml/buildfile.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/buildfile.puml'),
                 'http://www.plantuml.com/plantuml/svg/FSqX3e0m341HtrDKWa1W9yW22PoZP1KBOrrA2U7s33FrnHFVNqPgzvd0eYN6LMGcXUk8kP3IYQGgpohP5acYk2c_q1Nbgjn3jzynXLOSXWcReiF0XNDm8_YQ__81',
             ],
             'Spanish chars' => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../resources/puml/spanish-characters.puml'),
+                file_get_contents(__DIR__ . '/../../resources/puml/spanish-characters.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIh9BCb9LV18JCf9p4l9LqZDKqWjBaWyl34_X-lmn7mWhQ1hf-2SaLXGcdDuRPw2bSAX_O6bcOTNvYaKvASK7Lwea5XPcf9Ob9jgpuLGfGlK0zKDrB0mCb-Hoo4rBmLa7m00',
             ],
         ];
