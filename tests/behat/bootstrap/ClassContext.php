@@ -3,7 +3,6 @@
 namespace Jawira\PhingVisualizer\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Exception;
 use Jawira\PhingVisualizer\Diagram;
 

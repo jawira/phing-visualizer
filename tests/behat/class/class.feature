@@ -25,6 +25,7 @@ Feature: Create Phing diagram
       | build.xml | png    | .                | build.png        | 55441 |
       | build.xml | svg    | .                | build.svg        | 14371 |
 
+
   Scenario Outline: Create diagram from build.xml using default output
     Given I use "<input>" as input file
     When I instantiate Diagram class
