@@ -15,6 +15,17 @@ All notable changes to this project will be documented in this file.
 Unreleased
 ----------
 
+### Added 
+
+-
+
+v1.7.1 - (2018-10-13)
+---------------------
+
+### Fixed
+
+- PHPUnit tests fixed
+
 ### Updated
 
 - Images in README.md have new color scheme
