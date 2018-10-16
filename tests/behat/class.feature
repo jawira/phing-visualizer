@@ -3,7 +3,7 @@ Feature: Create Phing diagram
   As a dev
   I need to instantiate and use Diagram class
 
-  Scenario Outline: Create diagram from default buildfile
+  Scenario Outline: Create diagram from build.xml
     Given I use "<input>" as input file
     When I instantiate Diagram class
     And save Diagram using "<format>" as format and "<output>" as output
@@ -24,3 +24,17 @@ Feature: Create Phing diagram
       | build.xml | puml   | .                | build.puml       | 1078  |
       | build.xml | png    | .                | build.png        | 55441 |
       | build.xml | svg    | .                | build.svg        | 14371 |
+
+  Scenario Outline: Create diagram from build.xml using default output
+    Given I use "<input>" as input file
+    When I instantiate Diagram class
+    And save Diagram using "<format>" as format
+    Then I should have a file called "<path>"
+    And File should have at least "<size>" bytes
+
+    Examples:
+      | input     | format | path       | size  |
+      | build.xml | eps    | build.eps  | 87193 |
+      | build.xml | puml   | build.puml | 1078  |
+      | build.xml | png    | build.png  | 55441 |
+      | build.xml | svg    | build.svg  | 14371 |

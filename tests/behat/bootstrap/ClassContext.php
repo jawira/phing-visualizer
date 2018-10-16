@@ -3,6 +3,7 @@
 namespace Jawira\PhingVisualizer\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Exception;
 use Jawira\PhingVisualizer\Diagram;
 
@@ -86,5 +87,18 @@ class ClassContext implements Context
         if (file_exists($this->fileLocation)) {
             unlink($this->fileLocation);
         }
+    }
+
+    /**
+     * @Given /^save Diagram using "([^"]*)" as format$/
+     * @param string $format Output diagram format
+     *
+     * @throws \Jawira\PhingVisualizer\DiagramException
+     */
+    public function saveDiagramUsingAsFormat($format)
+    {
+        $this->format = $format;
+
+        $this->diagram->save($format, null);
     }
 }
