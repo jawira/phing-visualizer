@@ -19,6 +19,11 @@ Unreleased
 
 - Change target background color [#37](https://github.com/jawira/phing-visualizer/issues/37)
 
+### Fixed
+
+- Updated PHPUnit test with `eps` format 
+- Updated Behat tests with `dummy.xml` 
+
 v1.7.1 - (2018-10-13)
 ---------------------
 
