@@ -32,19 +32,19 @@ Feature: Product basket
     And File should have at least "<size>" bytes
 
     Examples:
-      | input     | format | output           | path             | size  |
-      | build.xml | eps    | /tmp/            | /tmp/build.eps   | 87193 |
-      | build.xml | puml   | /tmp/            | /tmp/build.puml  | 1078  |
-      | build.xml | png    | /tmp/            | /tmp/build.png   | 55441 |
-      | build.xml | svg    | /tmp/            | /tmp/build.svg   | 14371 |
-      | build.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 87193 |
-      | build.xml | puml   | /tmp/custom.puml | /tmp/custom.puml | 1078  |
-      | build.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 55441 |
-      | build.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  | 14371 |
-      | build.xml | eps    | .                | build.eps        | 87193 |
-      | build.xml | puml   | .                | build.puml       | 1078  |
-      | build.xml | png    | .                | build.png        | 55441 |
-      | build.xml | svg    | .                | build.svg        | 14371 |
+      | input                          | format | output           | path             | size  |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/            | /tmp/dummy.eps   | 43575 |
+      | resources/buildfiles/dummy.xml | puml   | /tmp/            | /tmp/dummy.puml  | 472   |
+      | resources/buildfiles/dummy.xml | png    | /tmp/            | /tmp/dummy.png   | 19505 |
+      | resources/buildfiles/dummy.xml | svg    | /tmp/            | /tmp/dummy.svg   | 7689  |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 43575 |
+      | resources/buildfiles/dummy.xml | puml   | /tmp/custom.puml | /tmp/custom.puml | 472   |
+      | resources/buildfiles/dummy.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 19505 |
+      | resources/buildfiles/dummy.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  | 7689  |
+      | resources/buildfiles/dummy.xml | eps    | .                | dummy.eps        | 43575 |
+      | resources/buildfiles/dummy.xml | puml   | .                | dummy.puml       | 472   |
+      | resources/buildfiles/dummy.xml | png    | .                | dummy.png        | 19505 |
+      | resources/buildfiles/dummy.xml | svg    | .                | dummy.svg        | 7689  |
 
 
   Scenario Outline: Create diagram with one option

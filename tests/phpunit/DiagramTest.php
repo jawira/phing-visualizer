@@ -361,19 +361,24 @@ class DiagramTest extends TestCase
     public function generateUrlProvider(): array
     {
         return [
-            'Basic'         => [
+            'png - Basic'         => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../../resources/puml/bob-alice.puml'),
+                file_get_contents(__DIR__ . '/../../resources/phpunit/bob-alice.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
             ],
-            'Phing'         => [
+            'eps - Basic'         => [
+                Diagram::FORMAT_EPS,
+                file_get_contents(__DIR__ . '/../../resources/phpunit/bob-alice.puml'),
+                'http://www.plantuml.com/plantuml/eps/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
+            ],
+            'svg - Phing'         => [
                 Diagram::FORMAT_SVG,
-                file_get_contents(__DIR__ . '/../../resources/puml/buildfile.puml'),
+                file_get_contents(__DIR__ . '/../../resources/phpunit/buildfile.puml'),
                 'http://www.plantuml.com/plantuml/svg/FSqX3e0m341HtrDKWa1W9yW22PoZP1KBOrrA2U7s33FrnHFVNqPgzvd0eYN6LMGcXUk8kP3IYQGgpohP5acYk2c_q1Nbgjn3jzynXLOSXWcReiF0XNDm8_YQ__81',
             ],
-            'Spanish chars' => [
+            'png - Spanish chars' => [
                 Diagram::FORMAT_PNG,
-                file_get_contents(__DIR__ . '/../../resources/puml/spanish-characters.puml'),
+                file_get_contents(__DIR__ . '/../../resources/phpunit/spanish-characters.puml'),
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIh9BCb9LV18JCf9p4l9LqZDKqWjBaWyl34_X-lmn7mWhQ1hf-2SaLXGcdDuRPw2bSAX_O6bcOTNvYaKvASK7Lwea5XPcf9Ob9jgpuLGfGlK0zKDrB0mCb-Hoo4rBmLa7m00',
             ],
         ];
@@ -382,6 +387,7 @@ class DiagramTest extends TestCase
     public function buildfilesProvider()
     {
         return [
+            'Dummy'              => ['buildfiles/dummy.xml'],
             'Gist alphabraga'    => ['buildfiles/gist-alphabraga.xml'],
             'Gist kbariotis'     => ['buildfiles/gist-kbariotis.xml'],
             'Gist mapserver2007' => ['buildfiles/gist-mapserver2007.xml'],
@@ -418,17 +424,22 @@ class DiagramTest extends TestCase
             'Save png'  => [
                 Diagram::FORMAT_PNG,
                 'buildfiles/output.png',
-                'png/bob-alice.png',
+                'phpunit/bob-alice.png',
             ],
             'Save svg'  => [
                 Diagram::FORMAT_SVG,
                 'buildfiles/output.svg',
-                'svg/bob-alice.svg',
+                'phpunit/bob-alice.svg',
             ],
             'Save puml' => [
                 Diagram::FORMAT_PUML,
                 'buildfiles/output.puml',
-                'puml/bob-alice.puml',
+                'phpunit/bob-alice.puml',
+            ],
+            'Save eps'  => [
+                Diagram::FORMAT_EPS,
+                'buildfiles/output.eps',
+                'phpunit/bob-alice.eps',
             ],
         ];
     }
@@ -439,12 +450,17 @@ class DiagramTest extends TestCase
             'Generate svg' => [
                 Diagram::FORMAT_SVG,
                 'http://www.plantuml.com/plantuml/svg/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
-                'svg/bob-alice.svg',
+                'phpunit/bob-alice.svg',
             ],
             'Generate png' => [
                 Diagram::FORMAT_PNG,
                 'http://www.plantuml.com/plantuml/png/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
-                'png/bob-alice.png',
+                'phpunit/bob-alice.png',
+            ],
+            'Generate eps' => [
+                Diagram::FORMAT_EPS,
+                'http://www.plantuml.com/plantuml/eps/SoWkIImgAStDuNBAJrBGjLDmpCbCJbMmKiX8pSd9vt98pKi1IG80',
+                'phpunit/bob-alice.eps',
             ],
         ];
     }
@@ -452,6 +468,10 @@ class DiagramTest extends TestCase
     public function generatePumlProvider()
     {
         return [
+            'Dummy'              => [
+                'buildfiles/dummy.xml',
+                'puml/dummy.puml',
+            ],
             'Gist alphabraga'    => [
                 'buildfiles/gist-alphabraga.xml',
                 'puml/gist-alphabraga.puml',
