@@ -1,0 +1,29 @@
+@startuml
+
+title Dummy
+skinparam Arrow {
+    Color #0C3A49
+    FontColor #3787A6
+}
+skinparam Usecase {
+    BackgroundColor #F7FEE1
+    BorderColor #0C3A49
+}
+
+(init)
+(composer)
+(tests)
+(notifying)
+(emailing)
+(irc)
+(phpunit)
+(behat)
+
+(init) --> (composer) : depend:1
+(tests) --> (phpunit) : call:1
+(tests) --> (behat) : call:2
+(tests) --> (composer) : depend:1
+(notifying) --> (emailing) : call:1
+(notifying) --> (irc) : call:2
+(notifying) --> (composer) : depend:1
+@enduml

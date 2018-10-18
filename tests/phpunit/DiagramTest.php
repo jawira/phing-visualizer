@@ -387,6 +387,7 @@ class DiagramTest extends TestCase
     public function buildfilesProvider()
     {
         return [
+            'Dummy'              => ['buildfiles/dummy.xml'],
             'Gist alphabraga'    => ['buildfiles/gist-alphabraga.xml'],
             'Gist kbariotis'     => ['buildfiles/gist-kbariotis.xml'],
             'Gist mapserver2007' => ['buildfiles/gist-mapserver2007.xml'],
@@ -467,6 +468,10 @@ class DiagramTest extends TestCase
     public function generatePumlProvider()
     {
         return [
+            'Dummy'              => [
+                'buildfiles/dummy.xml',
+                'puml/dummy.puml',
+            ],
             'Gist alphabraga'    => [
                 'buildfiles/gist-alphabraga.xml',
                 'puml/gist-alphabraga.puml',

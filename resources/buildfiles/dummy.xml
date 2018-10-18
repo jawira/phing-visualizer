@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Dummy" description="Using supported tasks" default="init">
+
+    <description>
+    - Target's depends
+    - RunTargetTask
+    - PhingCallTask
+    - ForeachTask
+    </description>
+
+    <target name="init" depends="composer">
+        <echo>Hello world, this is init target.</echo>
+    </target>
+
+    <target name="composer">
+        <echo>Creating vendor directory</echo>
+    </target>
+
+    <target name="tests" depends="composer">
+        <echo>Running all available tests</echo>
+        <runtarget target="phpunit"/>
+        <phingcall target="behat"/>
+    </target>
+
+    <target name="notifying" depends="composer">
+        <foreach target="emailing" list="friend@yahoo.es, mom@msn.com, dad@hotmail.com" param="address"/>
+        <foreach target="irc" list="junior, guest, hacker123" param="alias"/>
+    </target>
+
+    <target name="emailing">
+        <echo>Emailing to ${address}</echo>
+    </target>
+
+    <target name="irc">
+        <echo>Sending message to ${alias}</echo>
+    </target>
+
+    <target name="phpunit">
+        <echo>Running PHPUnit</echo>
+    </target>
+
+    <target name="behat">
+        <echo>Running Behat</echo>
+    </target>
+</project>
