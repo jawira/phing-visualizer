@@ -17,7 +17,7 @@ Unreleased
 
 ### Added 
 
--
+- Change target background color [#37](https://github.com/jawira/phing-visualizer/issues/37)
 
 v1.7.1 - (2018-10-13)
 ---------------------
