@@ -21,7 +21,7 @@ Unreleased
 
 ### Fixed
 
-- Updated PHPUnit test with `eps` format 
+- Updated PHPUnit test with `eps` format [#34](https://github.com/jawira/phing-visualizer/issues/34)
 - Updated Behat tests with `dummy.xml` 
 
 v1.7.1 - (2018-10-13)
