@@ -2,6 +2,8 @@
   <dictionary name="jawira">
     <words>
       <w>/tmp/</w>
+      <w>alphabraga</w>
+      <w>bovigo</w>
       <w>build.png</w>
       <w>build.xml</w>
       <w>buildfile</w>
@@ -10,6 +12,9 @@
       <w>filepath</w>
       <w>jawira</w>
       <w>kamermans</w>
+      <w>kbariotis</w>
+      <w>mapserver</w>
+      <w>nfabre</w>
       <w>phing</w>
       <w>puml</w>
     </words>
