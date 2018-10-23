@@ -59,7 +59,6 @@ class ExecutableContext implements Context
      */
     public function iRunGivenExecutable()
     {
-
         $this->output = $this->command->run()->getStdOut();
     }
 
@@ -137,5 +136,13 @@ class ExecutableContext implements Context
         $this->command->option($option);
     }
 
+    /**
+     * @Given Current directory is :directory
+     * @param string $directory CWD
+     */
+    public function currentDirectoryIs($directory)
+    {
+        $this->command->setDirectory($directory);
+    }
 
 }
