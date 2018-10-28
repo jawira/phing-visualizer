@@ -15,6 +15,10 @@ All notable changes to this project will be documented in this file.
 Unreleased
 ----------
 
+### Changes
+
+- Updated readme's images with new color scheme
+
 v1.7.2 - (2018-10-23)
 ---------------------
 
