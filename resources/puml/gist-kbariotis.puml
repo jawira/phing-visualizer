@@ -1,18 +1,19 @@
 @startuml
 
-title HelloWorld
 skinparam Arrow {
-    Color #0C3A49
-    FontColor #3787A6
+Color #0C3A49
+FontColor #3787A6
 }
 skinparam Usecase {
-    BackgroundColor #F7FEE1
-    BorderColor #0C3A49
+BackgroundColor #F7FEE1
+BorderColor #0C3A49
 }
 
+rectangle "HelloWorld" {
 (welcome)
 (test)
 (build)
+}
 
 (build) --> (test) : depend:1
 @enduml

@@ -7,6 +7,11 @@ use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionObject;
 
+/**
+ * Class DiagramTest
+ *
+ * @package Jawira\PhingVisualizer
+ */
 class DiagramTest extends TestCase
 {
 
@@ -87,6 +92,8 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::getBuildfile()
      *
      * @param $buildfile
+     *
+     * @throws \ReflectionException
      */
     public function testGetBuildfile($buildfile)
     {
@@ -176,6 +183,8 @@ class DiagramTest extends TestCase
      * @param $format
      * @param $output
      * @param $expected
+     *
+     * @throws \ReflectionException
      */
     public function testValidateOutputLocation($buildfile, $format, $output, $expected)
     {
@@ -200,6 +209,8 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::validateOutputLocation()
      *
      * @param string $dir Invalid output directory
+     *
+     * @throws \ReflectionException
      */
     public function testInvalidOutputDirWhenValidatingOutputLocation(string $dir)
     {
@@ -276,6 +287,8 @@ class DiagramTest extends TestCase
      * @param string $format Format to generate, png, svg,...
      * @param string $url    PlantUml url
      * @param string $image  Relative path to existing file
+     *
+     * @throws \ReflectionException
      */
     public function testGenerateImage(string $format, string $url, string $image)
     {
@@ -293,10 +306,21 @@ class DiagramTest extends TestCase
 
         $generatedImage = $method->invokeArgs($diagramStub, [$format]);
 
+        switch ($format) {
+            case Diagram::FORMAT_PNG:
+            case Diagram::FORMAT_PUML:
+                $this->assertGreaterThan(abs(strlen($generatedImage) - strlen($expectedImage)), 10);
+                break;
+            case Diagram::FORMAT_EPS:
+                $this->assertContains('simplerect', $generatedImage);
+                $this->assertContains('newpath', $generatedImage);
+                $this->assertContains('rlineto', $generatedImage);
+                $this->assertContains('setrgbcolor', $generatedImage);
+                break;
+        }
+
         if ($format === Diagram::FORMAT_SVG) {
             $this->assertXmlStringEqualsXmlString($expectedImage, $generatedImage);
-        } else {
-            $this->assertSame($expectedImage, $generatedImage);
         }
     }
 
@@ -306,6 +330,8 @@ class DiagramTest extends TestCase
      *
      * @param string $buildfile
      * @param string $puml
+     *
+     * @throws \ReflectionException
      */
     public function testGeneratePuml(string $buildfile, string $puml)
     {
