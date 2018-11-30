@@ -1,5 +1,4 @@
-Changelog
-=========
+# Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -12,8 +11,7 @@ All notable changes to this project will be documented in this file.
 ### Security
 -->
 
-Unreleased
-----------
+## Unreleased
 
 ### Changes
 
@@ -21,20 +19,18 @@ Unreleased
 - [#42] xslt file has been splited in three files
 - Diagram's targets are surrounded by a rectangle
 
-v1.7.2 - (2018-10-23)
----------------------
+## [v1.7.2] - (2018-10-23)
 
 ### Added 
 
-- Change target background color [#37](https://github.com/jawira/phing-visualizer/issues/37)
+- [#37] Change target background color
 
 ### Fixed
 
-- Updated PHPUnit test with `eps` format [#34](https://github.com/jawira/phing-visualizer/issues/34)
+- [#34] Updated PHPUnit test with `eps` format 
 - Updated Behat tests with `dummy.xml` 
 
-v1.7.1 - (2018-10-13)
----------------------
+## [v1.7.1] - (2018-10-13)
 
 ### Fixed
 
@@ -44,16 +40,14 @@ v1.7.1 - (2018-10-13)
 
 - Images in README.md have new color scheme
 
-v1.7.0 - (2018-10-13)
----------------------
+## [v1.7.0] - (2018-10-13)
 
 ### Added
 
 - `phing-visualizer` now supports `eps` format.
 - New color scheme for visualization
 
-v1.6.0 - (2018-07-23)
----------------------
+## [v1.6.0] - (2018-07-23)
 
 ### Changed
 
@@ -61,27 +55,24 @@ v1.6.0 - (2018-07-23)
 default _buildfile name_ has been added.
 - Improving ./CONTRIBUTING.md
 
-v1.5.1 - (2018-07-11)
----------------------
+## [v1.5.1] - (2018-07-11)
 
 ### Added
 
 - Adding more examples in readme file, all buildfiles are freely available in 
 Gist and Github
 
-v1.5.0 - (2018-07-05) 
----------------------
+## [v1.5.0] - (2018-07-05) 
 
 ### Added
 
 - Supporting visualization of RunTargetTask
 
-v1.4.5 - (2018-07-03)
----------------------
+## [v1.4.5] - (2018-07-03)
 
 ### Added
 
-- An help option (-h, --help) was added to executable #12
+- [#12] An help option (-h, --help) was added to executable 
 - Code Climate badges in README.md
 - Travis-ci badges in README.md
 
@@ -90,20 +81,18 @@ v1.4.5 - (2018-07-03)
 - Updating Makefile to download latest Phing's version, older version was not 
 compatible with current buildfile
 
-v1.4.4 (2018-06-08)
--------------------
+## [v1.4.4] (2018-06-08)
 
 ### Fixed
 
-* Error loading autoload file was fixed. Executable will work when executing 
-from `vendor/bin/phing-visualizer`. #28
+* [#28] Error loading autoload file was fixed. Executable will work when executing 
+from `vendor/bin/phing-visualizer`. 
 
 ### Changed
 
 * Improved README.md
 
-v1.4.0 (2018-03-05)
--------------------
+## [v1.4.0] (2018-03-05)
 
 ### Added
 
@@ -119,31 +108,27 @@ v1.4.0 (2018-03-05)
 * Readme file was updated: badges, installing instructions, example and 
 executable usage
 
-v1.3.1 (2017-01-23)
--------------------
+## [v1.3.1] (2017-01-23)
 
 ### Fixed
 
 * Valid license in `composer.json`  
 
-v1.3.0 (2017-01-13)
--------------------
+## [v1.3.0] (2017-01-13)
 
 ### Added
 
 * Tests with travis-ci.org & code climate
 
 
-v1.2.0 (2017-01-11)
--------------------
+## [v1.2.0] (2017-01-11)
 
 ### Changed
 
 * Improved Unit tests for Diagram class
 
 
-v1.1.0 (2017-01-08)
--------------------
+## [v1.1.0] (2017-01-08)
 
 ### Added
 
@@ -155,8 +140,7 @@ v1.1.0 (2017-01-08)
 * Refactored Diagram class
 
 
-v1.0.0 (2017-01-02)
--------------------
+## [v1.0.0] (2017-01-02)
 
 ### Changed
 
@@ -164,12 +148,30 @@ v1.0.0 (2017-01-02)
 * Updated library usage in Readme file
 * Changed signature \Jawira\PhingVisualiser\Diagram::save
 
-
-v0.0.0 (2017-11-17)
--------------------
+## [v0.0.0] (2017-11-17)
 
 ### Added
 
 * First functional version
 * Executable in `bin` dir
 * XSLT file
+
+[#42]: https://github.com/jawira/phing-visualizer/pull/42
+[#37]: https://github.com/jawira/phing-visualizer/pull/37
+[#34]: https://github.com/jawira/phing-visualizer/pull/34
+[#28]: https://github.com/jawira/phing-visualizer/pull/28
+[#12]: https://github.com/jawira/phing-visualizer/pull/12
+[v1.7.2]: https://github.com/jawira/phing-visualizer/compare/v1.7.1...v1.7.2
+[v1.7.1]: https://github.com/jawira/phing-visualizer/compare/v1.7.0...v1.7.1
+[v1.7.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.7.0
+[v1.5.1]: https://github.com/jawira/phing-visualizer/compare/v1.5.0...v1.5.1
+[v1.5.0]: https://github.com/jawira/phing-visualizer/compare/v1.4.5...v1.5.0
+[v1.4.5]: https://github.com/jawira/phing-visualizer/compare/v1.4.4...v1.4.5
+[v1.4.4]: https://github.com/jawira/phing-visualizer/compare/v1.4.0...v1.4.4
+[v1.4.0]: https://github.com/jawira/phing-visualizer/compare/v1.3.1...v1.4.0
+[v1.3.1]: https://github.com/jawira/phing-visualizer/compare/v1.3.0...v1.3.1
+[v1.3.0]: https://github.com/jawira/phing-visualizer/compare/v1.2.0...v1.3.0
+[v1.2.0]: https://github.com/jawira/phing-visualizer/compare/v1.1.0...v1.2.0
+[v1.1.0]: https://github.com/jawira/phing-visualizer/compare/v1.0.0...v1.1.0
+[v1.0.0]: https://github.com/jawira/phing-visualizer/compare/v0.0.0...v1.0.0
+[v1.6.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.6.0
