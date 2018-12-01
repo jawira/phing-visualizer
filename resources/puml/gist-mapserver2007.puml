@@ -4,7 +4,7 @@ skinparam Arrow {
 Color #0C3A49
 FontColor #3787A6
 }
-skinparam Usecase {
+skinparam UseCase {
 BackgroundColor #F7FEE1
 BorderColor #0C3A49
 }
