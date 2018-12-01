@@ -327,6 +327,7 @@ class DiagramTest extends TestCase
     /**
      * @dataProvider generatePumlProvider
      * @covers       \Jawira\PhingVisualizer\Diagram::generatePuml()
+     * @covers       \Jawira\PhingVisualizer\Diagram::transformToPuml()
      *
      * @param string $buildfile
      * @param string $puml

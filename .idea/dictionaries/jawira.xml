@@ -1,7 +1,6 @@
 <component name="ProjectDictionaryState">
   <dictionary name="jawira">
     <words>
-      <w>/tmp/</w>
       <w>alphabraga</w>
       <w>bovigo</w>
       <w>build.png</w>
@@ -9,6 +8,7 @@
       <w>buildfile</w>
       <w>buildfiles</w>
       <w>dirpath</w>
+      <w>enduml</w>
       <w>filepath</w>
       <w>jawira</w>
       <w>kamermans</w>
@@ -17,6 +17,8 @@
       <w>nfabre</w>
       <w>phing</w>
       <w>puml</w>
+      <w>skinparam</w>
+      <w>startuml</w>
     </words>
   </dictionary>
 </component>

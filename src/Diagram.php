@@ -180,19 +180,29 @@ class Diagram
     {
         $puml = '@startuml' . PHP_EOL;
 
-        $xslStyle   = simplexml_load_string(file_get_contents(self::XSL_STYLE));
-        $xslTargets = simplexml_load_string(file_get_contents(self::XSL_TARGETS));
-        $xslCalls   = simplexml_load_string(file_get_contents(self::XSL_CALLS));
-
-        foreach ([$xslStyle, $xslTargets, $xslCalls] as $xsl) {
-            $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
-            $processor = new XSLTProcessor();
-            $processor->importStylesheet($xsl);
-            $puml .= $processor->transformToXml($xmlDoc) . PHP_EOL;
+        foreach ([self::XSL_STYLE, self::XSL_TARGETS, self::XSL_CALLS] as $xslFile) {
+            $puml .= $this->transformToPuml($xslFile);
         }
 
         $puml .= '@enduml' . PHP_EOL;
 
         return $puml;
+    }
+
+    /**
+     * Transforms buildfile using provided xsl file
+     *
+     * @param string $xslFile
+     *
+     * @return string
+     */
+    public function transformToPuml(string $xslFile): string
+    {
+        $xsl       = simplexml_load_string(file_get_contents($xslFile));
+        $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
+        $processor = new XSLTProcessor();
+        $processor->importStylesheet($xsl);
+
+        return $processor->transformToXml($xmlDoc) . PHP_EOL;
     }
 }
