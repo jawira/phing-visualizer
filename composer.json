@@ -13,12 +13,13 @@
     "ext-simplexml": "*",
     "ext-xsl": "*",
     "jawira/mini-getopt": "^0.0.1",
-    "jawira/plantuml-encoding": "^1.0.0"
+    "jawira/plantuml-encoding": "^1.0.5"
   },
   "require-dev": {
-    "behat/behat": "^3.5",
-    "kamermans/command": "^1.2",
-    "mikey179/vfsStream": "^1.6"
+    "behat/behat": "^3.5.0",
+    "kamermans/command": "^1.2.4",
+    "mikey179/vfsStream": "^1.6",
+    "malukenho/mcbumpface": "^0.1.2"
   },
   "autoload": {
     "psr-4": {
