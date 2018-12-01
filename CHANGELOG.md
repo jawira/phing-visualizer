@@ -13,6 +13,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- Public method `\Jawira\PhingVisualizer\Diagram::transformToPuml`, this method
+is supposed to be used by other libraries or projects.
+
 ## [v2.0.0] - 2018-12-01
 
 ### Changes
