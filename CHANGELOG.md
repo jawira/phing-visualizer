@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.0.0] - 2018-12-01
+
 ### Changes
 
 - Updated readme's images with new color scheme
@@ -175,3 +177,4 @@ executable usage
 [v1.1.0]: https://github.com/jawira/phing-visualizer/compare/v1.0.0...v1.1.0
 [v1.0.0]: https://github.com/jawira/phing-visualizer/compare/v0.0.0...v1.0.0
 [v1.6.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.6.0
+[v2.0.0]: https://github.com/jawira/phing-visualizer/compare/v1.7.2...v2.0.0
