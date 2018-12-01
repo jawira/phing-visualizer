@@ -19,8 +19,10 @@ class Diagram
     public const FORMAT_PUML       = 'puml';
     public const FORMAT_SVG        = 'svg';
 
-    protected const XSL_PATH = __DIR__ . '/../resources/xslt/plantuml.xsl';
-    protected const URL      = 'http://www.plantuml.com/plantuml/%s/%s';
+    protected const XSL_STYLE   = __DIR__ . '/../resources/xslt/style.xsl';
+    protected const XSL_TARGETS = __DIR__ . '/../resources/xslt/targets.xsl';
+    protected const XSL_CALLS   = __DIR__ . '/../resources/xslt/calls.xsl';
+    protected const URL         = 'http://www.plantuml.com/plantuml/%s/%s';
 
     /**
      * @var string
@@ -176,12 +178,21 @@ class Diagram
      */
     protected function generatePuml(): string
     {
-        $xmlDoc = simplexml_load_string(file_get_contents($this->getBuildfile()));
-        $xslDoc = simplexml_load_string(file_get_contents(self::XSL_PATH));
+        $puml = '@startuml' . PHP_EOL;
 
-        $processor = new XSLTProcessor();
-        $processor->importStylesheet($xslDoc);
+        $xslStyle   = simplexml_load_string(file_get_contents(self::XSL_STYLE));
+        $xslTargets = simplexml_load_string(file_get_contents(self::XSL_TARGETS));
+        $xslCalls   = simplexml_load_string(file_get_contents(self::XSL_CALLS));
 
-        return $processor->transformToXml($xmlDoc);
+        foreach ([$xslStyle, $xslTargets, $xslCalls] as $xsl) {
+            $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
+            $processor = new XSLTProcessor();
+            $processor->importStylesheet($xsl);
+            $puml .= $processor->transformToXml($xmlDoc) . PHP_EOL;
+        }
+
+        $puml .= '@enduml' . PHP_EOL;
+
+        return $puml;
     }
 }

@@ -1,15 +1,15 @@
 @startuml
 
-title ProjectName
 skinparam Arrow {
-    Color #0C3A49
-    FontColor #3787A6
+Color #0C3A49
+FontColor #3787A6
 }
 skinparam Usecase {
-    BackgroundColor #F7FEE1
-    BorderColor #0C3A49
+BackgroundColor #F7FEE1
+BorderColor #0C3A49
 }
 
+rectangle "ProjectName" {
 (build)
 (start)
 (clean)
@@ -21,6 +21,7 @@ skinparam Usecase {
 (metrics)
 (copylogs)
 (deploy)
+}
 
 (build) --> (start) : call:1
 (build) --> (clean) : call:2
