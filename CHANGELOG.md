@@ -13,6 +13,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.2.0] - 2018-12-02 
+
+### Changed
+
+- Location of xslt files are now public.
+
 ## [v2.1.0] - 2018-12-01
 
 ### Added
@@ -186,3 +192,4 @@ executable usage
 [v1.6.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.6.0
 [v2.0.0]: https://github.com/jawira/phing-visualizer/compare/v1.7.2...v2.0.0
 [v2.1.0]: https://github.com/jawira/phing-visualizer/compare/v2.0.0...v2.1.0
+[v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0

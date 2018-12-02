@@ -18,11 +18,10 @@ class Diagram
     public const FORMAT_PNG        = 'png';
     public const FORMAT_PUML       = 'puml';
     public const FORMAT_SVG        = 'svg';
-
-    protected const XSL_STYLE   = __DIR__ . '/../resources/xslt/style.xsl';
-    protected const XSL_TARGETS = __DIR__ . '/../resources/xslt/targets.xsl';
-    protected const XSL_CALLS   = __DIR__ . '/../resources/xslt/calls.xsl';
-    protected const URL         = 'http://www.plantuml.com/plantuml/%s/%s';
+    public const XSL_STYLE         = __DIR__ . '/../resources/xslt/style.xsl';
+    public const XSL_TARGETS       = __DIR__ . '/../resources/xslt/targets.xsl';
+    public const XSL_CALLS         = __DIR__ . '/../resources/xslt/calls.xsl';
+    public const URL               = 'http://www.plantuml.com/plantuml/%s/%s';
 
     /**
      * @var string
