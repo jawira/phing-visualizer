@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- Making xslt files location public
+
 ## [v2.1.0] - 2018-12-01
 
 ### Added
