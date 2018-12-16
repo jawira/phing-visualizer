@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- Fixed composer.json to remove Travis build error.
+
 ## [v2.2.0] - 2018-12-02 
 
 ### Changed
