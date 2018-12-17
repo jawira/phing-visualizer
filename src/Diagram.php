@@ -22,6 +22,7 @@ class Diagram
     public const XSL_TARGETS       = __DIR__ . '/../resources/xslt/targets.xsl';
     public const XSL_CALLS         = __DIR__ . '/../resources/xslt/calls.xsl';
     public const URL               = 'http://www.plantuml.com/plantuml/%s/%s';
+    public const COLOR             = '#FFFFCC';
 
     /**
      * @var string
@@ -201,7 +202,7 @@ class Diagram
         $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
         $processor = new XSLTProcessor();
         $processor->importStylesheet($xsl);
-
+        $processor->setParameter('', 'color', self::COLOR);
         return $processor->transformToXml($xmlDoc) . PHP_EOL;
     }
 }
