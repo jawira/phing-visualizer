@@ -5,13 +5,14 @@
 <xsl:output method="text" encoding="UTF-8" indent="no"/>
 
 <xsl:template match="/project">
+hide stereotype
 skinparam Arrow {
-Color #0C3A49
-FontColor #3787A6
+Color #555555
+FontColor #555555
 }
 skinparam UseCase {
-BackgroundColor #F7FEE1
-BorderColor #0C3A49
+BackgroundColor #FFFFCC
+BorderColor #555555
 }</xsl:template>
 
 </xsl:stylesheet>

@@ -13,6 +13,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Removed
+
+- Rectangle around diagrams were removed.
+
+### Changed
+
+- Targets' colors are sent as parameter to xslt file. 
+
 ### Fixed
 
 - Fixed composer.json to remove Travis build error.
