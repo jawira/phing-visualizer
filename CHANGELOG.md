@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Added
+
+- [#44] Diagrams displays the name of the buildfile as title.
+
 ### Removed
 
 - Rectangle around diagrams were removed.
@@ -205,3 +209,4 @@ executable usage
 [v2.0.0]: https://github.com/jawira/phing-visualizer/compare/v1.7.2...v2.0.0
 [v2.1.0]: https://github.com/jawira/phing-visualizer/compare/v2.0.0...v2.1.0
 [v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0
+[#44]: https://github.com/jawira/phing-visualizer/pull/44

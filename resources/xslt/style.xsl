@@ -5,6 +5,8 @@
 <xsl:output method="text" encoding="UTF-8" indent="no"/>
 
 <xsl:template match="/project">
+<xsl:variable name="name" select="@name"/>
+title <xsl:value-of select="$name"/>
 hide stereotype
 skinparam Arrow {
 Color #555555
