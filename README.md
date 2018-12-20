@@ -11,6 +11,7 @@ Phing visualizer
 [![Maintainability](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/maintainability)](https://codeclimate.com/github/jawira/phing-visualizer/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/test_coverage)](https://codeclimate.com/github/jawira/phing-visualizer/test_coverage)
 [![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/jawira/phing-visualizer.svg?columns=all)](https://waffle.io/jawira/phing-visualizer) 
 
 You can go from this:
 
