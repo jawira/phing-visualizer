@@ -18,8 +18,8 @@ use Throwable;
 function loadAutoload(): void
 {
     $candidates = [
-        __DIR__ . '/../vendor/autoload.php',    // development
-        __DIR__ . '/../../../autoload.php',     // as dependency
+        __DIR__ . '/../vendor/autoload.php',    // production
+        __DIR__ . '/../../../autoload.php',     // development
     ];
 
     $eureka = false;

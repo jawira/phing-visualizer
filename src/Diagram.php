@@ -2,6 +2,7 @@
 
 namespace Jawira\PhingVisualizer;
 
+use SimpleXMLElement;
 use XSLTProcessor;
 use function dirname;
 use function Jawira\PlantUml\encodep;
@@ -29,7 +30,6 @@ class Diagram
      */
     protected $buildfile;
 
-
     /**
      * Diagram constructor.
      *
@@ -42,7 +42,6 @@ class Diagram
         $this->setBuildfile($buildfile);
     }
 
-
     /**
      * @return string
      */
@@ -50,7 +49,6 @@ class Diagram
     {
         return $this->buildfile;
     }
-
 
     /**
      * Load buildfile location
@@ -137,14 +135,20 @@ class Diagram
      *
      * @param string $format
      *
-     * @return bool|string
+     * @return string
      * @throws \Jawira\PhingVisualizer\DiagramException
      */
     protected function generateImage(string $format): string
     {
         $url = $this->generateUrl($format);
 
-        return file_get_contents($url);
+        $content = file_get_contents($url);
+
+        if ($content === false) {
+            $content = '';
+        }
+
+        return $content;
     }
 
     /**
@@ -175,6 +179,7 @@ class Diagram
      * Generate PlantUml code
      *
      * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
     protected function generatePuml(): string
     {
@@ -195,14 +200,32 @@ class Diagram
      * @param string $xslFile
      *
      * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
     public function transformToPuml(string $xslFile): string
     {
-        $xsl       = simplexml_load_string(file_get_contents($xslFile));
-        $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
+        // Loading xml
+        $xslContent = file_get_contents($xslFile);
+        if ($xslContent === false) {
+            throw new DiagramException('Invalid xslt content');
+        }
+        $xsl = simplexml_load_string($xslContent);
+        if (!($xsl instanceof SimpleXMLElement)) {
+            throw new DiagramException('Cannot read xsl string');
+        }
+
+        // Loading XML
+        $xmlContent = file_get_contents($this->getBuildfile());
+        if ($xmlContent === false) {
+            throw new DiagramException('Invalid xml content');
+        }
+        $xml = simplexml_load_string($xmlContent);
+
+        // Processor
         $processor = new XSLTProcessor();
         $processor->importStylesheet($xsl);
         $processor->setParameter('', 'color', self::COLOR);
-        return $processor->transformToXml($xmlDoc) . PHP_EOL;
+
+        return $processor->transformToXml($xml) . PHP_EOL;
     }
 }
