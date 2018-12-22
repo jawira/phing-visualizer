@@ -1,24 +1,28 @@
 @startuml
 
+title Dummy
+hide stereotype
 skinparam Arrow {
-Color #0C3A49
-FontColor #3787A6
+Color #555555
+FontColor #555555
 }
 skinparam UseCase {
-BackgroundColor #F7FEE1
-BorderColor #0C3A49
+BackgroundColor #FFFFCC
+BorderColor #555555
 }
 
-rectangle "Dummy" {
-(init)
-(composer)
-(tests)
-(notifying)
-(emailing)
-(irc)
-(phpunit)
-(behat)
+skinparam UseCase {
+BackgroundColor<< Dummy >> #FFFFCC
 }
+(init)<< Dummy >>
+(composer)<< Dummy >>
+(tests)<< Dummy >>
+(notifying)<< Dummy >>
+(emailing)<< Dummy >>
+(irc)<< Dummy >>
+(phpunit)<< Dummy >>
+(behat)<< Dummy >>
+
 
 (init) --> (composer) : depend:1
 (tests) --> (phpunit) : call:1
