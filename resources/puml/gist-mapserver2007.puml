@@ -1,21 +1,25 @@
 @startuml
 
+title stream
+hide stereotype
 skinparam Arrow {
-Color #0C3A49
-FontColor #3787A6
+Color #555555
+FontColor #555555
 }
 skinparam UseCase {
-BackgroundColor #F7FEE1
-BorderColor #0C3A49
+BackgroundColor #FFFFCC
+BorderColor #555555
 }
 
-rectangle "stream" {
-(main)
-(init)
-(test)
-(phpmd)
-(phpcpd)
+skinparam UseCase {
+BackgroundColor<< stream >> #FFFFCC
 }
+(main)<< stream >>
+(init)<< stream >>
+(test)<< stream >>
+(phpmd)<< stream >>
+(phpcpd)<< stream >>
+
 
 (main) --> (init) : depend:1
 (main) --> (phpmd) : depend:2
