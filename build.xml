@@ -2,11 +2,8 @@
 
 <project name="PhingVisualizer" default="properties">
 
-    <property file="build.properties.ini"/>
-
     <!--Setup-->
     <target name="setup" description="Prepare library for dev">
-        <phingcall target="init"/>
         <phingcall target="composer:install"/>
         <phingcall target="make:phpunit.phar"/>
     </target>
@@ -14,12 +11,6 @@
     <!--Available properties-->
     <target name="properties" description="List all properties">
         <echoproperties/>
-    </target>
-
-    <!--Config files-->
-    <target name="init" description="Crate config files">
-        <copy file="${project.basedir}/build.properties.ini.dist"
-              tofile="${project.basedir}/build.properties.ini"/>
     </target>
 
     <target name="check-phing-version" description="Require at least Phing v3">
@@ -66,7 +57,7 @@
 
     <!--Run PHPUnit-->
     <target name="phpunit:run" description="Run PHPUnit's tests" depends="make:phpunit.phar">
-        <exec executable="${phpunit}" passthru="true" checkreturn="true"/>
+        <exec executable="${project.basedir}/phpunit.phar" passthru="true" checkreturn="true"/>
     </target>
 
     <!--php -l -->
