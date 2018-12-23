@@ -11,8 +11,3 @@ phing.phar:			## Download Phing
 	@wget -O ./phing.phar https://www.phing.info/get/phing-3.0.0-alpha1.phar
 	@chmod +x ./phing.phar
 	@./phing.phar -v
-
-phpunit.phar:		## Download PHPUnit
-	@wget -O ./phpunit.phar https://phar.phpunit.de/phpunit-6.phar
-	@chmod +x ./phpunit.phar
-	@./phpunit.phar --version

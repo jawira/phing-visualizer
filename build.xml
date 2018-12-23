@@ -5,7 +5,7 @@
     <!--Setup-->
     <target name="setup" description="Prepare library for dev">
         <phingcall target="composer:install"/>
-        <phingcall target="make:phpunit.phar"/>
+        <phingcall target="phive:phpunit"/>
     </target>
 
     <!--Available properties-->
@@ -56,36 +56,41 @@
     </target>
 
     <!--Run PHPUnit-->
-    <target name="phpunit:run" description="Run PHPUnit's tests" depends="make:phpunit.phar">
-        <exec executable="${project.basedir}/phpunit.phar" passthru="true" checkreturn="true"/>
+    <target name="phpunit:run" description="Run PHPUnit's tests" depends="phive:phpunit">
+        <exec executable="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
 
     <!--php -l -->
-    <target name="php:check-syntax" description="Check syntax on PHP files" depends="filesets">
+    <target name="php:check-syntax" description="Check syntax on PHP files">
         <!--All project's PHP files, excluding vendor dir-->
-        <phplint>
-            <fileset refid="php_files"/>
+        <phplint haltonfailure="true">
+            <fileset dir="${project.basedir}">
+                <include name="src/**.php"/>
+            </fileset>
         </phplint>
     </target>
 
-    <!--Register your filesets here-->
-    <target name="filesets">
-        <fileset dir="${project.basedir}" id="php_files">
-            <include name="**/*.php"/>
-            <exclude name="vendor/"/>
-            <exclude name=".idea/"/>
-        </fileset>
-    </target>
-
     <target name="test" description="Test library"
-            depends="composer:install, php:check-syntax, phpunit:run, composer:validate"/>
+            depends="composer:install, php:check-syntax, phpunit:run, phpstan:analyse, composer:validate"/>
 
     <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
         <exec command="make cc-test-reporter" passthru="true"/>
     </target>
 
-    <target name="make:phpunit.phar" description="Download PHPUnit">
-        <exec command="make phpunit.phar" passthru="true"/>
+    <target name="phive:phpunit" description="Install PHPUnit">
+        <exec executable="phive" checkreturn="true" passthru="true">
+            <arg value="install"/>
+            <arg line="--target bin/"/>
+            <arg value="phpunit"/>
+        </exec>
+    </target>
+
+    <target name="phive:phpstan" description="Install PHPStan">
+        <exec executable="phive" checkreturn="true" passthru="true">
+            <arg value="install"/>
+            <arg line="--target bin/"/>
+            <arg value="phpstan"/>
+        </exec>
     </target>
 
     <target name="code-climate:before" description="CodeClimate before build" depends="make:cc-test-reporter">
@@ -94,11 +99,22 @@
         </exec>
     </target>
 
+    <target name="phpstan:analyse" description="Analyse source code" depends="phive:phpstan">
+        <exec executable="bin/phpstan" passthru="true" checkreturn="true">
+            <arg value="--level=max"/>
+            <arg value="--no-interaction"/>
+            <arg value="--no-progress"/>
+            <arg value="--debug"/>
+            <arg value="analyse"/>
+            <arg path="src/"/>
+        </exec>
+    </target>
+
     <target name="code-climate:after" description="CodeClimate after build" depends="make:cc-test-reporter">
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
             <arg value="format-coverage"/>
             <arg value="-tclover"/>
-            <arg value="${project.basedir}/resources/coverage/clover.xml"/>
+            <arg file="${project.basedir}/resources/coverage/clover.xml"/>
         </exec>
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
             <arg value="upload-coverage"/>
