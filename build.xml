@@ -5,7 +5,7 @@
     <!--Setup-->
     <target name="setup" description="Prepare library for dev">
         <phingcall target="composer:install"/>
-        <phingcall target="phive:phpunit"/>
+        <phingcall target="phive:update"/>
     </target>
 
     <!--Available properties-->
@@ -56,7 +56,7 @@
     </target>
 
     <!--Run PHPUnit-->
-    <target name="phpunit:run" description="Run PHPUnit's tests" depends="phive:phpunit">
+    <target name="phpunit:run" description="Run PHPUnit's tests" depends="composer:install, phive:update">
         <exec executable="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
 
@@ -71,25 +71,15 @@
     </target>
 
     <target name="test" description="Test library"
-            depends="composer:install, php:check-syntax, phpunit:run, phpstan:analyse, composer:validate"/>
+            depends="php:check-syntax, phpunit:run, phpstan:analyse, composer:validate"/>
 
     <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
         <exec command="make cc-test-reporter" passthru="true"/>
     </target>
 
-    <target name="phive:phpunit" description="Install PHPUnit">
+    <target name="phive:update" description="Install PHPStan">
         <exec executable="phive" checkreturn="true" passthru="true">
-            <arg value="install"/>
-            <arg line="--target bin/"/>
-            <arg value="phpunit"/>
-        </exec>
-    </target>
-
-    <target name="phive:phpstan" description="Install PHPStan">
-        <exec executable="phive" checkreturn="true" passthru="true">
-            <arg value="install"/>
-            <arg line="--target bin/"/>
-            <arg value="phpstan"/>
+            <arg value="update"/>
         </exec>
     </target>
 
@@ -99,7 +89,7 @@
         </exec>
     </target>
 
-    <target name="phpstan:analyse" description="Analyse source code" depends="phive:phpstan">
+    <target name="phpstan:analyse" description="Analyse source code" depends="phive:update">
         <exec executable="bin/phpstan" passthru="true" checkreturn="true">
             <arg value="--level=max"/>
             <arg value="--no-interaction"/>

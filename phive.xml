@@ -27,5 +27,5 @@
           <phar url="https://some.tld/tool.phar" />
       -->
   <phar name="phpunit" version="^7.5.1" installed="7.5.1" location="./bin/phpunit" copy="false"/>
-  <phar name="phpstan" version="^0.10.5" installed="0.10.5" location="./bin/phpstan" copy="false"/>
+  <phar name="phpstan" version="^0.10.5" installed="0.10.6" location="./bin/phpstan" copy="false"/>
 </phive>
