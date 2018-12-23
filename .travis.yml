@@ -6,8 +6,7 @@ git:
   depth: 3
 
 install:
-  - make cc-test-reporter
-  - make phing.phar
+  - make /usr/local/bin/phive cc-test-reporter phing.phar
   - ./phing.phar setup
 
 before_script:
