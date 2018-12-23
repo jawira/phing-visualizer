@@ -30,9 +30,6 @@
       "Jawira\\PhingVisualizer\\Behat\\": "tests/behat/bootstrap"
     }
   },
-"suggest": {
-  "phpunit/phpunit": "Unitary tests"
-},
   "bin": [
     "bin/phing-visualizer"
   ]
