@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="PhingVisualizer" default="properties">
+<project name="PhingVisualizer" default="setup">
 
-    <!--Setup-->
     <target name="setup" description="Prepare library for dev">
         <phingcall target="composer:install"/>
-        <phingcall target="make:phpunit.phar"/>
+        <phingcall target="phive:update"/>
     </target>
 
-    <!--Available properties-->
-    <target name="properties" description="List all properties">
-        <echoproperties/>
-    </target>
-
-    <target name="check-phing-version" description="Require at least Phing v3">
+    <target name="phing:check-version" description="Require at least Phing v3">
         <fail message="Install Phing v3 or newer">
             <condition>
                 <not>
@@ -23,9 +17,8 @@
         </fail>
     </target>
 
-    <!--composer install-->
     <target name="composer:install" description="Install dependencies"
-            depends="check-phing-version">
+            depends="phing:check-version">
         <composer>
             <arg value="install"/>
             <arg value="--no-interaction"/>
@@ -33,10 +26,8 @@
         </composer>
     </target>
 
-    <!--composer install for prod-->
     <target name="composer:optimize" description="Install dependencies optimized for production environment"
-            depends="check-phing-version">
-
+            depends="phing:check-version">
         <composer>
             <arg value="install"/>
             <arg value="--no-dev"/>
@@ -45,47 +36,38 @@
         </composer>
     </target>
 
-    <!--composer validate-->
     <target name="composer:validate" description="Checks if composer.json is valid"
-            depends="check-phing-version">
+            depends="phing:check-version">
         <composer>
             <arg value="validate"/>
             <arg value="--strict"/>
-            <arg value="--no-check-lock"/>
         </composer>
     </target>
 
-    <!--Run PHPUnit-->
-    <target name="phpunit:run" description="Run PHPUnit's tests" depends="make:phpunit.phar">
-        <exec executable="${project.basedir}/phpunit.phar" passthru="true" checkreturn="true"/>
+    <target name="phpunit:run" description="Run PHPUnit's tests" depends="composer:install, phive:update">
+        <exec executable="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
 
-    <!--php -l -->
-    <target name="php:check-syntax" description="Check syntax on PHP files" depends="filesets">
-        <!--All project's PHP files, excluding vendor dir-->
-        <phplint>
-            <fileset refid="php_files"/>
+    <target name="php:check-syntax" description="Check syntax on PHP files">
+        <phplint haltonfailure="true">
+            <fileset dir="${project.basedir}">
+                <include name="src/**.php"/>
+                <include name="tests/**.php"/>
+            </fileset>
         </phplint>
     </target>
 
-    <!--Register your filesets here-->
-    <target name="filesets">
-        <fileset dir="${project.basedir}" id="php_files">
-            <include name="**/*.php"/>
-            <exclude name="vendor/"/>
-            <exclude name=".idea/"/>
-        </fileset>
-    </target>
-
     <target name="test" description="Test library"
-            depends="composer:install, php:check-syntax, phpunit:run, composer:validate"/>
+            depends="php:check-syntax, composer:validate, composer:install, phpstan:analyse, phpunit:run, behat:run"/>
 
     <target name="make:cc-test-reporter" description="Download CodeClimate test reporter">
         <exec command="make cc-test-reporter" passthru="true"/>
     </target>
 
-    <target name="make:phpunit.phar" description="Download PHPUnit">
-        <exec command="make phpunit.phar" passthru="true"/>
+    <target name="phive:update" description="Install PHPStan">
+        <exec executable="phive" checkreturn="true" passthru="true">
+            <arg value="update"/>
+        </exec>
     </target>
 
     <target name="code-climate:before" description="CodeClimate before build" depends="make:cc-test-reporter">
@@ -94,14 +76,29 @@
         </exec>
     </target>
 
+    <target name="phpstan:analyse" description="Analyse source code" depends="phive:update">
+        <exec executable="bin/phpstan" passthru="true" checkreturn="true">
+            <arg value="--level=max"/>
+            <arg value="--no-interaction"/>
+            <arg value="--no-progress"/>
+            <arg value="--debug"/>
+            <arg value="analyse"/>
+            <arg path="src/"/>
+        </exec>
+    </target>
+
     <target name="code-climate:after" description="CodeClimate after build" depends="make:cc-test-reporter">
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
             <arg value="format-coverage"/>
             <arg value="-tclover"/>
-            <arg value="${project.basedir}/resources/coverage/clover.xml"/>
+            <arg file="${project.basedir}/resources/coverage/clover.xml"/>
         </exec>
         <exec executable="${project.basedir}/cc-test-reporter" passthru="true">
             <arg value="upload-coverage"/>
         </exec>
+    </target>
+
+    <target name="behat:run" description="Run Behat tests" depends="composer:install">
+        <exec executable="vendor/bin/behat" checkreturn="true" passthru="true"/>
     </target>
 </project>

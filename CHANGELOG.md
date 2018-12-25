@@ -28,6 +28,7 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - Fixed composer.json to remove Travis build error.
+- [#43] Behat tests fixed.
 
 ## [v2.2.0] - 2018-12-02 
 
@@ -210,3 +211,4 @@ executable usage
 [v2.1.0]: https://github.com/jawira/phing-visualizer/compare/v2.0.0...v2.1.0
 [v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0
 [#44]: https://github.com/jawira/phing-visualizer/pull/44
+[#43]: https://github.com/jawira/phing-visualizer/pull/43
