@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="PhingVisualizer" default="setup">
+<project name="PhingVisualizer" default="setup" phingVersion="3.0">
 
     <target name="setup" description="Prepare library for dev">
         <phingcall target="composer:install"/>
         <phingcall target="phive:update"/>
     </target>
 
-    <target name="phing:check-version" description="Require at least Phing v3">
-        <fail message="Install Phing v3 or newer">
-            <condition>
-                <not>
-                    <phingversion atleast="3.0"/>
-                </not>
-            </condition>
-        </fail>
-    </target>
-
-    <target name="composer:install" description="Install dependencies"
-            depends="phing:check-version">
+    <target name="composer:install" description="Install dependencies">
         <composer>
             <arg value="install"/>
             <arg value="--no-interaction"/>
@@ -26,8 +15,7 @@
         </composer>
     </target>
 
-    <target name="composer:optimize" description="Install dependencies optimized for production environment"
-            depends="phing:check-version">
+    <target name="composer:optimize" description="Install dependencies optimized for production environment">
         <composer>
             <arg value="install"/>
             <arg value="--no-dev"/>
@@ -36,8 +24,7 @@
         </composer>
     </target>
 
-    <target name="composer:validate" description="Checks if composer.json is valid"
-            depends="phing:check-version">
+    <target name="composer:validate" description="Checks if composer.json is valid">
         <composer>
             <arg value="validate"/>
             <arg value="--strict"/>
