@@ -23,7 +23,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Targets' colors are sent as parameter to xslt file. 
+- Removing colors and borders from targets 
 
 ### Fixed
 

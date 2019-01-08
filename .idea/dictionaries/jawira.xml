@@ -17,6 +17,8 @@
       <w>mapserver</w>
       <w>nfabre</w>
       <w>phing</w>
+      <w>phive</w>
+      <w>phpstan</w>
       <w>plantuml</w>
       <w>puml</w>
       <w>simplexml</w>

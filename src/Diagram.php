@@ -19,9 +19,10 @@ class Diagram
     public const FORMAT_PNG        = 'png';
     public const FORMAT_PUML       = 'puml';
     public const FORMAT_SVG        = 'svg';
-    public const XSL_STYLE         = __DIR__ . '/../resources/xslt/style.xsl';
+    public const XSL_HEADER        = __DIR__ . '/../resources/xslt/header.xsl';
     public const XSL_TARGETS       = __DIR__ . '/../resources/xslt/targets.xsl';
     public const XSL_CALLS         = __DIR__ . '/../resources/xslt/calls.xsl';
+    public const XSL_FOOTER        = __DIR__ . '/../resources/xslt/footer.xsl';
     public const URL               = 'http://www.plantuml.com/plantuml/%s/%s';
     public const COLOR             = '#FFFFCC';
 
@@ -183,13 +184,11 @@ class Diagram
      */
     protected function generatePuml(): string
     {
-        $puml = '@startuml' . PHP_EOL;
+        $puml = '';
 
-        foreach ([self::XSL_STYLE, self::XSL_TARGETS, self::XSL_CALLS] as $xslFile) {
-            $puml .= $this->transformToPuml($xslFile);
+        foreach ([self::XSL_HEADER, self::XSL_TARGETS, self::XSL_CALLS, self::XSL_FOOTER] as $xslFile) {
+            $puml .= $this->transformToPuml($xslFile, []);
         }
-
-        $puml .= '@enduml' . PHP_EOL;
 
         return $puml;
     }
@@ -197,7 +196,8 @@ class Diagram
     /**
      * Transforms buildfile using provided xsl file
      *
-     * @param string $xslFile
+     * @param string $xslFile XSLT file
+     * @param array  $parameters Parameters to pass to XSLT file
      *
      * @return string
      * @throws \Jawira\PhingVisualizer\DiagramException
@@ -224,7 +224,6 @@ class Diagram
         // Processor
         $processor = new XSLTProcessor();
         $processor->importStylesheet($xsl);
-        $processor->setParameter('', 'color', self::COLOR);
 
         return $processor->transformToXml($xml) . PHP_EOL;
     }

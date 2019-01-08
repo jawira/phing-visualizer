@@ -4,7 +4,7 @@
 
     <target name="setup" description="Prepare library for dev">
         <phingcall target="composer:install"/>
-        <phingcall target="phive:update"/>
+        <phingcall target="phive:install"/>
     </target>
 
     <target name="composer:install" description="Install dependencies">
@@ -31,7 +31,7 @@
         </composer>
     </target>
 
-    <target name="phpunit:run" description="Run PHPUnit's tests" depends="composer:install, phive:update">
+    <target name="phpunit:run" description="Run PHPUnit's tests" depends="composer:install, phive:install">
         <exec executable="bin/phpunit" passthru="true" checkreturn="true"/>
     </target>
 
@@ -51,9 +51,9 @@
         <exec command="make cc-test-reporter" passthru="true"/>
     </target>
 
-    <target name="phive:update" description="Install PHPStan">
+    <target name="phive:install" description="Install PHPStan">
         <exec executable="phive" checkreturn="true" passthru="true">
-            <arg value="update"/>
+            <arg value="install"/>
         </exec>
     </target>
 
@@ -63,7 +63,7 @@
         </exec>
     </target>
 
-    <target name="phpstan:analyse" description="Analyse source code" depends="phive:update">
+    <target name="phpstan:analyse" description="Analyse source code" depends="phive:install">
         <exec executable="bin/phpstan" passthru="true" checkreturn="true">
             <arg value="--level=max"/>
             <arg value="--no-interaction"/>
