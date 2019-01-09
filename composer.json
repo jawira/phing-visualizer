@@ -12,7 +12,7 @@
     "php": "^7.1",
     "ext-simplexml": "*",
     "ext-xsl": "*",
-    "jawira/mini-getopt": "^0.0.1",
+    "jawira/mini-getopt": "^0.0.2",
     "jawira/plantuml-encoding": "^1.0"
   },
   "require-dev": {

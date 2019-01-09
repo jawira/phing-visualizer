@@ -12,17 +12,17 @@ Feature: Create Phing diagram
 
     Examples:
       | input                          | format | output           | path             | size  |
-      | resources/buildfiles/dummy.xml | eps    | /tmp/            | /tmp/dummy.eps   | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/            | /tmp/dummy.eps   | 43519 |
       | resources/buildfiles/dummy.xml | puml   | /tmp/            | /tmp/dummy.puml  | 472   |
-      | resources/buildfiles/dummy.xml | png    | /tmp/            | /tmp/dummy.png   | 19505 |
+      | resources/buildfiles/dummy.xml | png    | /tmp/            | /tmp/dummy.png   | 18518 |
       | resources/buildfiles/dummy.xml | svg    | /tmp/            | /tmp/dummy.svg   | 7689  |
-      | resources/buildfiles/dummy.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 43519 |
       | resources/buildfiles/dummy.xml | puml   | /tmp/custom.puml | /tmp/custom.puml | 472   |
-      | resources/buildfiles/dummy.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 19505 |
+      | resources/buildfiles/dummy.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 18518 |
       | resources/buildfiles/dummy.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  | 7689  |
-      | resources/buildfiles/dummy.xml | eps    | .                | dummy.eps        | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | .                | dummy.eps        | 43519 |
       | resources/buildfiles/dummy.xml | puml   | .                | dummy.puml       | 472   |
-      | resources/buildfiles/dummy.xml | png    | .                | dummy.png        | 19505 |
+      | resources/buildfiles/dummy.xml | png    | .                | dummy.png        | 18518 |
       | resources/buildfiles/dummy.xml | svg    | .                | dummy.svg        | 7689  |
 
 
@@ -35,7 +35,7 @@ Feature: Create Phing diagram
 
     Examples:
       | input                          | format | path                            | size  |
-      | resources/buildfiles/dummy.xml | eps    | resources/buildfiles/dummy.eps  | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | resources/buildfiles/dummy.eps  | 43519 |
       | resources/buildfiles/dummy.xml | puml   | resources/buildfiles/dummy.puml | 472   |
-      | resources/buildfiles/dummy.xml | png    | resources/buildfiles/dummy.png  | 19505 |
+      | resources/buildfiles/dummy.xml | png    | resources/buildfiles/dummy.png  | 18518 |
       | resources/buildfiles/dummy.xml | svg    | resources/buildfiles/dummy.svg  | 7689  |

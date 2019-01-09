@@ -2,6 +2,7 @@
 
 namespace Jawira\PhingVisualizer;
 
+use SimpleXMLElement;
 use XSLTProcessor;
 use function dirname;
 use function Jawira\PlantUml\encodep;
@@ -18,16 +19,17 @@ class Diagram
     public const FORMAT_PNG        = 'png';
     public const FORMAT_PUML       = 'puml';
     public const FORMAT_SVG        = 'svg';
-    public const XSL_STYLE         = __DIR__ . '/../resources/xslt/style.xsl';
+    public const XSL_HEADER        = __DIR__ . '/../resources/xslt/header.xsl';
     public const XSL_TARGETS       = __DIR__ . '/../resources/xslt/targets.xsl';
     public const XSL_CALLS         = __DIR__ . '/../resources/xslt/calls.xsl';
+    public const XSL_FOOTER        = __DIR__ . '/../resources/xslt/footer.xsl';
     public const URL               = 'http://www.plantuml.com/plantuml/%s/%s';
+    public const COLOR             = '#FFFFCC';
 
     /**
      * @var string
      */
     protected $buildfile;
-
 
     /**
      * Diagram constructor.
@@ -41,7 +43,6 @@ class Diagram
         $this->setBuildfile($buildfile);
     }
 
-
     /**
      * @return string
      */
@@ -49,7 +50,6 @@ class Diagram
     {
         return $this->buildfile;
     }
-
 
     /**
      * Load buildfile location
@@ -136,14 +136,20 @@ class Diagram
      *
      * @param string $format
      *
-     * @return bool|string
+     * @return string
      * @throws \Jawira\PhingVisualizer\DiagramException
      */
     protected function generateImage(string $format): string
     {
         $url = $this->generateUrl($format);
 
-        return file_get_contents($url);
+        $content = file_get_contents($url);
+
+        if ($content === false) {
+            $content = '';
+        }
+
+        return $content;
     }
 
     /**
@@ -174,16 +180,15 @@ class Diagram
      * Generate PlantUml code
      *
      * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
     protected function generatePuml(): string
     {
-        $puml = '@startuml' . PHP_EOL;
+        $puml = '';
 
-        foreach ([self::XSL_STYLE, self::XSL_TARGETS, self::XSL_CALLS] as $xslFile) {
-            $puml .= $this->transformToPuml($xslFile);
+        foreach ([self::XSL_HEADER, self::XSL_TARGETS, self::XSL_CALLS, self::XSL_FOOTER] as $xslFile) {
+            $puml .= $this->transformToPuml($xslFile, []);
         }
-
-        $puml .= '@enduml' . PHP_EOL;
 
         return $puml;
     }
@@ -191,17 +196,35 @@ class Diagram
     /**
      * Transforms buildfile using provided xsl file
      *
-     * @param string $xslFile
+     * @param string $xslFile XSLT file
+     * @param array  $parameters Parameters to pass to XSLT file
      *
      * @return string
+     * @throws \Jawira\PhingVisualizer\DiagramException
      */
     public function transformToPuml(string $xslFile): string
     {
-        $xsl       = simplexml_load_string(file_get_contents($xslFile));
-        $xmlDoc    = simplexml_load_string(file_get_contents($this->getBuildfile()));
+        // Loading xml
+        $xslContent = file_get_contents($xslFile);
+        if ($xslContent === false) {
+            throw new DiagramException('Invalid xslt content');
+        }
+        $xsl = simplexml_load_string($xslContent);
+        if (!($xsl instanceof SimpleXMLElement)) {
+            throw new DiagramException('Cannot read xsl string');
+        }
+
+        // Loading XML
+        $xmlContent = file_get_contents($this->getBuildfile());
+        if ($xmlContent === false) {
+            throw new DiagramException('Invalid xml content');
+        }
+        $xml = simplexml_load_string($xmlContent);
+
+        // Processor
         $processor = new XSLTProcessor();
         $processor->importStylesheet($xsl);
 
-        return $processor->transformToXml($xmlDoc) . PHP_EOL;
+        return $processor->transformToXml($xml) . PHP_EOL;
     }
 }

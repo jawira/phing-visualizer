@@ -1,7 +1,7 @@
-Feature: Product basket
-  In order to buy products
-  As a customer
-  I need to be able to put interesting products into a basket
+Feature: Execute phing-visualizer
+  In order to have a graphical representation of buildfile
+  As a developer
+  I need to run the executable
 
   Scenario: Display help (long version)
     Given executable is located in "bin/phing-visualizer"
@@ -33,17 +33,17 @@ Feature: Product basket
 
     Examples:
       | input                          | format | output           | path             | size  |
-      | resources/buildfiles/dummy.xml | eps    | /tmp/            | /tmp/dummy.eps   | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/            | /tmp/dummy.eps   | 43519 |
       | resources/buildfiles/dummy.xml | puml   | /tmp/            | /tmp/dummy.puml  | 472   |
-      | resources/buildfiles/dummy.xml | png    | /tmp/            | /tmp/dummy.png   | 19505 |
+      | resources/buildfiles/dummy.xml | png    | /tmp/            | /tmp/dummy.png   | 18518 |
       | resources/buildfiles/dummy.xml | svg    | /tmp/            | /tmp/dummy.svg   | 7689  |
-      | resources/buildfiles/dummy.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | /tmp/custom.eps  | /tmp/custom.eps  | 43519 |
       | resources/buildfiles/dummy.xml | puml   | /tmp/custom.puml | /tmp/custom.puml | 472   |
-      | resources/buildfiles/dummy.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 19505 |
+      | resources/buildfiles/dummy.xml | png    | /tmp/custom.png  | /tmp/custom.png  | 18518 |
       | resources/buildfiles/dummy.xml | svg    | /tmp/custom.svg  | /tmp/custom.svg  | 7689  |
-      | resources/buildfiles/dummy.xml | eps    | .                | dummy.eps        | 43575 |
+      | resources/buildfiles/dummy.xml | eps    | .                | dummy.eps        | 43519 |
       | resources/buildfiles/dummy.xml | puml   | .                | dummy.puml       | 472   |
-      | resources/buildfiles/dummy.xml | png    | .                | dummy.png        | 19505 |
+      | resources/buildfiles/dummy.xml | png    | .                | dummy.png        | 18518 |
       | resources/buildfiles/dummy.xml | svg    | .                | dummy.svg        | 7689  |
 
 

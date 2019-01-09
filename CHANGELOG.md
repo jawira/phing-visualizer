@@ -13,6 +13,25 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.2.1] - 2019-01-09
+
+### Added
+
+- [#44] Diagrams displays the name of the buildfile as title.
+
+### Removed
+
+- Rectangle around diagrams were removed.
+
+### Changed
+
+- Removing colors and borders from targets 
+
+### Fixed
+
+- Fixed composer.json to remove Travis build error.
+- [#43] Behat tests fixed.
+
 ## [v2.2.0] - 2018-12-02 
 
 ### Changed
@@ -193,3 +212,6 @@ executable usage
 [v2.0.0]: https://github.com/jawira/phing-visualizer/compare/v1.7.2...v2.0.0
 [v2.1.0]: https://github.com/jawira/phing-visualizer/compare/v2.0.0...v2.1.0
 [v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0
+[#44]: https://github.com/jawira/phing-visualizer/pull/44
+[#43]: https://github.com/jawira/phing-visualizer/pull/43
+[v2.2.1]: https://github.com/jawira/phing-visualizer/compare/v2.2.0...v2.2.1
