@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.2.1] - 2019-01-09
+
 ### Added
 
 - [#44] Diagrams displays the name of the buildfile as title.
@@ -212,3 +214,4 @@ executable usage
 [v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0
 [#44]: https://github.com/jawira/phing-visualizer/pull/44
 [#43]: https://github.com/jawira/phing-visualizer/pull/43
+[v2.2.1]: https://github.com/jawira/phing-visualizer/compare/v2.2.0...v2.2.1
