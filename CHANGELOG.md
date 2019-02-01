@@ -13,6 +13,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.2.2] - 2019-02-01
+
+### Fixed
+
+- Wrong PlantUML opening tag, fixed `@plantuml` by `@startuml` 
+
 ## [v2.2.1] - 2019-01-09
 
 ### Added
@@ -215,3 +221,4 @@ executable usage
 [#44]: https://github.com/jawira/phing-visualizer/pull/44
 [#43]: https://github.com/jawira/phing-visualizer/pull/43
 [v2.2.1]: https://github.com/jawira/phing-visualizer/compare/v2.2.0...v2.2.1
+[v2.2.2]: https://github.com/jawira/phing-visualizer/compare/v2.2.1...v2.2.2
