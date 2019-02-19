@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## Changed
+
+- #46 Diagram have different colors for `calls` and `depends`
+
 ## [v2.2.2] - 2019-02-01
 
 ### Fixed
