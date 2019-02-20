@@ -6,6 +6,11 @@ use Behat\Behat\Context\Context;
 use Exception;
 use Jawira\PhingVisualizer\Diagram;
 
+/**
+ * Class ClassContext
+ *
+ * @package Jawira\PhingVisualizer\Behat
+ */
 class ClassContext implements Context
 {
     /**

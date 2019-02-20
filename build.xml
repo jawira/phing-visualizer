@@ -86,6 +86,8 @@
     </target>
 
     <target name="behat:run" description="Run Behat tests" depends="composer:install">
-        <exec executable="vendor/bin/behat" checkreturn="true" passthru="true"/>
+        <exec executable="vendor/bin/behat" checkreturn="true" passthru="true">
+            <arg value="--stop-on-failure"/>
+        </exec>
     </target>
 </project>

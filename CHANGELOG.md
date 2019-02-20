@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 ## Changed
 
 - #46 Diagram have different colors for `calls` and `depends`
+- #47 Added PHPStan to tests
 
 ## [v2.2.2] - 2019-02-01
 

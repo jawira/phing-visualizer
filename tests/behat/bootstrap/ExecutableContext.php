@@ -3,7 +3,6 @@
 namespace Jawira\PhingVisualizer\Behat;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Exception;
 use kamermans\Command\Command;
@@ -120,6 +119,9 @@ class ExecutableContext implements Context
 
     /**
      * @Given I set option :arg1 with value :arg2
+     *
+     * @param string $option
+     * @param string $value
      */
 
     public function iSetOptionWithValue($option, $value)
@@ -129,6 +131,8 @@ class ExecutableContext implements Context
 
     /**
      * @Given I use option :arg1
+     *
+     * @param string $option
      */
 
     public function iUseOption($option)

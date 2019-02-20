@@ -65,6 +65,8 @@ class DiagramTest extends TestCase
      * @covers       \Jawira\PhingVisualizer\Diagram::setBuildfile()
      *
      * @param string $buildfile Path to buildfile
+     *
+     * @throws \ReflectionException
      */
     public function testSetBuildFile(string $buildfile)
     {
@@ -355,6 +357,9 @@ class DiagramTest extends TestCase
 
     }
 
+    /**
+     * @return array
+     */
     public function validateOutputLocationProvider()
     {
         return [
@@ -385,6 +390,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function generateUrlProvider(): array
     {
         return [
@@ -411,6 +419,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function buildfilesProvider()
     {
         return [
@@ -423,6 +434,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function notExistentFilesProvider()
     {
         return [
@@ -435,6 +449,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function notExistentDirsProvider()
     {
         return [
@@ -445,6 +462,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function saveProvider()
     {
         return [
@@ -471,6 +491,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function generateImageProvider()
     {
         return [
@@ -492,6 +515,9 @@ class DiagramTest extends TestCase
         ];
     }
 
+    /**
+     * @return array
+     */
     public function generatePumlProvider()
     {
         return [
