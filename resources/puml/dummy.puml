@@ -1,34 +1,29 @@
 @startuml
 
 title Dummy
-hide stereotype
-skinparam Arrow {
-Color #555555
-FontColor #555555
-}
-skinparam UseCase {
-BackgroundColor #FFFFCC
-BorderColor #555555
-}
+skinparam ArrowFontColor Black
+skinparam ArrowThickness 2
+skinparam UseCaseBackgroundColor #FFFECC
+skinparam UseCaseBorderColor #333333
+skinparam UseCaseBorderThickness 2
+skinparam UseCaseFontColor Black
 
-skinparam UseCase {
-BackgroundColor<< Dummy >> #FFFFCC
-}
-(init)<< Dummy >>
-(composer)<< Dummy >>
-(tests)<< Dummy >>
-(notifying)<< Dummy >>
-(emailing)<< Dummy >>
-(irc)<< Dummy >>
-(phpunit)<< Dummy >>
-(behat)<< Dummy >>
+(init)
+(composer)
+(tests)
+(notifying)
+(emailing)
+(irc)
+(phpunit)
+(behat)
 
 
-(init) --> (composer) : depend:1
-(tests) --> (phpunit) : call:1
-(tests) --> (behat) : call:2
-(tests) --> (composer) : depend:1
-(notifying) --> (emailing) : call:1
-(notifying) --> (irc) : call:2
-(notifying) --> (composer) : depend:1
+(init) -[#5D9CEC]-> (composer) : depend:1
+(tests) -[#EC87C0]-> (phpunit) : call:1
+(tests) -[#EC87C0]-> (behat) : call:2
+(tests) -[#5D9CEC]-> (composer) : depend:1
+(notifying) -[#EC87C0]-> (emailing) : call:1
+(notifying) -[#EC87C0]-> (irc) : call:2
+(notifying) -[#5D9CEC]-> (composer) : depend:1
+
 @enduml

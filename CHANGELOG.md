@@ -13,6 +13,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.3.0]  2019-02-21
+
+### Changed
+
+- [#46] Diagram have different colors for `calls` and `depends`
+- [#47] Added PHPStan to tests
+
 ## [v2.2.2] - 2019-02-01
 
 ### Fixed
@@ -222,3 +229,8 @@ executable usage
 [#43]: https://github.com/jawira/phing-visualizer/pull/43
 [v2.2.1]: https://github.com/jawira/phing-visualizer/compare/v2.2.0...v2.2.1
 [v2.2.2]: https://github.com/jawira/phing-visualizer/compare/v2.2.1...v2.2.2
+
+[#47]: https://github.com/jawira/phing-visualizer/pull/47
+[#46]: https://github.com/jawira/phing-visualizer/pull/46
+
+[v2.3.0]: https://github.com/jawira/phing-visualizer/compare/v2.2.2...v2.3.0

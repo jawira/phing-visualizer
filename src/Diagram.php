@@ -187,7 +187,7 @@ class Diagram
         $puml = '';
 
         foreach ([self::XSL_HEADER, self::XSL_TARGETS, self::XSL_CALLS, self::XSL_FOOTER] as $xslFile) {
-            $puml .= $this->transformToPuml($xslFile, []);
+            $puml .= $this->transformToPuml($xslFile);
         }
 
         return $puml;
@@ -197,7 +197,6 @@ class Diagram
      * Transforms buildfile using provided xsl file
      *
      * @param string $xslFile XSLT file
-     * @param array  $parameters Parameters to pass to XSLT file
      *
      * @return string
      * @throws \Jawira\PhingVisualizer\DiagramException

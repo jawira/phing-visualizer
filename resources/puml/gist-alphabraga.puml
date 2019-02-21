@@ -1,40 +1,35 @@
 @startuml
 
 title ProjectName
-hide stereotype
-skinparam Arrow {
-Color #555555
-FontColor #555555
-}
-skinparam UseCase {
-BackgroundColor #FFFFCC
-BorderColor #555555
-}
+skinparam ArrowFontColor Black
+skinparam ArrowThickness 2
+skinparam UseCaseBackgroundColor #FFFECC
+skinparam UseCaseBorderColor #333333
+skinparam UseCaseBorderThickness 2
+skinparam UseCaseFontColor Black
 
-skinparam UseCase {
-BackgroundColor<< ProjectName >> #FFFFCC
-}
-(build)<< ProjectName >>
-(start)<< ProjectName >>
-(clean)<< ProjectName >>
-(composer)<< ProjectName >>
-(phpdoc)<< ProjectName >>
-(makedist)<< ProjectName >>
-(structure)<< ProjectName >>
-(phpunit)<< ProjectName >>
-(metrics)<< ProjectName >>
-(copylogs)<< ProjectName >>
-(deploy)<< ProjectName >>
+(build)
+(start)
+(clean)
+(composer)
+(phpdoc)
+(makedist)
+(structure)
+(phpunit)
+(metrics)
+(copylogs)
+(deploy)
 
 
-(build) --> (start) : call:1
-(build) --> (clean) : call:2
-(build) --> (structure) : call:3
-(build) --> (composer) : call:4
-(build) --> (phpunit) : call:5
-(build) --> (metrics) : call:6
-(build) --> (phpdoc) : call:7
-(build) --> (copylogs) : call:8
-(build) --> (makedist) : call:9
-(build) --> (deploy) : call:10
+(build) -[#EC87C0]-> (start) : call:1
+(build) -[#EC87C0]-> (clean) : call:2
+(build) -[#EC87C0]-> (structure) : call:3
+(build) -[#EC87C0]-> (composer) : call:4
+(build) -[#EC87C0]-> (phpunit) : call:5
+(build) -[#EC87C0]-> (metrics) : call:6
+(build) -[#EC87C0]-> (phpdoc) : call:7
+(build) -[#EC87C0]-> (copylogs) : call:8
+(build) -[#EC87C0]-> (makedist) : call:9
+(build) -[#EC87C0]-> (deploy) : call:10
+
 @enduml

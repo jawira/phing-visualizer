@@ -1,24 +1,19 @@
 @startuml
 
 title FooBar
-hide stereotype
-skinparam Arrow {
-Color #555555
-FontColor #555555
-}
-skinparam UseCase {
-BackgroundColor #FFFFCC
-BorderColor #555555
-}
+skinparam ArrowFontColor Black
+skinparam ArrowThickness 2
+skinparam UseCaseBackgroundColor #FFFECC
+skinparam UseCaseBorderColor #333333
+skinparam UseCaseBorderThickness 2
+skinparam UseCaseFontColor Black
 
-skinparam UseCase {
-BackgroundColor<< FooBar >> #FFFFCC
-}
-(prepare)<< FooBar >>
-(build)<< FooBar >>
-(dist)<< FooBar >>
+(prepare)
+(build)
+(dist)
 
 
-(build) --> (prepare) : depend:1
-(dist) --> (build) : depend:1
+(build) -[#5D9CEC]-> (prepare) : depend:1
+(dist) -[#5D9CEC]-> (build) : depend:1
+
 @enduml
