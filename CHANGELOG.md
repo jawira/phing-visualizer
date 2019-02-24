@@ -13,11 +13,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.3.1] - 2019-02-24
+
 ### Fixed
 
-- #49 Error in Travis-ci pipeline
+- [#49] Error in Travis-ci pipeline
 
-## [v2.3.0]  2019-02-21
+## [v2.3.0] - 2019-02-21
 
 ### Changed
 
@@ -207,34 +209,35 @@ executable usage
 - Executable in `bin` dir
 - XSLT file
 
-[#42]: https://github.com/jawira/phing-visualizer/pull/42
-[#37]: https://github.com/jawira/phing-visualizer/pull/37
-[#34]: https://github.com/jawira/phing-visualizer/pull/34
-[#28]: https://github.com/jawira/phing-visualizer/pull/28
+
 [#12]: https://github.com/jawira/phing-visualizer/pull/12
-[v1.7.2]: https://github.com/jawira/phing-visualizer/compare/v1.7.1...v1.7.2
-[v1.7.1]: https://github.com/jawira/phing-visualizer/compare/v1.7.0...v1.7.1
-[v1.7.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.7.0
-[v1.5.1]: https://github.com/jawira/phing-visualizer/compare/v1.5.0...v1.5.1
-[v1.5.0]: https://github.com/jawira/phing-visualizer/compare/v1.4.5...v1.5.0
-[v1.4.5]: https://github.com/jawira/phing-visualizer/compare/v1.4.4...v1.4.5
-[v1.4.4]: https://github.com/jawira/phing-visualizer/compare/v1.4.0...v1.4.4
-[v1.4.0]: https://github.com/jawira/phing-visualizer/compare/v1.3.1...v1.4.0
-[v1.3.1]: https://github.com/jawira/phing-visualizer/compare/v1.3.0...v1.3.1
-[v1.3.0]: https://github.com/jawira/phing-visualizer/compare/v1.2.0...v1.3.0
-[v1.2.0]: https://github.com/jawira/phing-visualizer/compare/v1.1.0...v1.2.0
-[v1.1.0]: https://github.com/jawira/phing-visualizer/compare/v1.0.0...v1.1.0
+[#28]: https://github.com/jawira/phing-visualizer/pull/28
+[#34]: https://github.com/jawira/phing-visualizer/pull/34
+[#37]: https://github.com/jawira/phing-visualizer/pull/37
+[#42]: https://github.com/jawira/phing-visualizer/pull/42
+[#43]: https://github.com/jawira/phing-visualizer/pull/43
+[#44]: https://github.com/jawira/phing-visualizer/pull/44
+[#46]: https://github.com/jawira/phing-visualizer/pull/46
+[#47]: https://github.com/jawira/phing-visualizer/pull/47
+[#49]: https://github.com/jawira/phing-visualizer/pull/49
 [v1.0.0]: https://github.com/jawira/phing-visualizer/compare/v0.0.0...v1.0.0
+[v1.1.0]: https://github.com/jawira/phing-visualizer/compare/v1.0.0...v1.1.0
+[v1.2.0]: https://github.com/jawira/phing-visualizer/compare/v1.1.0...v1.2.0
+[v1.3.0]: https://github.com/jawira/phing-visualizer/compare/v1.2.0...v1.3.0
+[v1.3.1]: https://github.com/jawira/phing-visualizer/compare/v1.3.0...v1.3.1
+[v1.4.0]: https://github.com/jawira/phing-visualizer/compare/v1.3.1...v1.4.0
+[v1.4.4]: https://github.com/jawira/phing-visualizer/compare/v1.4.0...v1.4.4
+[v1.4.5]: https://github.com/jawira/phing-visualizer/compare/v1.4.4...v1.4.5
+[v1.5.0]: https://github.com/jawira/phing-visualizer/compare/v1.4.5...v1.5.0
+[v1.5.1]: https://github.com/jawira/phing-visualizer/compare/v1.5.0...v1.5.1
 [v1.6.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.6.0
+[v1.7.0]: https://github.com/jawira/phing-visualizer/compare/v1.5.1...v1.7.0
+[v1.7.1]: https://github.com/jawira/phing-visualizer/compare/v1.7.0...v1.7.1
+[v1.7.2]: https://github.com/jawira/phing-visualizer/compare/v1.7.1...v1.7.2
 [v2.0.0]: https://github.com/jawira/phing-visualizer/compare/v1.7.2...v2.0.0
 [v2.1.0]: https://github.com/jawira/phing-visualizer/compare/v2.0.0...v2.1.0
 [v2.2.0]: https://github.com/jawira/phing-visualizer/compare/v2.1.0...v2.2.0
-[#44]: https://github.com/jawira/phing-visualizer/pull/44
-[#43]: https://github.com/jawira/phing-visualizer/pull/43
 [v2.2.1]: https://github.com/jawira/phing-visualizer/compare/v2.2.0...v2.2.1
 [v2.2.2]: https://github.com/jawira/phing-visualizer/compare/v2.2.1...v2.2.2
-
-[#47]: https://github.com/jawira/phing-visualizer/pull/47
-[#46]: https://github.com/jawira/phing-visualizer/pull/46
-
 [v2.3.0]: https://github.com/jawira/phing-visualizer/compare/v2.2.2...v2.3.0
+[v2.3.1]: https://github.com/jawira/phing-visualizer/compare/v2.3.0...v2.3.1
