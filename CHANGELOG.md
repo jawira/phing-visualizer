@@ -69,7 +69,7 @@ is supposed to be used by other libraries or projects.
 ### Changes
 
 - Updated readme's images with new color scheme
-- [#42] xslt file has been splited in three files
+- [#42] xslt file has been split in three files
 - Diagram's targets are surrounded by a rectangle
 
 ## [v1.7.2] - (2018-10-23)
