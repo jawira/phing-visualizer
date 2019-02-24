@@ -1,19 +1,26 @@
 language: php
+
+#https://github.com/travis-ci/travis-ci/issues/6339:
 php:
-  - '7.1'
+  - 7.2.6
+#  - 7.1.18
+#  - 7.0.32
+#  - 5.6.37
 
 git:
   depth: 3
 
 install:
-  - make /usr/local/bin/phive cc-test-reporter phing.phar
-  - ./phing.phar setup
+  - make /usr/local/bin/phive cc-test-reporter
+  - phive install --trust-gpg-keys 4AA394086372C20A,8E730BA25823D8B5,2420BAE0A3BE25C6,4AA394086372C20A
+  - phive status
+  - bin/phing setup
 
 before_script:
-  - ./phing.phar code-climate:before
+  - bin/phing code-climate:before
 
 script:
-  - ./phing.phar test
+  - bin/phing test
 
 after_script:
-  - ./phing.phar code-climate:after
+  - bin/phing code-climate:after

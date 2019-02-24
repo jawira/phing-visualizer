@@ -3,14 +3,9 @@ help:				## Help
 .PHONY: help
 
 cc-test-reporter:	## CodeClimate reporter
-	@wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-	@chmod +x ./cc-test-reporter
-	@./cc-test-reporter -v
-
-phing.phar:			## Download Phing
-	@wget -O ./phing.phar https://www.phing.info/get/phing-3.0.0-alpha1.phar
-	@chmod +x ./phing.phar
-	@./phing.phar -v
+	wget -O ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+	chmod +x ./cc-test-reporter
+	./cc-test-reporter -v
 
 /usr/local/bin/phive:
 	wget -O phive.phar https://phar.io/releases/phive.phar
