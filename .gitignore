@@ -17,3 +17,4 @@
 /bin/phpstan
 /bin/phing
 /bin/behat
+/coverage/codeclimate.json
