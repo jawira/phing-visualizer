@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Fixed
+
+- #49 Error in Travis-ci pipeline
+
 ## [v2.3.0]  2019-02-21
 
 ### Changed
@@ -132,76 +136,76 @@ compatible with current buildfile
 
 ### Fixed
 
-* [#28] Error loading autoload file was fixed. Executable will work when executing 
+- [#28] Error loading autoload file was fixed. Executable will work when executing 
 from `vendor/bin/phing-visualizer`. 
 
 ### Changed
 
-* Improved README.md
+- Improved README.md
 
 ## [v1.4.0] (2018-03-05)
 
 ### Added
 
-* Phing visualiser now supports ForeachTask
-* Created CONTRIBUTING.md 
+- Phing visualiser now supports ForeachTask
+- Created CONTRIBUTING.md 
 
 ### Fixed
 
-* Updating files for test \Jawira\PhingVisualizer\DiagramTest::testGenerateImage
+- Updating files for test \Jawira\PhingVisualizer\DiagramTest::testGenerateImage
 
 ### Changed
 
-* Readme file was updated: badges, installing instructions, example and 
+- Readme file was updated: badges, installing instructions, example and 
 executable usage
 
 ## [v1.3.1] (2017-01-23)
 
 ### Fixed
 
-* Valid license in `composer.json`  
+- Valid license in `composer.json`  
 
 ## [v1.3.0] (2017-01-13)
 
 ### Added
 
-* Tests with travis-ci.org & code climate
+- Tests with travis-ci.org & code climate
 
 
 ## [v1.2.0] (2017-01-11)
 
 ### Changed
 
-* Improved Unit tests for Diagram class
+- Improved Unit tests for Diagram class
 
 
 ## [v1.1.0] (2017-01-08)
 
 ### Added
 
-* Unit tests for Diagram class
-* Phing support
+- Unit tests for Diagram class
+- Phing support
 
 ### Changed
 
-* Refactored Diagram class
+- Refactored Diagram class
 
 
 ## [v1.0.0] (2017-01-02)
 
 ### Changed
 
-* Renaming project name from `PhingDiagram` to `PhingVisualiser`.
-* Updated library usage in Readme file
-* Changed signature \Jawira\PhingVisualiser\Diagram::save
+- Renaming project name from `PhingDiagram` to `PhingVisualiser`.
+- Updated library usage in Readme file
+- Changed signature \Jawira\PhingVisualiser\Diagram::save
 
 ## [v0.0.0] (2017-11-17)
 
 ### Added
 
-* First functional version
-* Executable in `bin` dir
-* XSLT file
+- First functional version
+- Executable in `bin` dir
+- XSLT file
 
 [#42]: https://github.com/jawira/phing-visualizer/pull/42
 [#37]: https://github.com/jawira/phing-visualizer/pull/37
