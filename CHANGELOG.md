@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.3.2] - 2019-09-17
+
 ### Changed
 
 - [#45] - [#50] Updating documentation
@@ -247,3 +249,4 @@ executable usage
 [v2.3.1]: https://github.com/jawira/phing-visualizer/compare/v2.3.0...v2.3.1
 [#50]: https://github.com/jawira/phing-visualizer/pull/50
 [#45]: https://github.com/jawira/phing-visualizer/pull/45
+[v2.3.2]: https://github.com/jawira/phing-visualizer/compare/v2.3.1...v2.3.2
