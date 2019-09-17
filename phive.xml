@@ -3,7 +3,7 @@
   <configuration>
     <targetDirectory>bin</targetDirectory>
   </configuration>
-  <phar name="phpunit" version="^7.5.1" installed="7.5.1" location="./bin/phpunit" copy="false"/>
-  <phar name="phpstan" version="^0.10.5" installed="0.10.7" location="./bin/phpstan" copy="false"/>
-  <phar name="phing" version="^3.0.0-alpha2" installed="3.0.0-alpha2" location="./bin/phing" copy="false"/>
+  <phar name="phpunit" version="^7.5.1" installed="7.5.16" location="./bin/phpunit" copy="false"/>
+  <phar name="phpstan" version="^0.10.5" installed="0.11.16" location="./bin/phpstan" copy="false"/>
+  <phar name="phing" version="^3.0.0-alpha2" installed="3.0.0-alpha3" location="./bin/phing" copy="false"/>
 </phive>

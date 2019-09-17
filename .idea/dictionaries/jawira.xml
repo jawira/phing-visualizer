@@ -17,6 +17,7 @@
       <w>mapserver</w>
       <w>newpath</w>
       <w>nfabre</w>
+      <w>oneline</w>
       <w>phing</w>
       <w>phive</w>
       <w>phpstan</w>
@@ -28,6 +29,7 @@
       <w>simplexml</w>
       <w>skinparam</w>
       <w>startuml</w>
+      <w>symplify</w>
     </words>
   </dictionary>
 </component>
