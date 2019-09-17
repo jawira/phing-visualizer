@@ -8,16 +8,14 @@
     </target>
 
     <target name="composer:install" description="Install dependencies">
-        <composer>
-            <arg value="install"/>
+        <composer command="install">
             <arg value="--no-interaction"/>
             <arg value="--prefer-dist"/>
         </composer>
     </target>
 
     <target name="composer:optimize" description="Install dependencies optimized for production environment">
-        <composer>
-            <arg value="install"/>
+        <composer command="install">
             <arg value="--no-dev"/>
             <arg value="--optimize-autoloader"/>
             <arg value="--prefer-dist"/>
@@ -25,8 +23,7 @@
     </target>
 
     <target name="composer:validate" description="Checks if composer.json is valid">
-        <composer>
-            <arg value="validate"/>
+        <composer command="validate">
             <arg value="--strict"/>
         </composer>
     </target>
