@@ -4,16 +4,20 @@ Phing visualizer
 **Phing visualizer** generates a graphical representation of your 
 [Phing](https://www.phing.info/)'s buildfile.
 
-[![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
 [![Latest Stable Version](https://poser.pugx.org/jawira/phing-visualizer/v/stable)](https://packagist.org/packages/jawira/phing-visualizer)
+[![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
+[![Total Downloads](https://poser.pugx.org/jawira/phing-visualizer/downloads)](https://packagist.org/packages/jawira/phing-visualizer)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/maintainability)](https://codeclimate.com/github/jawira/phing-visualizer/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/fc981c0f860275c450be/test_coverage)](https://codeclimate.com/github/jawira/phing-visualizer/test_coverage)
 [![composer.lock](https://poser.pugx.org/jawira/phing-visualizer/composerlock)](https://packagist.org/packages/jawira/phing-visualizer)
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 [![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/jawira/phing-visualizer.svg?columns=all)](https://waffle.io/jawira/phing-visualizer) 
+[![Issues](https://img.shields.io/github/issues/jawira/phing-visualizer.svg?label=HuBoard&color=694DC2)](https://huboard.com/jawira/phing-visualizer)
 
-You can go from this:
+>💡 Important: `phing-visualizer` has been ported to Phing as `VisualizerTask`.  
+>You can use `<visualizer/>` since [Phing 3.0.0-alpha3][].
+
+With **phing-visualizer** You can go from this:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -63,59 +67,38 @@ To this:
 Usage
 -----
 
-You can use `phing-visualizer` in two possible ways:
+Create your diagram using the command line, some examples:
 
-### Using command line
-
-Create your diagram using the command line:
-
-```bash
+```console
 $ vendor/bin/phing-visualizer
 ```
 
-```bash
+```console
 $ vendor/bin/phing-visualizer -i build.xml -f svg
 ```
 
-```bash
+```console
 $ vendor/bin/phing-visualizer --input /my/location/build.xml --format svg
 ```
 
-```bash
+```console
 $ vendor/bin/phing-visualizer -i /my/location/build.xml -f png  -o /another/location/ 
 ```
 
-Executable options:
+Options
+-------
 
 | Option                | Description                                   | Default value     |
 | --------------------- | --------------------------------------------- | ----------------- | 
 | `-i` or `--input`     | Phing's buildfile location                    | build.xml         |
-| `-f` or `--format`    | Diagram format (`png`, `svg`, `eps` or `puml`)| png               |
 | `-o` or `--output`    | Dir or file location                          | Same as `--input` |
+| `-f` or `--format`    | Diagram format (`png`, `svg`, `eps` or `puml`)| `png`             |
 | `-h` or `--help`      | Help                                          |                   |
-
-### Instantiating `Diagram` class
-
-You can instantiate `Diagram` class to generate diagram in your source code:
-
-```php
-<?php
-include 'vendor/autoload.php';
-
-$intput = '/my/location/buildfile.xml'; // Input buildfile
-$output = '/my/location/';              // Can be a dir or a file location
-$format = 'png';                        // png, svg or puml
-
-$diagram = new Jawira\PhingVisualiser\Diagram($input);
-$diagram->save($format, $output);
-```
 
 Installing
 ----------
 
-The easiest way to install is with Composer:
-
-```bash
+```console
 $ composer require jawira/phing-visualizer
 ```
 
@@ -140,11 +123,33 @@ More examples
 Contributing
 ------------
 
-To contribute to this project please read [CONTRIBUTING.md](./CONTRIBUTING.md) 
-first.
-
+If you liked this project, ⭐ star it on [GitHub].
 
 License
 -------
 
 This project is under the [GNU GPLv3 license](./LICENSE).
+
+***
+
+Packages from jawira
+--------------------
+
+<dl>
+
+<dt><a href="https://packagist.org/packages/jawira/phing-open-task">jawira/phing-open-task</a> (library)</dt>
+<dd>Phing task to open files, directories, and URLs with your favorite software.</dd>
+
+<dt><a href="https://packagist.org/packages/jawira/emoji-catalog">jawira/emoji-catalog</a> (library)</dt>
+<dd>Get access to +3000 emojis as class constants.</dd>
+
+<dt><a href="https://packagist.org/packages/jawira/process-maker">jawira/process-maker</a> (project)</dt>
+<dd>Easily install and try ProcessMaker using Docker Compose.</dd>
+
+<dt><a href="https://packagist.org/packages/jawira/">more...</a></dt>
+
+</dl>
+
+
+[GitHub]: https://github.com/jawira/phing-visualizer
+[Phing 3.0.0-alpha3]: https://github.com/phingofficial/phing/releases/tag/3.0.0-alpha3
