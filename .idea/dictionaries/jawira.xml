@@ -30,6 +30,7 @@
       <w>skinparam</w>
       <w>startuml</w>
       <w>symplify</w>
+      <w>vfsstream</w>
     </words>
   </dictionary>
 </component>
