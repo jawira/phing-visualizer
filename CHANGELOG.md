@@ -13,6 +13,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- [#51] \Jawira\PhingVisualizer\Diagram::save now returns diagram's location
+
+### Removed
+
+- Removed unused constant \Jawira\PhingVisualizer\Diagram::COLOR
+
 ## [v2.3.2] - 2019-09-17
 
 ### Changed
@@ -250,3 +258,5 @@ executable usage
 [#50]: https://github.com/jawira/phing-visualizer/pull/50
 [#45]: https://github.com/jawira/phing-visualizer/pull/45
 [v2.3.2]: https://github.com/jawira/phing-visualizer/compare/v2.3.1...v2.3.2
+
+[#51]: https://github.com/jawira/phing-visualizer/pull/51

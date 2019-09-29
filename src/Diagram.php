@@ -24,7 +24,6 @@ class Diagram
     public const XSL_CALLS         = __DIR__ . '/../resources/xslt/calls.xsl';
     public const XSL_FOOTER        = __DIR__ . '/../resources/xslt/footer.xsl';
     public const URL               = 'http://www.plantuml.com/plantuml/%s/%s';
-    public const COLOR             = '#FFFFCC';
 
     /**
      * @var string
@@ -108,10 +107,10 @@ class Diagram
      * @param string      $format
      * @param null|string $output
      *
+     * @return string Location where the diagram was written
      * @throws \Jawira\PhingVisualizer\DiagramException
-     * @return int|bool The function returns the number of bytes that were written to the file, or false on failure.
      */
-    public function save(string $format, ?string $output)
+    public function save(string $format, ?string $output = null): string
     {
         switch ($format) {
             case self::FORMAT_PUML:
@@ -128,7 +127,11 @@ class Diagram
         }
         $output = $this->validateOutputLocation($format, $output);
 
-        return file_put_contents($output, $content);
+        if (!file_put_contents($output, $content)) {
+            throw new DiagramException('Error while writing diagram');
+        }
+
+        return $output;
     }
 
     /**
@@ -157,6 +160,7 @@ class Diagram
      *
      * @return string
      * @throws \Jawira\PhingVisualizer\DiagramException
+     * @throws \Exception
      */
     public function generateUrl(string $format): string
     {

@@ -3,7 +3,7 @@ language: php
 #https://github.com/travis-ci/travis-ci/issues/6339:
 php:
   - 7.2.6
-#  - 7.1.18
+  - 7.1.18
 #  - 7.0.32
 #  - 5.6.37
 
@@ -12,7 +12,7 @@ git:
 
 install:
   - make /usr/local/bin/phive cc-test-reporter
-  - phive install --trust-gpg-keys 4AA394086372C20A,8E730BA25823D8B5,2420BAE0A3BE25C6,4AA394086372C20A
+  - phive install --trust-gpg-keys 4AA394086372C20A,8E730BA25823D8B5,2420BAE0A3BE25C6
   - phive status
   - bin/phing setup
 
