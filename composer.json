@@ -13,8 +13,7 @@
     "ext-simplexml": "*",
     "ext-xsl": "*",
     "jawira/mini-getopt": "^0.0.2",
-    "jawira/plantuml-encoding": "^1.0",
-    "jawira/skeleton": "^1.12"
+    "jawira/plantuml-encoding": "^1.0"
   },
   "require-dev": {
     "behat/behat": "^3.5",

@@ -4,6 +4,9 @@ Phing visualizer
 **Phing visualizer** generates a graphical representation of your 
 [Phing](https://www.phing.info/)'s buildfile.
 
+>💡 Important: `phing-visualizer` has been ported to Phing as `VisualizerTask`.  
+>You can use `<visualizer/>` since [Phing 3.0.0-alpha3][].
+
 [![Latest Stable Version](https://poser.pugx.org/jawira/phing-visualizer/v/stable)](https://packagist.org/packages/jawira/phing-visualizer)
 [![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
 [![Total Downloads](https://poser.pugx.org/jawira/phing-visualizer/downloads)](https://packagist.org/packages/jawira/phing-visualizer)
@@ -13,9 +16,6 @@ Phing visualizer
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 [![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
 [![Issues](https://img.shields.io/github/issues/jawira/phing-visualizer.svg?label=HuBoard&color=694DC2)](https://huboard.com/jawira/phing-visualizer)
-
->💡 Important: `phing-visualizer` has been ported to Phing as `VisualizerTask`.  
->You can use `<visualizer/>` since [Phing 3.0.0-alpha3][].
 
 With **phing-visualizer** You can go from this:
 
