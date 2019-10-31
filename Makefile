@@ -14,3 +14,4 @@ cc-test-reporter:	## CodeClimate reporter
 	gpg --verify phive.phar.asc phive.phar
 	chmod +x phive.phar
 	sudo mv phive.phar /usr/local/bin/phive
+	phive --version

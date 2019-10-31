@@ -17,6 +17,16 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- [#53] Refactoring `xslt` files
+
+### Removed
+
+- Removed unwanted dependency
+
+## [v2.4.0] - 2019-09-29
+
+### Changed
+
 - [#51] \Jawira\PhingVisualizer\Diagram::save now returns diagram's location
 
 ### Removed
@@ -262,3 +272,5 @@ executable usage
 [v2.3.2]: https://github.com/jawira/phing-visualizer/compare/v2.3.1...v2.3.2
 [#51]: https://github.com/jawira/phing-visualizer/pull/51
 [v2.4.0]: https://github.com/jawira/phing-visualizer/compare/v2.3.2...v2.4.0
+
+[#53]: https://github.com/jawira/phing-visualizer/pull/53
