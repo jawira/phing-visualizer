@@ -13,8 +13,6 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-## [v2.4.0] - 2019-09-29
-
 ### Changed
 
 - [#53] Refactoring `xslt` files
