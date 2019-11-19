@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - [#53] Refactoring `xslt` files
+- [#52] Update readme file
 
 ### Removed
 
@@ -270,5 +271,5 @@ executable usage
 [v2.3.2]: https://github.com/jawira/phing-visualizer/compare/v2.3.1...v2.3.2
 [#51]: https://github.com/jawira/phing-visualizer/pull/51
 [v2.4.0]: https://github.com/jawira/phing-visualizer/compare/v2.3.2...v2.4.0
-
 [#53]: https://github.com/jawira/phing-visualizer/pull/53
+[#52]: https://github.com/jawira/phing-visualizer/pull/52

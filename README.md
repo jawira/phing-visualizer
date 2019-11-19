@@ -137,11 +137,11 @@ Packages from jawira
 
 <dl>
 
+<dt><a href="https://packagist.org/packages/jawira/phing-visualizer-gui">jawira/phing-visualizer-gui</a> (library)</dt>
+<dd>GUI for jawira/phing-visualizer.</dd>
+
 <dt><a href="https://packagist.org/packages/jawira/phing-open-task">jawira/phing-open-task</a> (library)</dt>
 <dd>Phing task to open files, directories, and URLs with your favorite software.</dd>
-
-<dt><a href="https://packagist.org/packages/jawira/emoji-catalog">jawira/emoji-catalog</a> (library)</dt>
-<dd>Get access to +3000 emojis as class constants.</dd>
 
 <dt><a href="https://packagist.org/packages/jawira/process-maker">jawira/process-maker</a> (project)</dt>
 <dd>Easily install and try ProcessMaker using Docker Compose.</dd>
