@@ -6,6 +6,7 @@
          beStrictAboutCoversAnnotation="true"
          beStrictAboutOutputDuringTests="true"
          beStrictAboutTodoAnnotatedTests="true"
+         stopOnFailure="true"
          verbose="true"
          colors="true">
 
