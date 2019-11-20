@@ -7,19 +7,24 @@
       <w>build.xml</w>
       <w>buildfile</w>
       <w>buildfiles</w>
+      <w>copylogs</w>
       <w>dirpath</w>
+      <w>emojis</w>
       <w>enduml</w>
       <w>filepath</w>
       <w>getopt</w>
       <w>jawira</w>
       <w>kamermans</w>
       <w>kbariotis</w>
+      <w>makedist</w>
       <w>mapserver</w>
       <w>newpath</w>
       <w>nfabre</w>
       <w>oneline</w>
       <w>phing</w>
       <w>phive</w>
+      <w>phpcpd</w>
+      <w>phpmd</w>
       <w>phpstan</w>
       <w>plantuml</w>
       <w>puml</w>

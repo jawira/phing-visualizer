@@ -1,5 +1,4 @@
 @startuml
-
 title stream
 skinparam ArrowFontColor Black
 skinparam ArrowThickness 2
@@ -14,10 +13,9 @@ skinparam UseCaseFontColor Black
 (phpmd)
 (phpcpd)
 
-
-(main) -[#5D9CEC]-> (init) : depend:1
-(main) -[#5D9CEC]-> (phpmd) : depend:2
-(main) -[#5D9CEC]-> (phpcpd) : depend:3
-(main) -[#5D9CEC]-> (test) : depend:4
+(main)-[#5D9CEC]->(init) : depend:1
+(main)-[#5D9CEC]->(phpmd) : depend:2
+(main)-[#5D9CEC]->(phpcpd) : depend:3
+(main)-[#5D9CEC]->(test) : depend:4
 
 @enduml
