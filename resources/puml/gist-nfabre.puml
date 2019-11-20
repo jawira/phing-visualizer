@@ -1,5 +1,4 @@
 @startuml
-
 title test
 skinparam ArrowFontColor Black
 skinparam ArrowThickness 2
@@ -9,7 +8,6 @@ skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
 (work)
-
 
 
 @enduml
