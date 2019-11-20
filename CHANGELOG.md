@@ -13,6 +13,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## [v2.5.0] - 2019-11-20
+
+### Fixed
+
+- [#54] Fix PHPUnit tests
+
 ### Changed
 
 - [#53] Refactoring `xslt` files
@@ -273,3 +279,5 @@ executable usage
 [v2.4.0]: https://github.com/jawira/phing-visualizer/compare/v2.3.2...v2.4.0
 [#53]: https://github.com/jawira/phing-visualizer/pull/53
 [#52]: https://github.com/jawira/phing-visualizer/pull/52
+[#54]: https://github.com/jawira/phing-visualizer/pull/54
+[v2.5.0]: https://github.com/jawira/phing-visualizer/compare/v2.4.0...v2.5.0
