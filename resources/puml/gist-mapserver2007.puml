@@ -7,15 +7,15 @@ skinparam UseCaseBorderColor #333333
 skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
+(main)-[#5D9CEC]->(init) : depend:1
+(main)-[#5D9CEC]->(phpmd) : depend:2
+(main)-[#5D9CEC]->(phpcpd) : depend:3
+(main)-[#5D9CEC]->(test) : depend:4
+
 (main)
 (init)
 (test)
 (phpmd)
 (phpcpd)
-
-(main)-[#5D9CEC]->(init) : depend:1
-(main)-[#5D9CEC]->(phpmd) : depend:2
-(main)-[#5D9CEC]->(phpcpd) : depend:3
-(main)-[#5D9CEC]->(test) : depend:4
 
 @enduml

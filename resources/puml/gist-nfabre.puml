@@ -7,7 +7,7 @@ skinparam UseCaseBorderColor #333333
 skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
-(work)
 
+(work)
 
 @enduml

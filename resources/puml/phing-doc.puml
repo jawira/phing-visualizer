@@ -7,11 +7,11 @@ skinparam UseCaseBorderColor #333333
 skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
+(build)-[#5D9CEC]->(prepare) : depend:1
+(dist)-[#5D9CEC]->(build) : depend:1
+
 (prepare)
 (build)
 (dist)
-
-(build)-[#5D9CEC]->(prepare) : depend:1
-(dist)-[#5D9CEC]->(build) : depend:1
 
 @enduml
