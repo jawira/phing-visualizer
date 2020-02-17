@@ -16,6 +16,7 @@ Phing visualizer
 [![PDS Skeleton](https://img.shields.io/badge/pds-skeleton-blue.svg)](https://github.com/php-pds/skeleton)
 [![License](https://poser.pugx.org/jawira/phing-visualizer/license)](https://packagist.org/packages/jawira/phing-visualizer)
 [![Issues](https://img.shields.io/github/issues/jawira/phing-visualizer.svg?label=HuBoard&color=694DC2)](https://huboard.com/jawira/phing-visualizer)
+[![HitCount](http://hits.dwyl.io/jawira/phing-visualizer.svg)](http://hits.dwyl.io/jawira/phing-visualizer)
 
 With **phing-visualizer** You can go from this:
 
