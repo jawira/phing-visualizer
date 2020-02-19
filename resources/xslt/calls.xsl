@@ -5,8 +5,16 @@
                 extension-element-prefixes="str">
   <xsl:output method="text" version="2.0" encoding="UTF-8" indent="no"/>
   <xsl:template match="/project">
-<!--Printing dependencies and calls-->
+
+
+    <!--Printing dependencies and calls-->
     <xsl:for-each select="./target">
+      <xsl:if test="@depends">
+        <xsl:call-template name="print-depends">
+          <xsl:with-param name="from" select="@name"/>
+          <xsl:with-param name="depends" select="@depends"/>
+        </xsl:call-template>
+      </xsl:if>
       <xsl:variable name="current-target" select="@name"/>
       <xsl:for-each select=".//phingcall | .//foreach | .//runtarget">
         <xsl:text>(</xsl:text>
@@ -20,12 +28,6 @@
         <xsl:value-of select="position()"/>
         <xsl:text>&#10;</xsl:text>
       </xsl:for-each>
-      <xsl:if test="@depends">
-        <xsl:call-template name="print-depends">
-          <xsl:with-param name="from" select="@name"/>
-          <xsl:with-param name="depends" select="@depends"/>
-        </xsl:call-template>
-      </xsl:if>
     </xsl:for-each>
   </xsl:template>
 

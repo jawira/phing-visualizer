@@ -7,6 +7,17 @@ skinparam UseCaseBorderColor #333333
 skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
+(build)-[#EC87C0]->(start) : call:1
+(build)-[#EC87C0]->(clean) : call:2
+(build)-[#EC87C0]->(structure) : call:3
+(build)-[#EC87C0]->(composer) : call:4
+(build)-[#EC87C0]->(phpunit) : call:5
+(build)-[#EC87C0]->(metrics) : call:6
+(build)-[#EC87C0]->(phpdoc) : call:7
+(build)-[#EC87C0]->(copylogs) : call:8
+(build)-[#EC87C0]->(makedist) : call:9
+(build)-[#EC87C0]->(deploy) : call:10
+
 (build)
 (start)
 (clean)
@@ -18,16 +29,5 @@ skinparam UseCaseFontColor Black
 (metrics)
 (copylogs)
 (deploy)
-
-(build)-[#EC87C0]->(start) : call:1
-(build)-[#EC87C0]->(clean) : call:2
-(build)-[#EC87C0]->(structure) : call:3
-(build)-[#EC87C0]->(composer) : call:4
-(build)-[#EC87C0]->(phpunit) : call:5
-(build)-[#EC87C0]->(metrics) : call:6
-(build)-[#EC87C0]->(phpdoc) : call:7
-(build)-[#EC87C0]->(copylogs) : call:8
-(build)-[#EC87C0]->(makedist) : call:9
-(build)-[#EC87C0]->(deploy) : call:10
 
 @enduml

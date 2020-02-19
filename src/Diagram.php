@@ -190,7 +190,7 @@ class Diagram
     {
         $puml = '';
 
-        foreach ([self::XSL_HEADER, self::XSL_TARGETS, self::XSL_CALLS, self::XSL_FOOTER] as $xslFile) {
+        foreach ([self::XSL_HEADER, self::XSL_CALLS, self::XSL_TARGETS, self::XSL_FOOTER] as $xslFile) {
             $puml .= $this->transformToPuml($xslFile);
         }
 

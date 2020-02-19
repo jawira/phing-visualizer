@@ -7,6 +7,14 @@ skinparam UseCaseBorderColor #333333
 skinparam UseCaseBorderThickness 2
 skinparam UseCaseFontColor Black
 
+(init)-[#5D9CEC]->(composer) : depend:1
+(tests)-[#5D9CEC]->(composer) : depend:1
+(tests)-[#EC87C0]->(phpunit) : call:1
+(tests)-[#EC87C0]->(behat) : call:2
+(notifying)-[#5D9CEC]->(composer) : depend:1
+(notifying)-[#EC87C0]->(emailing) : call:1
+(notifying)-[#EC87C0]->(irc) : call:2
+
 (init)
 (composer)
 (tests)
@@ -15,13 +23,5 @@ skinparam UseCaseFontColor Black
 (irc)
 (phpunit)
 (behat)
-
-(init)-[#5D9CEC]->(composer) : depend:1
-(tests)-[#EC87C0]->(phpunit) : call:1
-(tests)-[#EC87C0]->(behat) : call:2
-(tests)-[#5D9CEC]->(composer) : depend:1
-(notifying)-[#EC87C0]->(emailing) : call:1
-(notifying)-[#EC87C0]->(irc) : call:2
-(notifying)-[#5D9CEC]->(composer) : depend:1
 
 @enduml
