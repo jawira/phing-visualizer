@@ -32,5 +32,6 @@
   },
   "bin": [
     "bin/phing-visualizer"
-  ]
+  ],
+  "abandoned": "phing/phing"
 }
