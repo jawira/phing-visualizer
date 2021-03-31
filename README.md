@@ -4,8 +4,8 @@ Phing visualizer
 **Phing visualizer** generates a graphical representation of your 
 [Phing](https://www.phing.info/)'s buildfile.
 
->💡 Important: `phing-visualizer` has been ported to Phing as `VisualizerTask`.  
->You can use `<visualizer/>` since [Phing 3.0.0-alpha3][].
+>⚠️ Important: `phing-visualizer` has been ported to Phing as `VisualizerTask`.  
+>You can use `<visualizer/>` task since [Phing 3.0.0-alpha3][].
 
 [![Latest Stable Version](https://poser.pugx.org/jawira/phing-visualizer/v/stable)](https://packagist.org/packages/jawira/phing-visualizer)
 [![Build Status](https://www.travis-ci.org/jawira/phing-visualizer.svg?branch=develop)](https://www.travis-ci.org/jawira/phing-visualizer)
