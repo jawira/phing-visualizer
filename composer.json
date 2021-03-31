@@ -33,5 +33,5 @@
   "bin": [
     "bin/phing-visualizer"
   ],
-  "abandoned": "phing/phing"
+  "abandoned": "phing/task-visualizer"
 }
